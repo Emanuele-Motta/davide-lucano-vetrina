@@ -80,6 +80,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onBookClick, bookingCount, onVie
   }, [mobileMenuOpen]);
 
   return (
+    <>
     <header 
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
         isScrolled 
@@ -92,33 +93,25 @@ export const Navbar: React.FC<NavbarProps> = ({ onBookClick, bookingCount, onVie
         aria-label="Navigazione principale del sito"
         className="max-w-[1200px] mx-auto flex justify-between items-center h-16 sm:h-17 px-4 sm:px-6 md:px-8 xl:px-0"
       >
-        {/* Brand Identity / Logo */}
+        {/* Brand Identity / Official Logo */}
         <a 
           href="#hero" 
           id="nav-brand-logo"
           aria-label={`${siteConfig.doctor.name} - Torna alla Home`}
-          className="flex items-center gap-3 group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#006875] rounded-xl p-1"
+          className="flex items-center group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#00b488] rounded-xl p-0.5"
         >
-          <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-xl overflow-hidden shadow-2xs ring-1 ring-black/[0.08] bg-white p-0.5">
+          <div className="relative h-9 sm:h-10 md:h-11 w-auto rounded-lg overflow-hidden shadow-2xs ring-1 ring-black/[0.08] hover:opacity-95 transition-opacity bg-[#00b488]">
             <img 
               src={LOGO_URL} 
-              alt="Logo Studio Dott. Davide Lucano" 
-              width={36}
-              height={36}
+              alt={`Logo Studio ${siteConfig.doctor.name} - Fisioterapista`} 
+              width={110}
+              height={44}
               loading="eager"
               fetchPriority="high"
               decoding="async"
-              className="w-full h-full object-contain"
+              className="h-full w-auto object-contain rounded-lg"
               referrerPolicy="no-referrer"
             />
-          </div>
-          <div>
-            <span className="text-[16px] sm:text-[17px] font-semibold text-[#1d1d1f] group-hover:text-[#006875] tracking-tight transition-colors block leading-tight">
-              {siteConfig.doctor.name}
-            </span>
-            <span className="text-[11px] sm:text-[12px] font-normal text-[#6e6e73] tracking-normal block leading-tight">
-              {siteConfig.doctor.title}
-            </span>
           </div>
         </a>
 
@@ -212,98 +205,100 @@ export const Navbar: React.FC<NavbarProps> = ({ onBookClick, bookingCount, onVie
 
           <button 
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-xl text-[#1d1d1f] hover:bg-black/[0.04] focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#006875] cursor-pointer"
+            className="p-2 rounded-xl text-[#1d1d1f] hover:bg-black/[0.04] focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#00b488] cursor-pointer min-w-[44px] min-h-[44px] flex items-center justify-center"
             aria-label={mobileMenuOpen ? "Chiudi menu di navigazione" : "Apri menu di navigazione"}
             aria-expanded={mobileMenuOpen}
             aria-controls="mobile-nav-menu"
             id="mobile-menu-btn"
           >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5 text-[#1d1d1f]" />}
+            {mobileMenuOpen ? <X className="w-6 h-6 text-[#1d1d1f]" /> : <Menu className="w-6 h-6 text-[#1d1d1f]" />}
           </button>
         </div>
       </nav>
+    </header>
 
-      {/* Mobile Drawer Navigation */}
-      {mobileMenuOpen && (
-        <div 
-          id="mobile-nav-menu"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Menu di navigazione mobile"
-          className="lg:hidden fixed inset-x-0 top-18 sm:top-20 bottom-0 bg-white/98 backdrop-blur-xl border-t border-gray-200 z-40 overflow-y-auto animate-in slide-in-from-top-4 duration-200 px-6 py-6 flex flex-col justify-between"
-        >
-          <div className="flex flex-col space-y-1">
-            <div className="text-[11px] font-medium uppercase tracking-wider text-[#86868b] px-3 py-1 mb-1">
-              Menu
-            </div>
-
-            {navSections.map(({ config }) => {
-              const isActive = activeSection === config.id;
-              return (
-                <a 
-                  key={config.id}
-                  href={`#${config.id}`} 
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-[14.5px] transition-colors ${
-                    isActive 
-                      ? 'bg-black/[0.05] text-[#1d1d1f] font-medium' 
-                      : 'text-[#6e6e73] hover:text-[#1d1d1f] hover:bg-black/[0.02]'
-                  }`}
-                >
-                  <span>{config.name}</span>
-                  <span className="text-[12px] text-[#86868b]">#{config.navLabel}</span>
-                </a>
-              );
-            })}
+    {/* Mobile Drawer Navigation - Positioned OUTSIDE <header> to ensure full viewport height on mobile */}
+    {mobileMenuOpen && (
+      <div 
+        id="mobile-nav-menu"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menu di navigazione mobile"
+        className="lg:hidden fixed inset-x-0 top-16 sm:top-[68px] bottom-0 z-50 bg-white/98 backdrop-blur-2xl border-t border-gray-200 overflow-y-auto px-6 py-6 flex flex-col justify-between shadow-2xl"
+        style={{ height: 'calc(100dvh - 64px)' }}
+      >
+        <div className="flex flex-col space-y-1">
+          <div className="text-[11px] font-semibold uppercase tracking-wider text-[#86868b] px-3.5 py-1 mb-2">
+            Menu di Navigazione
           </div>
 
-          <div className="pt-5 border-t border-black/[0.06] mt-6 space-y-2.5">
-            <button 
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onBookClick();
-              }}
-              className="w-full bg-[#1d1d1f] text-white py-3 rounded-full text-[14px] font-medium text-center hover:bg-black transition-colors flex items-center justify-center gap-2 shadow-2xs cursor-pointer active:scale-[0.98]"
+          {navSections.map(({ config }) => {
+            const isActive = activeSection === config.id;
+            return (
+              <a 
+                key={config.id}
+                href={`#${config.id}`} 
+                onClick={() => setMobileMenuOpen(false)}
+                className={`flex items-center justify-between px-4 py-3.5 rounded-xl text-[15px] font-medium transition-colors ${
+                  isActive 
+                    ? 'bg-[#00b488]/10 text-[#00b488] font-semibold' 
+                    : 'text-[#1d1d1f] hover:bg-black/[0.04]'
+                }`}
+              >
+                <span>{config.name}</span>
+                <span className="text-[12px] text-[#86868b]">#{config.navLabel}</span>
+              </a>
+            );
+          })}
+        </div>
+
+        <div className="pt-6 border-t border-black/[0.06] mt-6 space-y-3 pb-8">
+          <button 
+            onClick={() => {
+              setMobileMenuOpen(false);
+              onBookClick();
+            }}
+            className="w-full bg-[#1d1d1f] text-white py-3.5 rounded-full text-[14px] font-medium text-center hover:bg-black transition-colors flex items-center justify-center gap-2 shadow-xs cursor-pointer active:scale-[0.98]"
+          >
+            {isBookingEnabled ? (
+              <>
+                <Calendar className="w-4 h-4 text-white/80" />
+                <span>{t.nav.bookOnline}</span>
+              </>
+            ) : (
+              <>
+                <Phone className="w-4 h-4 text-white/80" />
+                <span>Richiedi Appuntamento</span>
+              </>
+            )}
+          </button>
+
+          <div className="grid grid-cols-2 gap-2.5">
+            <a
+              href={`tel:${siteConfig.studio.phone.replace(/\s+/g, '')}`}
+              className="flex items-center justify-center gap-1.5 py-3 px-3 rounded-full border border-black/[0.08] text-[#1d1d1f] text-[13px] font-medium bg-[#f5f5f7] hover:bg-[#e8e8ed]"
             >
-              {isBookingEnabled ? (
-                <>
-                  <Calendar className="w-3.5 h-3.5 text-white/80" />
-                  <span>{t.nav.bookOnline}</span>
-                </>
-              ) : (
-                <>
-                  <Phone className="w-3.5 h-3.5 text-white/80" />
-                  <span>Richiedi Appuntamento</span>
-                </>
-              )}
-            </button>
+              <Phone className="w-3.5 h-3.5 text-[#00b488]" />
+              <span>Chiama Studio</span>
+            </a>
 
-            <div className="grid grid-cols-2 gap-2">
-              <a
-                href={`tel:${siteConfig.studio.phone.replace(/\s+/g, '')}`}
-                className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-full border border-black/[0.08] text-[#1d1d1f] text-[12.5px] font-medium bg-[#f5f5f7] hover:bg-[#e8e8ed]"
-              >
-                <Phone className="w-3 h-3 text-[#006875]" />
-                <span>Chiama Studio</span>
-              </a>
+            <a
+              href={siteConfig.studio.whatsappLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-1.5 py-3 px-3 rounded-full border border-emerald-200 text-emerald-800 text-[13px] font-medium bg-emerald-50 hover:bg-emerald-100"
+            >
+              <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
+              <span>WhatsApp</span>
+            </a>
+          </div>
 
-              <a
-                href={siteConfig.studio.whatsappLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-full border border-emerald-200 text-emerald-800 text-[12.5px] font-medium bg-emerald-50 hover:bg-emerald-100"
-              >
-                <MessageCircle className="w-3 h-3 text-emerald-600" />
-                <span>WhatsApp</span>
-              </a>
-            </div>
-
-            <div className="text-center pt-2 text-[11.5px] text-[#86868b]">
-              {siteConfig.studio.fullAddress}
-            </div>
+          <div className="text-center pt-2 text-[12px] text-[#86868b] leading-tight">
+            {siteConfig.studio.fullAddress}
           </div>
         </div>
-      )}
-    </header>
+      </div>
+    )}
+    </>
   );
 };

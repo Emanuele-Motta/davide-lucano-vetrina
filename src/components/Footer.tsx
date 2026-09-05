@@ -43,25 +43,17 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal, onOpenCookiePrefere
           {/* Column 1: Identity & Professional Details (4 cols) */}
           <div className="lg:col-span-4 space-y-3">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-white p-1 flex items-center justify-center shrink-0 border border-black/[0.06] shadow-2xs">
+              <div className="h-11 sm:h-12 w-auto rounded-lg overflow-hidden bg-[#00b488] shadow-2xs ring-1 ring-black/[0.08]">
                 <img 
                   src={LOGO_URL} 
                   alt="Logo Studio Medico Fisioterapico" 
-                  width={32}
-                  height={32}
+                  width={130}
+                  height={48}
                   loading="lazy"
                   decoding="async"
-                  className="w-full h-full object-contain"
+                  className="h-full w-auto object-contain rounded-lg"
                   referrerPolicy="no-referrer"
                 />
-              </div>
-              <div>
-                <span className="text-[16px] font-semibold text-[#1d1d1f] tracking-tight block">
-                  {siteConfig.doctor.name}
-                </span>
-                <span className="text-[12px] font-medium text-[#006875] block">
-                  {siteConfig.doctor.title}
-                </span>
               </div>
             </div>
 

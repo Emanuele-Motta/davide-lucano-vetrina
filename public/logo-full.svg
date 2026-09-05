@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" width="100%" height="100%">
+  <!-- Solid Teal-Green Clinic Canvas -->
+  <rect width="1000" height="600" fill="#00b488"/>
+  
+  <g fill="#ffffff">
+    <!-- Main Doctor Name Typography: Bold Clean Grotesque -->
+    <text 
+      x="70" 
+      y="310" 
+      font-family="'Plus Jakarta Sans', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Montserrat', 'Inter', sans-serif" 
+      font-weight="800" 
+      font-size="152" 
+      letter-spacing="-3"
+    >Davide</text>
+
+    <text 
+      x="70" 
+      y="460" 
+      font-family="'Plus Jakarta Sans', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Montserrat', 'Inter', sans-serif" 
+      font-weight="800" 
+      font-size="152" 
+      letter-spacing="-3"
+    >Lucano</text>
+
+    <!-- Subtitle: Fisioterapista -->
+    <text 
+      x="75" 
+      y="545" 
+      font-family="'Plus Jakarta Sans', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Inter', sans-serif" 
+      font-weight="300" 
+      font-size="60" 
+      letter-spacing="5"
+    >Fisioterapista</text>
+
+    <!-- Right Monogram: Structural White 'L' -->
+    <!-- Vertical Column -->
+    <path d="M670 126 L712 126 L712 540 L670 540 Z" fill="#ffffff"/>
+    <!-- Bottom Horizontal Bar -->
+    <path d="M670 498 L950 498 L950 540 L670 540 Z" fill="#ffffff"/>
+
+    <!-- Kinetic Spine Arc / Movement Swoosh -->
+    <path 
+      d="M 746 200 
+         C 830 202, 922 238, 922 308 
+         C 922 388, 830 468, 746 508 
+         C 815 450, 872 380, 872 308 
+         C 872 245, 815 210, 746 200 Z" 
+      fill="#ffffff"
+    />
+
+    <!-- Posture Balance Dot / Vitality Head -->
+    <circle cx="922" cy="166" r="36" fill="#ffffff"/>
+  </g>
+</svg>
