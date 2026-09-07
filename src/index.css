@@ -48,10 +48,20 @@
   will-change: transform;
 }
 
-/* Pause on hover */
-.marquee-container:hover .animate-marquee,
-.marquee-container:focus-within .animate-marquee {
-  animation-play-state: paused !important;
+/* Pause on hover ONLY on desktop devices with a real pointer/mouse to prevent mobile touch/click freeze */
+@media (hover: hover) and (pointer: fine) {
+  .marquee-container:hover .animate-marquee {
+    animation-play-state: paused;
+  }
+}
+
+/* Hide scrollbar for touch-friendly horizontal scrolling on mobile */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

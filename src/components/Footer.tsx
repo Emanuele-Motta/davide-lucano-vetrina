@@ -43,7 +43,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal, onOpenCookiePrefere
           {/* Column 1: Identity & Professional Details (4 cols) */}
           <div className="lg:col-span-4 space-y-3">
             <div className="flex items-center gap-3">
-              <div className="h-11 sm:h-12 w-auto rounded-lg overflow-hidden bg-[#00b488] shadow-2xs ring-1 ring-black/[0.08]">
+              <div className="h-11 sm:h-12 w-auto rounded-lg overflow-hidden bg-[#006875] shadow-2xs ring-1 ring-black/[0.08]">
                 <img 
                   src={LOGO_URL} 
                   alt="Logo Studio Medico Fisioterapico" 
@@ -182,18 +182,20 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal, onOpenCookiePrefere
           </div>
         </div>
 
-        {/* Disclaimer Note */}
-        <div className="py-4 text-[11px] text-[#86868b] flex items-start gap-2 border-b border-black/[0.06] leading-relaxed">
-          <AlertCircle className="w-3 h-3 text-amber-500 shrink-0 mt-0.5" />
-          <span>
-            Le informazioni cliniche fornite hanno finalità puramente divulgative e non sostituiscono il parere medico. Per emergenze contattare il 112. Spese sanitarie detraibili al 19% (art. 10 DPR 633/72).
-          </span>
-        </div>
+        {/* Disclaimer Note (disabilitato di default / configurabile via VITE_SHOW_FOOTER_DISCLAIMER) */}
+        {siteConfig.footer?.showDisclaimer && (
+          <div className="py-4 text-[11px] text-[#86868b] flex items-start gap-2 border-b border-black/[0.06] leading-relaxed">
+            <AlertCircle className="w-3 h-3 text-amber-500 shrink-0 mt-0.5" />
+            <span>
+              Le informazioni cliniche fornite hanno finalità puramente divulgative e non sostituiscono il parere medico. Per emergenze contattare il 112. Spese sanitarie detraibili al 19% (art. 10 DPR 633/72).
+            </span>
+          </div>
+        )}
 
         {/* Bottom Bar: Copyright & Legal */}
         <div className="pt-5 flex flex-col md:flex-row justify-between items-center gap-3 text-[11.5px] text-[#86868b] text-center md:text-left">
           <p>
-            © {new Date().getFullYear()} {siteConfig.doctor.name} • P.IVA {siteConfig.studio.piva} • {siteConfig.doctor.alboNumber}
+            © {new Date().getFullYear()} {siteConfig.doctor.name} • {siteConfig.studio.piva} • {siteConfig.doctor.alboNumber} • PEC: {siteConfig.studio.pec}
           </p>
 
           <nav aria-label="Link legali e conformità normativa" className="flex flex-wrap justify-center gap-4">

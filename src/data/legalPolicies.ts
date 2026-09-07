@@ -1,3 +1,5 @@
+import { siteConfig } from '../config/siteConfig';
+
 export interface CookieAuditItem {
   name: string;
   provider: string;
@@ -9,28 +11,28 @@ export interface CookieAuditItem {
 export const COOKIE_AUDIT_TABLE: CookieAuditItem[] = [
   {
     name: 'davide_lucano_cookie_consent_v2',
-    provider: 'Dott. Davide Lucano (Prima parte)',
+    provider: `${siteConfig.doctor.name} (Prima parte)`,
     category: 'Tecnico',
     purpose: 'Memorizza lo stato e la data del consenso espresso dall’utente per le singole categorie di cookie, nel rispetto delle Linee Guida del Garante Privacy.',
     duration: '6 mesi'
   },
   {
     name: 'fisioterapia_feature_booking_enabled',
-    provider: 'Dott. Davide Lucano (Prima parte)',
+    provider: `${siteConfig.doctor.name} (Prima parte)`,
     category: 'Tecnico',
     purpose: 'Memorizza lo stato di attivazione della modalità di prenotazione o contatto rapido per garantire la corretta visualizzazione dell’interfaccia.',
     duration: 'Persistente (Locale)'
   },
   {
     name: 'studio_milano_user_bookings',
-    provider: 'Dott. Davide Lucano (Prima parte)',
+    provider: `${siteConfig.doctor.name} (Prima parte)`,
     category: 'Tecnico',
     purpose: 'Consente all’utente di visualizzare in locale l’elenco dei propri appuntamenti confermati senza necessità di registrazione account complessa.',
     duration: 'Persistente (Locale)'
   },
   {
     name: 'fisioterapia_lang_preference',
-    provider: 'Dott. Davide Lucano (Prima parte)',
+    provider: `${siteConfig.doctor.name} (Prima parte)`,
     category: 'Preferenze',
     purpose: 'Salva la lingua preferita di navigazione scelta dal paziente.',
     duration: '12 mesi'
@@ -46,7 +48,7 @@ export const COOKIE_AUDIT_TABLE: CookieAuditItem[] = [
     name: 'maps_session (Se acconsentito)',
     provider: 'Google Maps / Alphabet Inc. (Terza parte)',
     category: 'Marketing',
-    purpose: 'Permette la visualizzazione interattiva della mappa dello studio in Via delle betulle 10, Milano e il calcolo del percorso stradale.',
+    purpose: `Permette la visualizzazione interattiva della mappa dello studio in ${siteConfig.studio.address}, ${siteConfig.studio.city} e il calcolo del percorso stradale.`,
     duration: 'Sessione / Persistente'
   }
 ];
@@ -54,11 +56,11 @@ export const COOKIE_AUDIT_TABLE: CookieAuditItem[] = [
 export const PRIVACY_POLICY_SECTIONS = [
   {
     title: '1. Titolare del Trattamento dei Dati',
-    content: `Il Titolare del Trattamento è il Dott. Davide Lucano, Fisioterapista & Osteopata D.O., regolarmente iscritto all'Albo dell'Ordine della Professione Sanitaria di Fisioterapista (FNOFI n. 4821).
-Sede dello Studio: Via delle betulle 10, 20152 Milano (MI)
-Partita IVA: IT10948200965
-Email per l'esercizio dei diritti privacy: info@fisioterapiamilano.it - PEC: davide.lucano@pec.it
-Telefono studio: +39 02 8492 1104`
+    content: `Il Titolare del Trattamento è il ${siteConfig.doctor.name}, ${siteConfig.doctor.title}, regolarmente iscritto all'Albo dell'${siteConfig.doctor.alboNumber}.
+Sede dello Studio: ${siteConfig.studio.fullAddress}
+Codice Fiscale / Partita IVA: ${siteConfig.studio.piva}
+Email per l'esercizio dei diritti privacy: ${siteConfig.studio.email} - PEC: ${siteConfig.studio.pec}
+Telefono studio: ${siteConfig.studio.phone}`
   },
   {
     title: '2. Tipologia di Dati Trattati e Dati Sanitari (Art. 9 GDPR)',
@@ -103,7 +105,7 @@ Tutti i dati sanitari sono vincolati dal più rigoroso Segreto Professionale ed 
 - Chiedere la limitazione del trattamento (art. 18);
 - Esercitare il diritto alla portabilità dei dati (art. 20);
 - Esercitare opposizione all'invio dei dati al Sistema Tessera Sanitaria all'atto dell'emissione della fattura.
-Le richieste possono essere inviate senza formalità all'indirizzo email: info@fisioterapiamilano.it.`
+Le richieste possono essere inviate senza formalità all'indirizzo email: ${siteConfig.studio.email}.`
   },
   {
     title: '8. Diritto di Reclamo all’Autorità Garante',
@@ -120,7 +122,7 @@ export const COOKIE_POLICY_SECTIONS = [
     title: '2. Riferimenti Normativi e Linee Guida del Garante Privacy',
     content: `La presente informativa è redatta in piena conformità alle "Linee guida cookie e altri strumenti di tracciamento" emanate dal Garante per la Protezione dei Dati Personali il 10 giugno 2021 (pubblicate in G.U. n. 163 del 9 luglio 2021) e all'art. 122 del Codice della Privacy (D.Lgs. 196/2003 e s.m.i.).
 In conformità a tali prescrizioni:
-- L'utente ha la facoltà di rifiutare tutti i cookie non necessari chiudendo il banner tramite l'apposito pulsante contrassegnato con la 'X' in alto a destra o tramite il pulsante 'Rifiuta tutti';
+- L'utente ha la facoltà di rifiutare tutti i cookie non necessari chiudendo il banner tramite l'apposito pulsante contrassegnato con la 'X' in alto a destra o tramite il pulsante 'Solo essenziali';
 - Nessun cookie di profilazione o statistico non anonimizzato viene installato senza il consenso espresso e preventivo dell'interessato (principio di privacy by default);
 - Il consenso espresso è tracciato con timestamp e revocabile in qualsiasi momento con un solo clic tramite il comando permanente "Preferenze Cookie".`
   },
@@ -152,7 +154,7 @@ La disabilitazione totale dei cookie tecnici essenziali potrebbe compromettere i
 export const TERMS_SECTIONS = [
   {
     title: '1. Oggetto del Servizio Sanitario',
-    content: `Il Dott. Davide Lucano eroga prestazioni professionali sanitarie di Fisioterapia, Riabilitazione Funzionale, Terapia Manuale ed Osteopatia presso lo Studio di Via delle betulle 10, Milano (MI) conformemente alla normativa vigente e al profilo professionale DM 741/1994.`
+    content: `Il ${siteConfig.doctor.name} eroga prestazioni professionali sanitarie di Fisioterapia, Riabilitazione Funzionale, Terapia Manuale ed Osteopatia presso lo Studio di ${siteConfig.studio.fullAddress} conformemente alla normativa vigente e al profilo professionale DM 741/1994.`
   },
   {
     title: '2. Prenotazioni Online e Modalità di Accesso',
@@ -162,7 +164,7 @@ export const TERMS_SECTIONS = [
     title: '3. Politica di Disdetta e Rispetto dell’Orario',
     content: `Per garantire la massima puntualità ed efficienza delle cure a tutti i pazienti, comprese eventuali urgenze riabilitative acute:
 - Si raccomanda di presentarsi con 5 minuti di anticipo rispetto all'orario concordato;
-- Eventuali cancellazioni o spostamenti di appuntamento devono essere comunicati con almeno 24 ore di anticipo contattando il recapito telefonico o WhatsApp dello studio (+39 02 8492 1104).`
+- Eventuali cancellazioni o spostamenti di appuntamento devono essere comunicati con almeno 24 ore di anticipo contattando il recapito telefonico o WhatsApp dello studio (${siteConfig.studio.phone}).`
   },
   {
     title: '4. Regime Fiscale ed Esenzione IVA (Art. 10 D.P.R. 633/72)',

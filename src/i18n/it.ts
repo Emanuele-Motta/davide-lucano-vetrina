@@ -275,12 +275,12 @@ export const itTranslations: Translations = {
     bookOnline: "Prenota Online"
   },
   hero: {
-    pill: "Dott. Davide Lucano • Fisioterapia & Osteopata",
-    titleStart: "Dott. Davide Lucano.",
-    titleHighlight: "Fisioterapia e riabilitazione.",
-    subtitle: "Valutazione specialistica e percorsi clinici individuali 1-a-1 a Milano.",
-    ctaBook: "Prenota visita",
-    ctaServices: "Vedi trattamenti",
+    pill: "Dott. Davide Lucano • Fisioterapia & Osteopatia a Milano",
+    titleStart: "Ritrova il movimento.",
+    titleHighlight: "Senza dolore.",
+    subtitle: "Fisioterapia avanzata e percorsi su misura a Milano. Per tornare a vivere, lavorare e fare sport al massimo.",
+    ctaBook: "Prenota una valutazione",
+    ctaServices: "Specializzazioni",
     badges: {
       alboTitle: "Albo FNOFI Milano",
       alboDesc: "Iscrizione n. 1420",
@@ -291,9 +291,9 @@ export const itTranslations: Translations = {
     }
   },
   about: {
-    badge: "Profilo Clinico",
-    title: "Approccio clinico su misura.",
-    subtitle: "Nessun protocollo standard: diagnosi funzionale approfondita, terapia manuale avanzata ed esercizio terapeutico per eliminare la causa del dolore alla radice.",
+    badge: "Filosofia Clinica",
+    title: "Al centro ci sei tu, non la patologia.",
+    subtitle: "Niente percorsi standard. Solo ascolto, diagnosi accurate e un piano di recupero disegnato sui tuoi ritmi.",
     doctor: {
       name: "Dott. Davide Lucano",
       title: "Fisioterapista & Osteopata D.O. • Albo FNOFI Milano n. 1420",
@@ -308,26 +308,26 @@ export const itTranslations: Translations = {
     highlights: {
       evidence: {
         title: "Metodo Evidence-Based",
-        desc: "Protocolli validati dalla ricerca scientifica internazionale."
+        desc: "Protocolli clinici validati dalla ricerca scientifica per risultati stabili nel tempo."
       },
       technology: {
         title: "Tecnologia Avanzata",
-        desc: "Tecar terapia ed elettromedicali di ultima generazione."
+        desc: "Tecar terapia ed elettromedicali di ultima generazione per accelerare la rigenerazione."
       },
       punctuality: {
-        title: "Puntualità & Privacy",
-        desc: "Riceve su appuntamento in ambiente riservato, senza attese."
+        title: "Ascolto & Puntualità",
+        desc: "Riceve su appuntamento in ambiente riservato: zero attese, tempo dedicato al 100% a te."
       },
       exercises: {
         title: "Prevenzione Attiva",
-        desc: "Esercizi mirati per consolidare i risultati ed evitare ricadute."
+        desc: "Esercizi mirati e consigli ergonomici per consolidare i benefici ed evitare ricadute."
       }
     }
   },
   services: {
-    badge: "Trattamenti",
-    title: "Trattamenti specialistici.",
-    subtitle: "Percorsi riabilitativi individuali 1-a-1 per il ripristino del movimento senza dolore.",
+    badge: "Aree di Intervento",
+    title: "Specializzazioni.",
+    subtitle: "Percorsi mirati per liberare il movimento ed eliminare il dolore.",
     allCategory: "Tutti",
     bookNow: "Prenota ora",
     clinicalDetails: "Dettagli clinici",
@@ -335,7 +335,7 @@ export const itTranslations: Translations = {
       {
         id: "terapia-manuale",
         title: "Terapia Manuale & Osteopatia Clinica",
-        shortDesc: "Trattamento mirato di blocchi articolari, cervicalgie, lombalgie e sciatalgie.",
+        shortDesc: "Libera le articolazioni, scioglie le contratture e riduce l'infiammazione fin dalla prima seduta.",
         fullDesc: "Mobilizzazione vertebrale, manipolazione miofasciale e decompressione articolare per la risoluzione rapida del dolore e il ripristino dell'escursione articolare.",
         duration: "45 min",
         price: "€ 85",
@@ -351,7 +351,7 @@ export const itTranslations: Translations = {
       {
         id: "riabilitazione-sportiva",
         title: "Riabilitazione Sportiva & Return-to-Play",
-        shortDesc: "Recupero funzionale, riatletizzazione e prevenzione delle recidive per sportivi.",
+        shortDesc: "Riprendi il tuo sport in totale sicurezza con test funzionali e riatletizzazione progressiva.",
         fullDesc: "Programmi evidence-based di recupero funzionale e riatletizzazione dopo infortuni muscolari, distorsioni o interventi chirurgici.",
         duration: "60 min",
         price: "€ 95",
@@ -367,7 +367,7 @@ export const itTranslations: Translations = {
       {
         id: "posturale",
         title: "Rieducazione Posturale Globale (RPG)",
-        shortDesc: "Riequilibrio delle catene muscolari e correzione di posture da sedentarietà.",
+        shortDesc: "Ritrova l'equilibrio della colonna e correggi le tensioni causate dalla sedentarietà.",
         fullDesc: "Integrazione dei metodi Mézières e Souchard per riequilibrare le catene muscolari e risolvere tensioni da prolungata sedentarietà.",
         duration: "50 min",
         price: "€ 80",
@@ -383,7 +383,7 @@ export const itTranslations: Translations = {
       {
         id: "tecar-terapia",
         title: "Tecar Terapia Capacitiva & Resistiva",
-        shortDesc: "Radiofrequenza per sfiammare i tessuti e dimezzare i tempi di recupero.",
+        shortDesc: "Accelera i tempi biologici di riparazione dei tessuti e spegne il dolore rapidamente.",
         fullDesc: "Tecnologia a radiofrequenza per stimolare i processi biologici di autoriparazione, drenare edemi e ridurre il dolore rapidamente.",
         duration: "30 min",
         price: "€ 70",
@@ -399,7 +399,7 @@ export const itTranslations: Translations = {
       {
         id: "prima-visita",
         title: "Prima Visita Fisioterapica & Valutazione",
-        shortDesc: "Anamnesi completa, test ortopedici e primo trattamento terapeutico incluso.",
+        shortDesc: "Anamnesi accurata, test biomeccanici mirati e primo trattamento terapeutico immediato.",
         fullDesc: "Valutazione di 60 minuti: esame della documentazione clinica, test ortopedici, diagnosi funzionale e primo trattamento terapeutico erogato nella seduta.",
         duration: "60 min",
         price: "€ 100",
@@ -415,7 +415,7 @@ export const itTranslations: Translations = {
       {
         id: "controllo",
         title: "Seduta di Controllo & Trattamento",
-        shortDesc: "Monitoraggio progressi, progressione delle tecniche e aggiornamento esercizi.",
+        shortDesc: "Verifica dei miglioramenti ottenuti, perfezionamento delle tecniche ed evoluzione del piano.",
         fullDesc: "Seduta individuale di consolidamento dei risultati, rivalutazione dei parametri di mobilità e progressione del programma di esercizi.",
         duration: "40 min",
         price: "€ 75",
@@ -568,46 +568,46 @@ export const itTranslations: Translations = {
       },
       {
         question: "Le sedute sono detraibili fiscalmente?",
-        answer: "Sì, al 100%. Le prestazioni fisioterapiche sono sanitarie, esenti da IVA (art. 10 DPR 633/72) e detraibili al 19% nel modello 730 per i pagamenti tracciabili."
+        answer: "Sì, al 100%. Le prestazioni fisioterapiche sono sanitarie, esenti da IVA (art. 10 DPR 633/72) e detraibili al 19% nel modello 730 con pagamenti tracciabili."
       },
       {
         question: "Come si raggiunge lo studio e dove si parcheggia?",
-        answer: "Lo studio è situato in Via delle betulle 14 a Pieve Emanuele (Milano). Dispone di ampio parcheggio gratuito proprio di fronte all'ingresso, senza limitazioni ZTL."
+        answer: "Lo studio è in Via delle betulle 14 a Pieve Emanuele (Milano). Dispone di ampio parcheggio gratuito proprio di fronte all'ingresso, senza limitazioni ZTL."
       },
       {
         question: "Quali problematiche vengono trattate principalmente?",
-        answer: "Dolori alla colonna (cervicalgie, lombalgie, sciatalgie), lesioni sportive e articolari (spalla, ginocchio, caviglia), riabilitazione post-chirurgica e correzione posturale."
+        answer: "Disturbi della colonna (cervicalgia, lombalgia, sciatalgia), infortuni sportivi e articolari, riabilitazione post-chirurgica e riequilibrio posturale."
       },
       {
         question: "Cosa include la Prima Visita?",
-        answer: "Dura circa 60 minuti: include colloquio anamnestico, visione di esami diagnostici, test biomeccanici, primo trattamento terapeutico e definizione del percorso riabilitativo."
+        answer: "Dura 60 minuti: include anamnesi clinica, visione degli esami diagnostici, test biomeccanici, primo trattamento terapeutico e piano di recupero su misura."
       },
       {
         question: "La Tecar Terapia è dolorosa?",
-        answer: "No, è un trattamento piacevole e indolore che produce un calore profondo rilassante, accelerando la guarigione biologica dei tessuti infiammati."
+        answer: "No, è un trattamento del tutto indolore e piacevole. Genera un calore profondo rilassante che stimola la microcircolazione e riduce rapidamente l'infiammazione."
       },
       {
         question: "Come si prenota o si modifica un appuntamento?",
-        answer: "È possibile prenotare online direttamente dal calendario su questa pagina o contattare il Dott. Lucano via WhatsApp o telefono (+39 02 8716 9421)."
+        answer: "Puoi selezionare data e ora direttamente dal calendario online qui sopra. In alternativa, puoi scrivere su WhatsApp al +39 347 123 4567 per assistenza diretta."
       }
     ],
     banner: {
       title: "Hai un dubbio o una richiesta specifica?",
-      subtitle: "Il Dott. Davide Lucano è a disposizione per informazioni cliniche.",
+      subtitle: "Il Dott. Davide Lucano risponde con trasparenza sul tuo caso clinico.",
       call: "Chiama",
       bookOnline: "Prenota Online"
     },
     contactBanner: {
       title: "Hai un dubbio o una richiesta specifica?",
-      subtitle: "Il Dott. Davide Lucano è a disposizione per informazioni cliniche.",
+      subtitle: "Il Dott. Davide Lucano risponde con trasparenza sul tuo caso clinico.",
       call: "Chiama",
       bookOnline: "Prenota Online"
     }
   },
   booking: {
-    badge: "Agenda Online del Dott. Davide Lucano",
-    title: "Prenota la Tua Seduta con il Dott. Davide Lucano",
-    subtitle: "Seleziona il trattamento clinico e l'orario più comodo. Sedute individuali 1-a-1 a Milano con conferma istantanea.",
+    badge: "Prenotazione Online",
+    title: "Il tuo percorso inizia qui.",
+    subtitle: "Scegli il giorno e l'orario più comodo in meno di due minuti.",
     steps: {
       step1: "1. Seleziona il Trattamento",
       step2: "2. Scegli Data e Ora",

@@ -98,9 +98,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onBookClick, bookingCount, onVie
           href="#hero" 
           id="nav-brand-logo"
           aria-label={`${siteConfig.doctor.name} - Torna alla Home`}
-          className="flex items-center group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#00b488] rounded-xl p-0.5"
+          className="flex items-center group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#006875] rounded-xl p-0.5"
         >
-          <div className="relative h-9 sm:h-10 md:h-11 w-auto rounded-lg overflow-hidden shadow-2xs ring-1 ring-black/[0.08] hover:opacity-95 transition-opacity bg-[#00b488]">
+          <div className="relative h-9 sm:h-10 md:h-11 w-auto rounded-lg overflow-hidden shadow-2xs ring-1 ring-black/[0.08] hover:opacity-95 transition-opacity bg-[#006875]">
             <img 
               src={LOGO_URL} 
               alt={`Logo Studio ${siteConfig.doctor.name} - Fisioterapista`} 
@@ -205,7 +205,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onBookClick, bookingCount, onVie
 
           <button 
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-xl text-[#1d1d1f] hover:bg-black/[0.04] focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#00b488] cursor-pointer min-w-[44px] min-h-[44px] flex items-center justify-center"
+            className="p-2 rounded-xl text-[#1d1d1f] hover:bg-black/[0.04] focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#006875] cursor-pointer min-w-[44px] min-h-[44px] flex items-center justify-center"
             aria-label={mobileMenuOpen ? "Chiudi menu di navigazione" : "Apri menu di navigazione"}
             aria-expanded={mobileMenuOpen}
             aria-controls="mobile-nav-menu"
@@ -228,7 +228,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onBookClick, bookingCount, onVie
         style={{ height: 'calc(100dvh - 64px)' }}
       >
         <div className="flex flex-col space-y-1">
-          <div className="text-[11px] font-semibold uppercase tracking-wider text-[#86868b] px-3.5 py-1 mb-2">
+          <div className="text-[11px] font-semibold uppercase tracking-wider text-[#86868b] px-3.5 py-1 mb-2 text-center">
             Menu di Navigazione
           </div>
 
@@ -239,14 +239,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onBookClick, bookingCount, onVie
                 key={config.id}
                 href={`#${config.id}`} 
                 onClick={() => setMobileMenuOpen(false)}
-                className={`flex items-center justify-between px-4 py-3.5 rounded-xl text-[15px] font-medium transition-colors ${
+                className={`flex items-center justify-center text-center px-4 py-3.5 rounded-xl text-[16px] font-medium transition-colors ${
                   isActive 
-                    ? 'bg-[#00b488]/10 text-[#00b488] font-semibold' 
+                    ? 'bg-[#006875]/10 text-[#006875] font-semibold' 
                     : 'text-[#1d1d1f] hover:bg-black/[0.04]'
                 }`}
               >
                 <span>{config.name}</span>
-                <span className="text-[12px] text-[#86868b]">#{config.navLabel}</span>
               </a>
             );
           })}
@@ -278,7 +277,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onBookClick, bookingCount, onVie
               href={`tel:${siteConfig.studio.phone.replace(/\s+/g, '')}`}
               className="flex items-center justify-center gap-1.5 py-3 px-3 rounded-full border border-black/[0.08] text-[#1d1d1f] text-[13px] font-medium bg-[#f5f5f7] hover:bg-[#e8e8ed]"
             >
-              <Phone className="w-3.5 h-3.5 text-[#00b488]" />
+              <Phone className="w-3.5 h-3.5 text-[#006875]" />
               <span>Chiama Studio</span>
             </a>
 

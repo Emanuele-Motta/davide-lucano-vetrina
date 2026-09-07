@@ -17,8 +17,9 @@ export const Hero: React.FC<HeroProps> = ({ onBookClick, onExploreAbout, onExplo
   const [isBgLoaded, setIsBgLoaded] = useState(false);
 
   return (
-    <header 
+    <section 
       id="hero"
+      aria-label="Presentazione e Introduzione del Dott. Davide Lucano"
       className="relative pt-24 sm:pt-28 md:pt-32 pb-14 sm:pb-18 px-5 md:px-16 flex flex-col items-center justify-center text-center overflow-hidden"
     >
       {/* Optimized Background Image Container with Smooth Scale & Fade-In Animation */}
@@ -41,19 +42,10 @@ export const Hero: React.FC<HeroProps> = ({ onBookClick, onExploreAbout, onExplo
         />
       </motion.div>
 
-      {/* Subtle Ambient Radial Glow for Apple-style Key Visual Depth */}
-      <motion.div 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] sm:w-[580px] h-[300px] sm:h-[420px] bg-gradient-to-tr from-[#006875]/15 via-sky-100/30 to-transparent rounded-full blur-3xl pointer-events-none z-0"
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ 
-          opacity: [0.4, 0.7, 0.4], 
-          scale: [0.98, 1.05, 0.98] 
-        }}
-        transition={{ 
-          duration: 9, 
-          repeat: Infinity, 
-          ease: "easeInOut" 
-        }}
+      {/* Subtle Ambient Radial Glow for Apple-style Key Visual Depth (GPU-friendly static gradient) */}
+      <div 
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] sm:w-[580px] h-[300px] sm:h-[420px] bg-[radial-gradient(ellipse_at_center,_rgba(0,104,117,0.10),_rgba(0,104,117,0.02)_45%,_transparent_70%)] pointer-events-none z-0"
+        aria-hidden="true"
       />
 
       {/* Soft gradient overlay to blend into the main canvas */}
@@ -61,17 +53,6 @@ export const Hero: React.FC<HeroProps> = ({ onBookClick, onExploreAbout, onExplo
 
       {/* Content Container with Apple Staggered Reveal */}
       <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center">
-        
-        {/* Pill Tag */}
-        <motion.div 
-          className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-black/[0.04] text-[#1d1d1f] text-[12.5px] font-medium tracking-tight mb-5 border border-black/[0.06] shadow-2xs backdrop-blur-xs"
-          initial={{ opacity: 0, y: -12, scale: 0.94 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <span className="w-1.5 h-1.5 rounded-full bg-[#006875] animate-pulse" />
-          <span>{t.hero.pill}</span>
-        </motion.div>
 
         {/* Primary SEO H1 Headline */}
         <motion.h1 
@@ -152,6 +133,6 @@ export const Hero: React.FC<HeroProps> = ({ onBookClick, onExploreAbout, onExplo
           </div>
         </motion.div>
       </div>
-    </header>
+    </section>
   );
 };

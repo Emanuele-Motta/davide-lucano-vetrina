@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { Star, CheckCircle, ExternalLink, ShieldCheck, Award, MessageSquare } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { Star, CheckCircle, ExternalLink, ShieldCheck, Award, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useTranslation } from '../i18n';
 import { MIO_DOTTORE_CONFIG, getAllReviews, getReviewsOverview } from '../data/reviewsConfig';
+import { Testimonial } from '../types';
 
 interface ReviewsSectionProps {
   isLoading?: boolean;
@@ -11,6 +12,7 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({ isLoading = fals
   const { t } = useTranslation();
   const reviewsOverview = getReviewsOverview();
   const allReviews = getAllReviews();
+  const mobileScrollRef = useRef<HTMLDivElement>(null);
 
   const filterOptions = [
     { id: 'all', label: `Tutte (${allReviews.length})` },
@@ -36,6 +38,71 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({ isLoading = fals
   const displayList = filteredReviews.length > 0 ? filteredReviews : allReviews;
   const repeatCount = displayList.length <= 2 ? 4 : displayList.length <= 4 ? 3 : 2;
   const marqueeItems = Array.from({ length: repeatCount }, () => displayList).flat();
+
+  const handleScrollMobile = (direction: 'left' | 'right') => {
+    if (!mobileScrollRef.current) return;
+    const scrollAmount = mobileScrollRef.current.clientWidth * 0.82;
+    mobileScrollRef.current.scrollBy({
+      left: direction === 'left' ? -scrollAmount : scrollAmount,
+      behavior: 'smooth'
+    });
+  };
+
+  const renderReviewCard = (review: Testimonial, isMarquee = false) => (
+    <div
+      className={`h-full bg-white p-5 sm:p-6 rounded-2xl border border-black/[0.06] shadow-2xs flex flex-col justify-between select-none ${
+        isMarquee 
+          ? 'w-[300px] sm:w-[350px] md:w-[380px] shrink-0 hover:border-black/[0.14] hover:-translate-y-1 hover:shadow-xs transition-all duration-300 ease-out group' 
+          : 'w-full'
+      }`}
+    >
+      <div>
+        {/* Header with Source Badge & 5 stars */}
+        <div className="flex items-center justify-between gap-2 mb-3">
+          <div className="flex gap-0.5">
+            {[...Array(review.rating)].map((_, i) => (
+              <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+            ))}
+          </div>
+
+          {/* Review Source Tag */}
+          {review.source === 'miodottore' ? (
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10.5px] font-medium bg-[#006875]/10 text-[#006875]">
+              <ShieldCheck className="w-3 h-3 text-[#006875]" />
+              <span>MioDottore</span>
+            </span>
+          ) : (
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10.5px] font-medium bg-black/[0.04] text-[#6e6e73]">
+              <span>{review.source === 'google' ? 'Google' : 'Studio'}</span>
+            </span>
+          )}
+        </div>
+
+        {/* Review Text */}
+        <p className="text-[13.5px] text-[#333] leading-[1.65] mb-5 italic">
+          &ldquo;{review.content}&rdquo;
+        </p>
+      </div>
+
+      {/* Author & Treatment Footer */}
+      <div className="pt-3.5 border-t border-black/[0.06]">
+        <div className="flex items-center justify-between gap-2">
+          <div>
+            <h4 className="text-[13px] font-semibold text-[#1d1d1f] flex items-center gap-1 leading-snug">
+              {review.name}
+              {review.verifiedPatient && (
+                <CheckCircle className="w-3 h-3 text-[#006875] shrink-0" title="Paziente verificato" />
+              )}
+            </h4>
+            <p className="text-[11.5px] text-[#86868b] leading-normal">{review.role || review.date}</p>
+          </div>
+          <span className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-[#f5f5f7] text-[#6e6e73] shrink-0">
+            {review.treatment}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
 
   if (isLoading) {
     return (
@@ -153,65 +220,58 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({ isLoading = fals
         </div>
       </div>
 
-      {/* Infinite Horizontal Scroll Container */}
-      <div className="relative w-full overflow-hidden marquee-container py-2">
-        {/* Soft edge gradients for seamless fading in and out */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-12 sm:w-28 md:w-36 bg-gradient-to-r from-[#fafafa] to-transparent z-10" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-12 sm:w-28 md:w-36 bg-gradient-to-l from-[#fafafa] to-transparent z-10" />
+      {/* MOBILE EXPERIENCE: Touch scrollable with swipe and snap (non si blocca mai al tocco/click) */}
+      <div className="md:hidden">
+        <div 
+          ref={mobileScrollRef}
+          className="flex gap-3.5 overflow-x-auto snap-x snap-mandatory scroll-smooth px-5 py-2 no-scrollbar touch-pan-x"
+        >
+          {displayList.map((review, idx) => (
+            <div
+              key={`mobile-${review.id}-${idx}`}
+              className="w-[82vw] max-w-[320px] shrink-0 snap-center"
+            >
+              {renderReviewCard(review, false)}
+            </div>
+          ))}
+        </div>
 
-        {/* Moving Track with pause on hover */}
+        {/* Mobile quick navigation indicator & controls */}
+        <div className="flex items-center justify-between px-5 pt-3 text-[12px] text-[#86868b]">
+          <span className="flex items-center gap-1">
+            <span>Scorri le recensioni ({displayList.length})</span>
+          </span>
+          <div className="flex items-center gap-2">
+            <button 
+              onClick={() => handleScrollMobile('left')}
+              aria-label="Recensione precedente"
+              className="p-1.5 rounded-full bg-white border border-black/[0.08] shadow-2xs active:scale-90 text-[#1d1d1f] cursor-pointer"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+            <button 
+              onClick={() => handleScrollMobile('right')}
+              aria-label="Recensione successiva"
+              className="p-1.5 rounded-full bg-white border border-black/[0.08] shadow-2xs active:scale-90 text-[#1d1d1f] cursor-pointer"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* DESKTOP EXPERIENCE: Infinite Smooth Horizontal Marquee */}
+      <div className="hidden md:block relative w-full overflow-hidden marquee-container py-2">
+        {/* Soft edge gradients for seamless fading in and out */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-28 md:w-36 bg-gradient-to-r from-[#fafafa] to-transparent z-10" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-28 md:w-36 bg-gradient-to-l from-[#fafafa] to-transparent z-10" />
+
+        {/* Moving Track */}
         <div className="animate-marquee flex gap-5 px-4">
           {marqueeItems.map((review, idx) => (
-            <div
-              key={`${review.id}-${idx}`}
-              className="w-[300px] sm:w-[350px] md:w-[380px] shrink-0 bg-white p-5 sm:p-6 rounded-2xl border border-black/[0.06] shadow-2xs flex flex-col justify-between hover:border-black/[0.14] hover:-translate-y-1 hover:shadow-xs transition-all duration-300 ease-out select-none group"
-            >
-              <div>
-                {/* Header with Source Badge & 5 stars */}
-                <div className="flex items-center justify-between gap-2 mb-3">
-                  <div className="flex gap-0.5">
-                    {[...Array(review.rating)].map((_, i) => (
-                      <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                    ))}
-                  </div>
-
-                  {/* Review Source Tag */}
-                  {review.source === 'miodottore' ? (
-                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10.5px] font-medium bg-[#006875]/10 text-[#006875]">
-                      <ShieldCheck className="w-3 h-3 text-[#006875]" />
-                      <span>MioDottore</span>
-                    </span>
-                  ) : (
-                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10.5px] font-medium bg-black/[0.04] text-[#6e6e73]">
-                      <span>{review.source === 'google' ? 'Google' : 'Studio'}</span>
-                    </span>
-                  )}
-                </div>
-
-                {/* Review Text */}
-                <p className="text-[13.5px] text-[#333] leading-[1.65] mb-5 italic">
-                  &ldquo;{review.content}&rdquo;
-                </p>
-              </div>
-
-              {/* Author & Treatment Footer */}
-              <div className="pt-3.5 border-t border-black/[0.06]">
-                <div className="flex items-center justify-between gap-2">
-                  <div>
-                    <h4 className="text-[13px] font-semibold text-[#1d1d1f] flex items-center gap-1 leading-snug">
-                      {review.name}
-                      {review.verifiedPatient && (
-                        <CheckCircle className="w-3 h-3 text-[#006875] shrink-0" title="Paziente verificato" />
-                      )}
-                    </h4>
-                    <p className="text-[11.5px] text-[#86868b] leading-normal">{review.role || review.date}</p>
-                  </div>
-                  <span className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-[#f5f5f7] text-[#6e6e73] shrink-0">
-                    {review.treatment}
-                  </span>
-                </div>
-              </div>
-            </div>
+            <React.Fragment key={`${review.id}-${idx}`}>
+              {renderReviewCard(review, true)}
+            </React.Fragment>
           ))}
         </div>
       </div>

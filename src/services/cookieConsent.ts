@@ -75,3 +75,40 @@ export const clearCookieConsent = () => {
     console.error(e);
   }
 };
+
+/**
+ * Inizializza Google Analytics solo ed esclusivamente se l'utente ha prestato consenso esplicito per la categoria "analytics"
+ * e se è configurato un VITE_GA_MEASUREMENT_ID valido.
+ */
+export const initializeAnalyticsIfConsented = (measurementId?: string) => {
+  if (!measurementId || typeof window === 'undefined') return;
+
+  const consent = getStoredCookieConsent();
+  if (!consent || !consent.categories.analytics) {
+    return;
+  }
+
+  // Se già caricato, non reinserire
+  if (document.getElementById('ga-gtag-script')) return;
+
+  const script = document.createElement('script');
+  script.id = 'ga-gtag-script';
+  script.async = true;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
+  document.head.appendChild(script);
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag(...args: unknown[]) {
+    window.dataLayer.push(args);
+  }
+  gtag('js', new Date());
+  gtag('config', measurementId, {
+    anonymize_ip: true,
+  });
+};
+
+declare global {
+  interface Window {
+    dataLayer: unknown[];
+  }
+}

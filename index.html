@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#00b488" />
+    <meta name="theme-color" content="#006875" />
     <meta name="color-scheme" content="light" />
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <link rel="apple-touch-icon" href="/logo.svg" />
@@ -42,13 +42,16 @@
     <link rel="preload" as="image" href="/logo-full.svg" fetchpriority="high">
     <link rel="preload" as="image" href="https://lh3.googleusercontent.com/aida-public/AB6AXuA72HboJfwpGNx_IeuxhWziI3niXCw4HJR3neBpYuhMia-NSOq1lHAgazO-RCWsRo_zbjintUxGU3HHo64-T9YKfJ4wwQVe3cwOqpwZ16k_8LxVHld8AH40DhOOjOb1F3TDRZDbYMiFxlkTz4zhAs2hZ3Mn1Yfj7Xe56iQPnX_oO32WkPteXSCNoM2Fv3m0P36jLKO1qRYc29IVfB63ktRwSGYYlYD0kfbdop7oJZegZGZyLJZaW-PoEA" fetchpriority="high">
 
-    <!-- Fonts Preconnect -->
+    <!-- Fonts Preconnect & Async Load (Eliminates Render-Blocking for mobile FCP) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    </noscript>
 
     <!-- JSON-LD Structured Data for Google Rich Snippets & Local Knowledge Graph -->
-    <script type="application/ld+json">
+    <script id="dynamic-json-ld" type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@graph": [
@@ -259,7 +262,7 @@
     }
     </script>
   </head>
-  <body class="bg-[#f9f9f9] text-[#121212] antialiased selection:bg-[#00E5FF] selection:text-[#121212]">
+  <body class="bg-[#fafafa] text-[#1d1d1f] antialiased selection:bg-[#006875]/20 selection:text-[#006875]">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

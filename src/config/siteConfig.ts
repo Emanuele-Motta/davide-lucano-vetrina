@@ -2,16 +2,38 @@ import defaultDoctorImage from '../assets/images/doctor_davide_lucano_1788424695
 import { TimeSlot } from '../types';
 
 /**
+ * Helper per interpretare i valori booleani da variabili d'ambiente Vite / Netlify
+ */
+const parseEnvBool = (val: unknown, defaultVal: boolean): boolean => {
+  if (val === undefined || val === null || val === '') return defaultVal;
+  const str = String(val).trim().toLowerCase();
+  return str === 'true' || str === '1' || str === 'yes' || str === 'on';
+};
+
+/**
+ * Helper per interpretare i valori numerici d'ordine da variabili d'ambiente Vite / Netlify
+ */
+const parseEnvNumber = (val: unknown, defaultVal: number): number => {
+  if (val === undefined || val === null || val === '') return defaultVal;
+  const parsed = parseInt(String(val).trim(), 10);
+  return isNaN(parsed) ? defaultVal : parsed;
+};
+
+/**
+ * Helper per interpretare stringhe da variabili d'ambiente Vite / Netlify
+ */
+const parseEnvString = (val: unknown, defaultVal: string): string => {
+  if (val === undefined || val === null || val === '') return defaultVal;
+  return String(val).trim();
+};
+
+/**
  * =========================================================================================
- * ⚙️ CENTRO DI CONFIGURAZIONE GLOBALE DEL SITO (LATO CODICE)
+ * ⚙️ CENTRO DI CONFIGURAZIONE GLOBALE DEL SITO (LATO CODICE & VARIABILI D'AMBIENTE NETLIFY)
  * =========================================================================================
  * Questo è l'unico file di configurazione principale del sito vetrina del Dott. Davide Lucano.
- * Qualsiasi modifica a:
- *  - Dati del Dottore (nome, foto, titoli, albo, esperienza)
- *  - Recapiti e Studio (indirizzo, telefono, WhatsApp, orari di apertura)
- *  - Sistema di Prenotazione (attivazione/disattivazione, orari e slot disponibili, festivi)
- *  - Profilo MioDottore & Recensioni
- * può essere effettuata direttamente qui in modo rapido, pulito e documentato.
+ * Tutte le sezioni del sito sono attivabili/disattivabili e riordinabili direttamente dal pannello
+ * Netlify impostando variabili d'ambiente (es. VITE_SECTION_HERO=false, VITE_ORDER_FAQ=80, ecc.).
  * =========================================================================================
  */
 
@@ -20,9 +42,9 @@ export const siteConfig = {
   // 1. DATI DEL PROFESSIONISTA
   // ---------------------------------------------------------------------------------------
   doctor: {
-    name: "Dott. Davide Lucano",
-    title: "Fisioterapista & Osteopata D.O.",
-    alboNumber: "Iscritto Ordine Fisioterapisti (FNOFI Milano) n. 1420",
+    name: parseEnvString(import.meta.env.VITE_DOCTOR_NAME, "Dott. Davide Lucano"),
+    title: parseEnvString(import.meta.env.VITE_DOCTOR_TITLE, "Fisioterapista & Osteopata D.O."),
+    alboNumber: parseEnvString(import.meta.env.VITE_DOCTOR_ALBO, "Iscritto Ordine Fisioterapisti (FNOFI Milano) n. 1420"),
     experienceYears: "10+",
     verifiedReviewsCount: "184+",
     ratingScore: "5.0",
@@ -59,23 +81,24 @@ export const siteConfig = {
   // 2. RECAPITI E LOCALIZZAZIONE DELLO STUDIO
   // ---------------------------------------------------------------------------------------
   studio: {
-    name: "Studio Fisioterapia & Riabilitazione Dott. Davide Lucano",
-    address: "Via delle betulle 14",
+    name: parseEnvString(import.meta.env.VITE_STUDIO_NAME, "Studio Fisioterapia & Riabilitazione Dott. Davide Lucano"),
+    address: parseEnvString(import.meta.env.VITE_STUDIO_ADDRESS, "Via delle betulle 14"),
     civic: "14",
-    cap: "20072",
-    city: "Pieve Emanuele",
-    province: "MI",
+    cap: parseEnvString(import.meta.env.VITE_STUDIO_CAP, "20072"),
+    city: parseEnvString(import.meta.env.VITE_STUDIO_CITY, "Pieve Emanuele"),
+    province: parseEnvString(import.meta.env.VITE_STUDIO_PROVINCE, "MI"),
     region: "Lombardia",
-    fullAddress: "Via delle betulle 14, 20072 Pieve Emanuele (Milano)",
+    fullAddress: `${parseEnvString(import.meta.env.VITE_STUDIO_ADDRESS, "Via delle betulle 14")}, ${parseEnvString(import.meta.env.VITE_STUDIO_CAP, "20072")} ${parseEnvString(import.meta.env.VITE_STUDIO_CITY, "Pieve Emanuele")} (Milano)`,
     metroInfo: "Comodamente raggiungibile da Milano Sud, Rozzano, Opera, Basiglio e Melegnano • Ampio parcheggio gratuito antistante",
     
     // Recapiti di contatto diretto
-    phone: "+39 02 8716 9421",
-    whatsappNumber: "+39 347 123 4567",
-    whatsappLink: "https://wa.me/393471234567?text=Buongiorno%20Dott.%20Lucano,%20desidero%20maggiori%20informazioni%20o%20fissare%20un%20appuntamento.",
-    email: "info@fisioterapialucano.it",
-    pec: "davide.lucano@pec.it",
-    piva: "P.IVA 12345678901",
+    phone: parseEnvString(import.meta.env.VITE_STUDIO_PHONE, "+39 02 8716 9421"),
+    whatsappNumber: parseEnvString(import.meta.env.VITE_STUDIO_WHATSAPP, "+39 347 123 4567"),
+    whatsappLink: `https://wa.me/${parseEnvString(import.meta.env.VITE_STUDIO_WHATSAPP, "393471234567").replace(/[^0-9]/g, '')}?text=${encodeURIComponent("Buongiorno Dott. Lucano, desidero maggiori informazioni o fissare un appuntamento.")}`,
+    email: parseEnvString(import.meta.env.VITE_STUDIO_EMAIL, "info@fisioterapialucano.it"),
+    pec: parseEnvString(import.meta.env.VITE_STUDIO_PEC, "davide.lucano@pec.it"),
+    piva: parseEnvString(import.meta.env.VITE_STUDIO_PIVA, "P.IVA 12345678901"),
+    formEndpoint: parseEnvString(import.meta.env.VITE_FORM_ENDPOINT, ""),
 
     // Orari di apertura per il pubblico
     openingHours: [
@@ -96,9 +119,9 @@ export const siteConfig = {
      * TOGGLE PRENOTAZIONI:
      * - true: il calendario e la prenotazione online sono ATTIVI e visibili sul sito.
      * - false: il sito mostra il modulo e i contatti diretti (Telefono / WhatsApp) senza calendario interattivo.
-     * (Settato a true momentaneamente su tua richiesta).
+     * Configurabile anche via Netlify con VITE_ENABLE_BOOKING.
      */
-    isEnabled: true,
+    isEnabled: parseEnvBool(import.meta.env.VITE_ENABLE_BOOKING, true),
 
     /**
      * BLOCCO DATE ANTECEDENTI AD OGGI:
@@ -207,12 +230,19 @@ export const siteConfig = {
   // 4. INTEGRAZIONE MIODOTTORE & RECENSIONI
   // ---------------------------------------------------------------------------------------
   mioDottore: {
-    profileUrl: "https://www.miodottore.it/davide-lucano/fisioterapista-osteopata/milano",
+    profileUrl: parseEnvString(import.meta.env.VITE_MIODOTTORE_URL, "https://www.miodottore.it/davide-lucano/fisioterapista-osteopata/milano"),
     doctorSlug: "davide-lucano",
     overallRating: 5.0,
     totalReviewsCount: "184+",
     recommendationPercentage: "100%",
     badgeLabel: "Profilo Ufficiale Certificato MioDottore"
+  },
+
+  // ---------------------------------------------------------------------------------------
+  // 4.1 ANALYTICS (OPZIONALE CON PREVIO CONSENSO PRIVACY GARANTE)
+  // ---------------------------------------------------------------------------------------
+  analytics: {
+    gaMeasurementId: parseEnvString(import.meta.env.VITE_GA_MEASUREMENT_ID, ""),
   },
 
   // ---------------------------------------------------------------------------------------
@@ -230,58 +260,66 @@ export const siteConfig = {
       id: "hero",
       name: "Presentazione Iniziale",
       navLabel: "Home",
-      enabled: true,
-      order: 10,
+      enabled: parseEnvBool(import.meta.env.VITE_SECTION_HERO, true),
+      order: parseEnvNumber(import.meta.env.VITE_ORDER_HERO, 10),
     },
     about: {
       id: "chi-sono",
       name: "Chi Sono & Metodo Clinico",
       navLabel: "Chi Sono",
-      enabled: true,
-      order: 20,
+      enabled: parseEnvBool(import.meta.env.VITE_SECTION_ABOUT, true),
+      order: parseEnvNumber(import.meta.env.VITE_ORDER_ABOUT, 20),
     },
     services: {
       id: "servizi",
       name: "Trattamenti Specializzati",
       navLabel: "Trattamenti",
-      enabled: true,
-      order: 30,
+      enabled: parseEnvBool(import.meta.env.VITE_SECTION_SERVICES, true),
+      order: parseEnvNumber(import.meta.env.VITE_ORDER_SERVICES, 30),
     },
     territory: {
       id: "zone-servite",
       name: "Aree e Zone Servite a Milano",
       navLabel: "Zone Servite",
-      enabled: true,
-      order: 40,
+      enabled: parseEnvBool(import.meta.env.VITE_SECTION_TERRITORY, true),
+      order: parseEnvNumber(import.meta.env.VITE_ORDER_TERRITORY, 40),
     },
     reviews: {
       id: "recensioni",
       name: "Recensioni & Opinioni MioDottore",
       navLabel: "Recensioni",
-      enabled: true,
-      order: 50,
+      enabled: parseEnvBool(import.meta.env.VITE_SECTION_REVIEWS, true),
+      order: parseEnvNumber(import.meta.env.VITE_ORDER_REVIEWS, 50),
     },
     booking: {
       id: "prenota",
       name: "Modulo & Calendario Prenotazione",
       navLabel: "Prenota",
-      enabled: true,
-      order: 60,
+      enabled: parseEnvBool(import.meta.env.VITE_SECTION_BOOKING ?? import.meta.env.VITE_ENABLE_BOOKING, true),
+      order: parseEnvNumber(import.meta.env.VITE_ORDER_BOOKING, 60),
     },
     location: {
       id: "dove-siamo",
       name: "Studio, Orari & Mappa",
       navLabel: "Dove Siamo",
-      enabled: true,
-      order: 70,
+      enabled: parseEnvBool(import.meta.env.VITE_SECTION_LOCATION, true),
+      order: parseEnvNumber(import.meta.env.VITE_ORDER_LOCATION, 70),
     },
     faq: {
       id: "faq",
       name: "Domande Frequenti (FAQ Sanitarie)",
       navLabel: "FAQ",
-      enabled: true,
-      order: 80, // Ultima sezione prima del footer come richiesto
+      enabled: parseEnvBool(import.meta.env.VITE_SECTION_FAQ, true),
+      order: parseEnvNumber(import.meta.env.VITE_ORDER_FAQ, 80),
     },
+  },
+
+  // ---------------------------------------------------------------------------------------
+  // 6. PIÈ DI PAGINA & NOTE LEGALI
+  // ---------------------------------------------------------------------------------------
+  footer: {
+    // Il disclaimer clinico/fiscale è disattivato di default come richiesto (attivabile via VITE_SHOW_FOOTER_DISCLAIMER=true)
+    showDisclaimer: parseEnvBool(import.meta.env.VITE_SHOW_FOOTER_DISCLAIMER, false),
   },
 };
 
