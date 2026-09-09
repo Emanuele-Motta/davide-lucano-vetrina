@@ -1,4 +1,4 @@
-import defaultDoctorImage from '../assets/images/doctor_davide_lucano_1788424695751.jpg';
+import defaultDoctorImage from '../assets/images/davide_lucano.jpeg';
 import { TimeSlot } from '../types';
 
 /**
@@ -43,8 +43,8 @@ export const siteConfig = {
   // ---------------------------------------------------------------------------------------
   doctor: {
     name: parseEnvString(import.meta.env.VITE_DOCTOR_NAME, "Dott. Davide Lucano"),
-    title: parseEnvString(import.meta.env.VITE_DOCTOR_TITLE, "Fisioterapista & Osteopata D.O."),
-    alboNumber: parseEnvString(import.meta.env.VITE_DOCTOR_ALBO, "Iscritto Ordine Fisioterapisti (FNOFI Milano) n. 1420"),
+    title: parseEnvString(import.meta.env.VITE_DOCTOR_TITLE, "Fisioterapista"),
+    alboNumber: parseEnvString(import.meta.env.VITE_DOCTOR_ALBO, "Iscritto Ordine Fisioterapisti (FNOFI Milano) n. 7266"),
     experienceYears: "10+",
     verifiedReviewsCount: "184+",
     ratingScore: "5.0",

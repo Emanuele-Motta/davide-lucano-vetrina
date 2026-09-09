@@ -253,7 +253,7 @@ export const itTranslations: Translations = {
     fullName: "Dott. Davide Lucano - Fisioterapista & Osteopata",
     studioName: "Dott. Davide Lucano",
     doctorName: "Dott. Davide Lucano",
-    doctorRole: "Fisioterapista & Osteopata D.O.",
+    doctorRole: "Fisioterapista",
     registration: "Iscrizione Albo FNOFI n. 4821",
     address: "Via delle betulle 10",
     addressCity: "20152 Milano (MI)",
@@ -296,7 +296,7 @@ export const itTranslations: Translations = {
     subtitle: "Niente percorsi standard. Solo ascolto, diagnosi accurate e un piano di recupero disegnato sui tuoi ritmi.",
     doctor: {
       name: "Dott. Davide Lucano",
-      title: "Fisioterapista & Osteopata D.O. • Albo FNOFI Milano n. 1420",
+      title: "Fisioterapista • Albo FNOFI Milano n. 1420",
       bio: "Fisioterapista e Osteopata con oltre 10 anni di esperienza clinica a Milano. Specializzato in disturbi della colonna vertebrale, traumatologia sportiva e riabilitazione ortopedica.",
       credentials: [
         "Laurea in Fisioterapia • Università degli Studi di Milano",

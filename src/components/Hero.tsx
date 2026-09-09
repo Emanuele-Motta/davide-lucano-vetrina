@@ -20,7 +20,7 @@ export const Hero: React.FC<HeroProps> = ({ onBookClick, onExploreAbout, onExplo
     <section 
       id="hero"
       aria-label="Presentazione e Introduzione del Dott. Davide Lucano"
-      className="relative pt-24 sm:pt-28 md:pt-32 pb-14 sm:pb-18 px-5 md:px-16 flex flex-col items-center justify-center text-center overflow-hidden"
+      className="relative pt-24 sm:pt-28 md:pt-32 pb-14 sm:pb-18 px-5 md:px-16 flex flex-col items-center justify-center text-center overflow-hidden h-240"
     >
       {/* Optimized Background Image Container with Smooth Scale & Fade-In Animation */}
       <motion.div 
@@ -108,7 +108,7 @@ export const Hero: React.FC<HeroProps> = ({ onBookClick, onExploreAbout, onExplo
         </motion.div>
 
         {/* Trust Badges - Apple Minimalist Row */}
-        <motion.div 
+        {/* <motion.div 
           className="mt-12 pt-7 border-t border-black/[0.06] flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-[13px] text-[#6e6e73]"
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
@@ -131,7 +131,7 @@ export const Hero: React.FC<HeroProps> = ({ onBookClick, onExploreAbout, onExplo
             <span className="font-medium text-[#1d1d1f]">{t.hero.badges.locationTitle}</span>
             <span className="text-[#86868b]">{t.hero.badges.locationDesc}</span>
           </div>
-        </motion.div>
+        </motion.div> */}
       </div>
     </section>
   );

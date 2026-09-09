@@ -11,6 +11,7 @@ import {
 import { GoogleCalendarModal } from './GoogleCalendarModal';
 import { BookingContactDirectSection } from './BookingContactDirectSection';
 import { useBookingToggle } from '../context/FeatureToggleContext';
+import Cal, { getCalApi } from "@calcom/embed-react";
 import { 
   ChevronLeft, 
   ChevronRight, 
@@ -49,6 +50,15 @@ export const BookingSection: React.FC<BookingSectionProps> = ({
 }) => {
   const { t } = useTranslation();
   const { isBookingEnabled } = useBookingToggle();
+
+  const calendarCalCom = true;
+
+  useEffect(() => {
+    (async function () {
+      const cal = await getCalApi({"namespace":"visita"});
+      cal("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
+    })();
+  }, [])
 
   // Reference current date for disabling past dates and setting initial view
   const today = useMemo(() => new Date(), []);
@@ -326,7 +336,15 @@ export const BookingSection: React.FC<BookingSectionProps> = ({
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-10">
+          { calendarCalCom ? 
+            <Cal namespace="visita"
+              calLink="emanuele-motta-advnc8/visita"
+              style={{width:"100%",height:"100%",overflow:"scroll"}}
+              config={{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}}
+              
+              
+            />
+            : <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-10">
             
             {/* Left Column: Service & Patient Form */}
             <div className="space-y-5 lg:col-span-1">
@@ -764,7 +782,8 @@ export const BookingSection: React.FC<BookingSectionProps> = ({
               </div>
 
             </div>
-          </form>
+              </form>
+          }
 
         </div>
       </div>

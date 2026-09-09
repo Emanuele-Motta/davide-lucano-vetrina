@@ -18,6 +18,7 @@ import { useTranslation } from './i18n';
 import { getOrderedSections, SiteSectionKey, siteConfig } from './config/siteConfig';
 import { initializeAnalyticsIfConsented } from './services/cookieConsent';
 import { injectDynamicStructuredData } from './utils/seoStructuredData';
+import Lenis from 'lenis';
 
 // Code-splitting of modals to minimize initial bundle size and optimize Core Web Vitals
 const BookingSuccessModal = lazy(() =>
@@ -64,6 +65,26 @@ export default function App() {
 
   // Toast banner
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2, // Durata dell'inerzia (in secondi)
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Curva di accelerazione
+      smoothWheel: true,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    // Cleanup alla disattivazione del componente
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
 
   useEffect(() => {
     // Inietta / aggiorna dinamicamente i dati strutturati Schema.org (JSON-LD)
