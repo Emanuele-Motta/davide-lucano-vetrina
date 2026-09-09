@@ -61,7 +61,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal, onOpenCookiePrefere
               Trattamenti specialistici individuali 1-a-1, riabilitazione funzionale e terapia manuale a Milano e Pieve Emanuele.
             </p>
 
-            <div className="flex flex-wrap items-center gap-2 pt-1 text-[11.5px] text-[#86868b]">
+            <div className="flex flex-wrap items-center gap-2 pt-1 text-[11.5px] text-[#5e5e62]">
               <span className="inline-flex items-center gap-1 font-mono text-[#515154]">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                 {siteConfig.doctor.alboNumber}
@@ -106,13 +106,13 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal, onOpenCookiePrefere
             <div className="space-y-1 text-[12.5px]">
               {siteConfig.studio.openingHours.map((item, idx) => (
                 <div key={idx} className="flex justify-between items-center py-0.5">
-                  <span className="text-[#86868b]">{item.days}</span>
+                  <span className="text-[#5e5e62]">{item.days}</span>
                   <span className="font-medium text-[#1d1d1f]">{item.hours}</span>
                 </div>
               ))}
             </div>
 
-            <div className="flex items-center gap-1.5 pt-1.5 text-[11.5px] text-[#86868b]">
+            <div className="flex items-center gap-1.5 pt-1.5 text-[11.5px] text-[#5e5e62]">
               <Clock className="w-3 h-3 text-[#006875] shrink-0" />
               <span>Visite solo previo appuntamento</span>
             </div>
@@ -172,7 +172,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal, onOpenCookiePrefere
             <div className="pt-2">
               <button
                 onClick={handleBackToTop}
-                aria-label="Torna all'inizio della pagina"
+                aria-label="Torna su all'inizio della pagina"
                 className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white hover:bg-[#e8e8ed] text-[#1d1d1f] text-[11.5px] font-medium transition-all cursor-pointer border border-black/[0.08] shadow-2xs active:scale-[0.97]"
               >
                 <ArrowUp className="w-3 h-3 text-[#006875]" />
@@ -184,7 +184,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal, onOpenCookiePrefere
 
         {/* Disclaimer Note (disabilitato di default / configurabile via VITE_SHOW_FOOTER_DISCLAIMER) */}
         {siteConfig.footer?.showDisclaimer && (
-          <div className="py-4 text-[11px] text-[#86868b] flex items-start gap-2 border-b border-black/[0.06] leading-relaxed">
+          <div className="py-4 text-[11px] text-[#5e5e62] flex items-start gap-2 border-b border-black/[0.06] leading-relaxed">
             <AlertCircle className="w-3 h-3 text-amber-500 shrink-0 mt-0.5" />
             <span>
               Le informazioni cliniche fornite hanno finalità puramente divulgative e non sostituiscono il parere medico. Per emergenze contattare il 112. Spese sanitarie detraibili al 19% (art. 10 DPR 633/72).
@@ -193,7 +193,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal, onOpenCookiePrefere
         )}
 
         {/* Bottom Bar: Copyright & Legal */}
-        <div className="pt-5 flex flex-col md:flex-row justify-between items-center gap-3 text-[11.5px] text-[#86868b] text-center md:text-left">
+        <div className="pt-5 flex flex-col md:flex-row justify-between items-center gap-3 text-[11.5px] text-[#5e5e62] text-center md:text-left">
           <p>
             © {new Date().getFullYear()} {siteConfig.doctor.name} • {siteConfig.studio.piva} • {siteConfig.doctor.alboNumber} • PEC: {siteConfig.studio.pec}
           </p>

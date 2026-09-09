@@ -13,19 +13,29 @@ import {
 import { useTranslation } from '../i18n';
 import { useBookingToggle } from '../context/FeatureToggleContext';
 import { siteConfig, getOrderedSections } from '../config/siteConfig';
+import { useBodyScrollLock } from '../hooks/useBodyScrollLock';
 
 interface NavbarProps {
   onBookClick: () => void;
   bookingCount: number;
   onViewBookings: () => void;
+  activeSection?: string;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onBookClick, bookingCount, onViewBookings }) => {
+export const Navbar: React.FC<NavbarProps> = ({ 
+  onBookClick, 
+  bookingCount, 
+  onViewBookings,
+  activeSection: propActiveSection 
+}) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState<string>('');
+  const [internalActiveSection, setInternalActiveSection] = useState<string>('');
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
   const { t } = useTranslation();
   const { isBookingEnabled } = useBookingToggle();
+
+  // Usa la sezione attiva passata dal genitore o quella rilevata internamente
+  const activeSection = propActiveSection !== undefined ? propActiveSection : internalActiveSection;
 
   // Sezioni configurate e abilitate da mostrare nella navigazione (escludendo l'hero che è il logo)
   const navSections = useMemo(() => {
@@ -44,11 +54,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onBookClick, bookingCount, onVie
       for (let i = sections.length - 1; i >= 0; i--) {
         const sec = sections[i];
         if (sec.offsetTop <= scrollPos) {
-          setActiveSection(sec.id);
+          setInternalActiveSection(sec.id);
           return;
         }
       }
-      setActiveSection('');
+      setInternalActiveSection('');
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -67,17 +77,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onBookClick, bookingCount, onVie
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [mobileMenuOpen]);
 
-  // Blocca scroll body quando menu mobile aperto
-  useEffect(() => {
-    if (mobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [mobileMenuOpen]);
+  // Blocca scroll body e sospende Lenis quando menu mobile aperto
+  useBodyScrollLock(mobileMenuOpen);
 
   return (
     <>
@@ -224,11 +225,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onBookClick, bookingCount, onVie
         role="dialog"
         aria-modal="true"
         aria-label="Menu di navigazione mobile"
-        className="lg:hidden fixed inset-x-0 top-16 sm:top-[68px] bottom-0 z-50 bg-white/98 backdrop-blur-2xl border-t border-gray-200 overflow-y-auto px-6 py-6 flex flex-col justify-between shadow-2xl"
+        data-lenis-prevent
+        className="lg:hidden fixed inset-x-0 top-16 sm:top-[68px] bottom-0 z-50 bg-white/98 backdrop-blur-2xl border-t border-gray-200 overflow-y-auto px-6 py-6 flex flex-col justify-between shadow-2xl overscroll-contain"
         style={{ height: 'calc(100dvh - 64px)' }}
       >
         <div className="flex flex-col space-y-1">
-          <div className="text-[11px] font-semibold uppercase tracking-wider text-[#86868b] px-3.5 py-1 mb-2 text-center">
+          <div className="text-[11px] font-semibold uppercase tracking-wider text-[#5e5e62] px-3.5 py-1 mb-2 text-center">
             Menu di Navigazione
           </div>
 
@@ -292,7 +294,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onBookClick, bookingCount, onVie
             </a>
           </div>
 
-          <div className="text-center pt-2 text-[12px] text-[#86868b] leading-tight">
+          <div className="text-center pt-2 text-[12px] text-[#5e5e62] leading-tight">
             {siteConfig.studio.fullAddress}
           </div>
         </div>

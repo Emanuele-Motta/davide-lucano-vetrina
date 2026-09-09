@@ -143,9 +143,9 @@ export const BookingContactDirectSection: React.FC<BookingContactDirectSectionPr
                 <ShieldCheck className="w-4 h-4" />
                 <span>Presa in Carico Professionale 1-a-1</span>
               </div>
-              <h4 className="text-[20px] font-bold text-[#121212]">
+              <h3 className="text-[20px] font-bold text-[#121212]">
                 Sede delle Visite & Orari di Ricevimento
-              </h4>
+              </h3>
               <p className="text-[14px] text-[#5f5e5e] leading-relaxed">
                 Le sedute si tengono presso lo studio in <strong>{STUDIO_INFO.address}</strong> (Milano Ovest / San Siro), comodamente raggiungibile sia con i mezzi pubblici che in auto con facilità di parcheggio.
               </p>

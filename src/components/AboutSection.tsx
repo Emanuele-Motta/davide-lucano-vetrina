@@ -77,9 +77,9 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onExploreServices, o
               {/* Doctor Identity Header */}
               <div className="mb-4">
                 <div className="flex items-center gap-2 mb-1 flex-wrap">
-                  <h3 className="text-[22px] font-semibold text-[#1d1d1f] tracking-tight leading-snug">
+                  <p className="text-[22px] font-semibold text-[#1d1d1f] tracking-tight leading-snug">
                     {siteConfig.doctor.name}
-                  </h3>
+                  </p>
                   <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#006875]/10 text-[#006875] text-[11px] font-medium">
                     <ShieldCheck className="w-3 h-3 text-[#006875]" />
                     <span>Certificato</span>
@@ -90,7 +90,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onExploreServices, o
                   {siteConfig.doctor.title}
                 </p>
 
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11.5px] font-medium bg-black/[0.03] text-[#6e6e73]">
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11.5px] font-medium bg-black/[0.03] text-[#5e5e62]">
                   <GraduationCap className="w-3.5 h-3.5 text-[#006875] shrink-0" />
                   <span>{siteConfig.doctor.alboNumber}</span>
                 </div>
@@ -102,7 +102,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onExploreServices, o
                   <span className="block text-[16px] font-semibold text-[#1d1d1f] leading-tight">
                     {siteConfig.doctor.experienceYears}
                   </span>
-                  <span className="text-[11px] text-[#86868b] leading-tight">
+                  <span className="text-[11px] text-[#5e5e62] leading-tight font-medium">
                     Anni Esperienza
                   </span>
                 </div>
@@ -110,7 +110,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onExploreServices, o
                   <span className="block text-[16px] font-semibold text-[#006875] leading-tight">
                     {siteConfig.doctor.ratingScore} ★
                   </span>
-                  <span className="text-[11px] text-[#86868b] leading-tight">
+                  <span className="text-[11px] text-[#5e5e62] leading-tight font-medium">
                     Recensioni
                   </span>
                 </div>
@@ -118,7 +118,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onExploreServices, o
                   <span className="block text-[16px] font-semibold text-[#1d1d1f] leading-tight">
                     1-a-1
                   </span>
-                  <span className="text-[11px] text-[#86868b] leading-tight">
+                  <span className="text-[11px] text-[#5e5e62] leading-tight font-medium">
                     Visite Esclusive
                   </span>
                 </div>
@@ -130,7 +130,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onExploreServices, o
               </p>
 
               {/* Clinical Philosophy Quote Box */}
-              <div className="p-3 bg-[#fbfbfd] rounded-xl border border-black/[0.04] mb-4 text-[12px] text-[#6e6e73] leading-[1.55] italic">
+              <div className="p-3 bg-[#fbfbfd] rounded-xl border border-black/[0.04] mb-4 text-[12px] text-[#5e5e62] leading-[1.55] italic">
                 &ldquo;{siteConfig.doctor.quote}&rdquo;
               </div>
 
@@ -156,7 +156,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onExploreServices, o
                   <span>Scrivi su WhatsApp</span>
                 </a>
 
-                <span className="text-[11px] text-[#86868b] flex items-center gap-1">
+                <span className="text-[11px] text-[#5e5e62] font-medium flex items-center gap-1">
                   <MapPin className="w-3 h-3 text-[#006875]" />
                   {siteConfig.studio.city}
                 </span>
@@ -181,7 +181,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onExploreServices, o
               <div className="p-5 rounded-2xl bg-white border border-black/[0.06] shadow-2xs hover:border-black/[0.14] hover:-translate-y-0.5 transition-all duration-300 ease-out">
                 <div className="flex items-center gap-2 mb-1.5">
                   <CheckCircle2 className="w-4 h-4 text-[#006875]" />
-                  <h4 className="text-[15px] font-semibold text-[#1d1d1f] leading-snug">{t.about.highlights.evidence.title}</h4>
+                  <h3 className="text-[15px] font-semibold text-[#1d1d1f] leading-snug">{t.about.highlights.evidence.title}</h3>
                 </div>
                 <p className="text-[13.5px] text-[#6e6e73] leading-[1.6]">
                   {t.about.highlights.evidence.desc}
@@ -191,7 +191,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onExploreServices, o
               <div className="p-5 rounded-2xl bg-white border border-black/[0.06] shadow-2xs hover:border-black/[0.14] hover:-translate-y-0.5 transition-all duration-300 ease-out">
                 <div className="flex items-center gap-2 mb-1.5">
                   <CheckCircle2 className="w-4 h-4 text-[#006875]" />
-                  <h4 className="text-[15px] font-semibold text-[#1d1d1f] leading-snug">{t.about.highlights.technology.title}</h4>
+                  <h3 className="text-[15px] font-semibold text-[#1d1d1f] leading-snug">{t.about.highlights.technology.title}</h3>
                 </div>
                 <p className="text-[13.5px] text-[#6e6e73] leading-[1.6]">
                   {t.about.highlights.technology.desc}
@@ -201,7 +201,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onExploreServices, o
               <div className="p-5 rounded-2xl bg-white border border-black/[0.06] shadow-2xs hover:border-black/[0.14] hover:-translate-y-0.5 transition-all duration-300 ease-out">
                 <div className="flex items-center gap-2 mb-1.5">
                   <CheckCircle2 className="w-4 h-4 text-[#006875]" />
-                  <h4 className="text-[15px] font-semibold text-[#1d1d1f] leading-snug">{t.about.highlights.punctuality.title}</h4>
+                  <h3 className="text-[15px] font-semibold text-[#1d1d1f] leading-snug">{t.about.highlights.punctuality.title}</h3>
                 </div>
                 <p className="text-[13.5px] text-[#6e6e73] leading-[1.6]">
                   {t.about.highlights.punctuality.desc}
@@ -211,7 +211,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onExploreServices, o
               <div className="p-5 rounded-2xl bg-white border border-black/[0.06] shadow-2xs hover:border-black/[0.14] hover:-translate-y-0.5 transition-all duration-300 ease-out">
                 <div className="flex items-center gap-2 mb-1.5">
                   <CheckCircle2 className="w-4 h-4 text-[#006875]" />
-                  <h4 className="text-[15px] font-semibold text-[#1d1d1f] leading-snug">{t.about.highlights.exercises.title}</h4>
+                  <h3 className="text-[15px] font-semibold text-[#1d1d1f] leading-snug">{t.about.highlights.exercises.title}</h3>
                 </div>
                 <p className="text-[13.5px] text-[#6e6e73] leading-[1.6]">
                   {t.about.highlights.exercises.desc}

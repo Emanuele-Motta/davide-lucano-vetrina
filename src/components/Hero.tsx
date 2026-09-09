@@ -117,19 +117,19 @@ export const Hero: React.FC<HeroProps> = ({ onBookClick, onExploreAbout, onExplo
           <div className="flex items-center gap-2 transition-transform duration-200 hover:scale-105">
             <Award className="w-4 h-4 text-[#006875] shrink-0" />
             <span className="font-medium text-[#1d1d1f]">{t.hero.badges.alboTitle}</span>
-            <span className="text-[#86868b]">{t.hero.badges.alboDesc}</span>
+            <span className="text-[#5e5e62]">{t.hero.badges.alboDesc}</span>
           </div>
 
           <div className="flex items-center gap-2 transition-transform duration-200 hover:scale-105">
             <Clock className="w-4 h-4 text-[#006875] shrink-0" />
             <span className="font-medium text-[#1d1d1f]">{t.hero.badges.taxTitle}</span>
-            <span className="text-[#86868b]">{t.hero.badges.taxDesc}</span>
+            <span className="text-[#5e5e62]">{t.hero.badges.taxDesc}</span>
           </div>
 
           <div className="flex items-center gap-2 transition-transform duration-200 hover:scale-105">
             <ShieldCheck className="w-4 h-4 text-[#006875] shrink-0" />
             <span className="font-medium text-[#1d1d1f]">{t.hero.badges.locationTitle}</span>
-            <span className="text-[#86868b]">{t.hero.badges.locationDesc}</span>
+            <span className="text-[#5e5e62]">{t.hero.badges.locationDesc}</span>
           </div>
         </motion.div> */}
       </div>

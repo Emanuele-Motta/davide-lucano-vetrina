@@ -54,12 +54,12 @@ export const siteConfig = {
     photoUrl: defaultDoctorImage,
 
     // Breve biografia clinica presentata nella card "Chi sono"
-    bio: "Fisioterapista e Osteopata con oltre 10 anni di esperienza clinica a Milano. Specializzato nella diagnosi funzionale e nel trattamento manuale e strumentale di patologie muscolo-scheletriche, traumi sportivi e problematiche posturali complesse.",
+    bio: "Fisioterapista con oltre 10 anni di esperienza clinica a Milano. Specializzato nella diagnosi funzionale e nel trattamento manuale e strumentale di patologie muscolo-scheletriche, traumi sportivi e problematiche posturali complesse.",
 
     // Titoli e certificazioni principali mostrati con icone
     credentials: [
       "Laurea Magistrale in Fisioterapia (Università degli Studi di Milano)",
-      "Diploma Osteopatia D.O. (Formazione Superiore 5 anni)",
+      "Perfezionamento in Terapia Manuale Ortopedica & Riabilitazione Funzionale",
       "Certificazione Internazionale Terapia Manuale & Riabilitazione Funzionale",
       "Specialista Ufficiale Tecar Terapia e Terapie Fisiche Strumentali"
     ],
@@ -230,7 +230,7 @@ export const siteConfig = {
   // 4. INTEGRAZIONE MIODOTTORE & RECENSIONI
   // ---------------------------------------------------------------------------------------
   mioDottore: {
-    profileUrl: parseEnvString(import.meta.env.VITE_MIODOTTORE_URL, "https://www.miodottore.it/davide-lucano/fisioterapista-osteopata/milano"),
+    profileUrl: parseEnvString(import.meta.env.VITE_MIODOTTORE_URL, "https://www.miodottore.it/davide-lucano/fisioterapista/milano"),
     doctorSlug: "davide-lucano",
     overallRating: 5.0,
     totalReviewsCount: "184+",
@@ -331,6 +331,8 @@ export interface SectionItemConfig {
   navLabel: string;
   enabled: boolean;
   order: number;
+  seoTitle?: string;
+  seoDescription?: string;
 }
 
 /**

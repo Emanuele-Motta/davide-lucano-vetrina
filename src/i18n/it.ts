@@ -250,7 +250,7 @@ export interface Translations {
 export const itTranslations: Translations = {
   brand: {
     name: "Dott. Davide Lucano",
-    fullName: "Dott. Davide Lucano - Fisioterapista & Osteopata",
+    fullName: "Dott. Davide Lucano - Fisioterapista",
     studioName: "Dott. Davide Lucano",
     doctorName: "Dott. Davide Lucano",
     doctorRole: "Fisioterapista",
@@ -275,7 +275,7 @@ export const itTranslations: Translations = {
     bookOnline: "Prenota Online"
   },
   hero: {
-    pill: "Dott. Davide Lucano • Fisioterapia & Osteopatia a Milano",
+    pill: "Dott. Davide Lucano • Studio di Fisioterapia a Milano",
     titleStart: "Ritrova il movimento.",
     titleHighlight: "Senza dolore.",
     subtitle: "Fisioterapia avanzata e percorsi su misura a Milano. Per tornare a vivere, lavorare e fare sport al massimo.",
@@ -297,11 +297,11 @@ export const itTranslations: Translations = {
     doctor: {
       name: "Dott. Davide Lucano",
       title: "Fisioterapista • Albo FNOFI Milano n. 1420",
-      bio: "Fisioterapista e Osteopata con oltre 10 anni di esperienza clinica a Milano. Specializzato in disturbi della colonna vertebrale, traumatologia sportiva e riabilitazione ortopedica.",
+      bio: "Fisioterapista con oltre 10 anni di esperienza clinica a Milano. Specializzato in disturbi della colonna vertebrale, traumatologia sportiva e riabilitazione ortopedica.",
       credentials: [
         "Laurea in Fisioterapia • Università degli Studi di Milano",
         "Master Specialistico in Fisioterapia & Riabilitazione Sportiva",
-        "Diploma di Osteopatia (D.O.) • Formazione Post-Graduate Avanzata"
+        "Perfezionamento in Terapia Manuale Ortopedica & Riabilitazione Funzionale"
       ],
       individualSessions: "Sedute 1-a-1 dedicate"
     },
@@ -334,7 +334,7 @@ export const itTranslations: Translations = {
     items: [
       {
         id: "terapia-manuale",
-        title: "Terapia Manuale & Osteopatia Clinica",
+        title: "Terapia Manuale & Riabilitazione Ortopedica",
         shortDesc: "Libera le articolazioni, scioglie le contratture e riduce l'infiammazione fin dalla prima seduta.",
         fullDesc: "Mobilizzazione vertebrale, manipolazione miofasciale e decompressione articolare per la risoluzione rapida del dolore e il ripristino dell'escursione articolare.",
         duration: "45 min",
@@ -725,9 +725,9 @@ export const itTranslations: Translations = {
     }
   },
   footer: {
-    tagline: "Fisioterapia clinica d'eccellenza, terapia manuale, riabilitazione sportiva ed osteopatia a Milano a cura del Dott. Davide Lucano.",
+    tagline: "Fisioterapia clinica d'eccellenza, terapia manuale, riabilitazione sportiva e funzionale a Milano a cura del Dott. Davide Lucano.",
     taxNotice: "Prestazioni sanitarie esenti IVA ai sensi dell'art. 10 D.P.R. 633/72. Detraibili al 19% come spesa medica nella dichiarazione dei redditi.",
-    copyright: "Dott. Davide Lucano - Fisioterapista & Osteopata. Tutti i diritti riservati.",
+    copyright: "Dott. Davide Lucano - Fisioterapista. Tutti i diritti riservati.",
     nav: {
       about: "Chi Sono",
       services: "Servizi",

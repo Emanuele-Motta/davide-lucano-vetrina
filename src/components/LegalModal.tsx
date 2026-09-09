@@ -45,9 +45,13 @@ export const LegalModal: React.FC<LegalModalProps> = ({
       role="dialog"
       aria-modal="true"
       aria-labelledby="legal-modal-title"
+      data-lenis-prevent
       className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-black/55 backdrop-blur-xs animate-in fade-in duration-200 overscroll-contain"
     >
-      <div className="bg-white rounded-[24px] sm:rounded-[32px] max-w-3xl w-full p-5 sm:p-8 apple-shadow relative border border-gray-100 max-h-[90vh] flex flex-col overflow-hidden overscroll-contain">
+      <div 
+        data-lenis-prevent
+        className="bg-white rounded-[24px] sm:rounded-[32px] max-w-3xl w-full p-5 sm:p-8 apple-shadow relative border border-gray-100 max-h-[90vh] flex flex-col overflow-hidden overscroll-contain"
+      >
         
         {/* Header */}
         <div className="flex items-center justify-between pb-4 border-b border-gray-100 shrink-0">
@@ -64,7 +68,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({
                 {activeTab === 'terms' && 'Termini e Condizioni delle Prestazioni Fisioterapiche'}
               </h2>
               <p className="text-[12px] text-[#006875] font-medium">
-                Dott. Davide Lucano • Fisioterapista & Osteopata (Albo FNOFI n. 4821)
+                Dott. Davide Lucano • Fisioterapista (Albo FNOFI Milano n. 7266)
               </p>
             </div>
           </div>
@@ -117,7 +121,10 @@ export const LegalModal: React.FC<LegalModalProps> = ({
         </div>
 
         {/* Scrollable Content */}
-        <div className="overflow-y-auto py-5 px-1 pr-3 space-y-6 text-[13.5px] sm:text-[14px] text-[#444] leading-relaxed overscroll-contain modal-scrollable-content">
+        <div 
+          data-lenis-prevent
+          className="overflow-y-auto py-5 px-1 pr-3 space-y-6 text-[13.5px] sm:text-[14px] text-[#444] leading-relaxed overscroll-contain modal-scrollable-content flex-1"
+        >
           
           {/* TAB 1: PRIVACY */}
           {activeTab === 'privacy' && (

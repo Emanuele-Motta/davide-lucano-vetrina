@@ -18,6 +18,7 @@ import { useTranslation } from './i18n';
 import { getOrderedSections, SiteSectionKey, siteConfig } from './config/siteConfig';
 import { initializeAnalyticsIfConsented } from './services/cookieConsent';
 import { injectDynamicStructuredData } from './utils/seoStructuredData';
+import { setLenisInstance } from './utils/lenis';
 import Lenis from 'lenis';
 
 // Code-splitting of modals to minimize initial bundle size and optimize Core Web Vitals
@@ -68,20 +69,42 @@ export default function App() {
 
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.2, // Durata dell'inerzia (in secondi)
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Curva di accelerazione
+      duration: 1.0,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
+      touchMultiplier: 1.2,
     });
 
-    function raf(time) {
+    setLenisInstance(lenis);
+
+    let rafId: number;
+    function raf(time: number) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
 
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
 
-    // Cleanup alla disattivazione del componente
+    // Smooth anchor navigation with Lenis
+    const handleAnchorClick = (e: MouseEvent) => {
+      const target = (e.target as HTMLElement).closest('a');
+      if (!target) return;
+      const href = target.getAttribute('href');
+      if (href && href.startsWith('#') && href.length > 1) {
+        const element = document.querySelector(href);
+        if (element) {
+          e.preventDefault();
+          lenis.scrollTo(element as HTMLElement, { offset: -90 });
+        }
+      }
+    };
+
+    document.addEventListener('click', handleAnchorClick);
+
     return () => {
+      cancelAnimationFrame(rafId);
+      document.removeEventListener('click', handleAnchorClick);
+      setLenisInstance(null);
       lenis.destroy();
     };
   }, []);

@@ -66,13 +66,13 @@ Telefono studio: ${siteConfig.studio.phone}`
     title: '2. Tipologia di Dati Trattati e Dati Sanitari (Art. 9 GDPR)',
     content: `Il Titolare tratta dati personali comuni e dati appartenenti a particolari categorie (dati relativi alla salute):
 a) Dati Anagrafici e di Contatto: nome, cognome, numero di telefono cellulare, indirizzo e-mail, codice fiscale e indirizzo di residenza per finalità di fatturazione.
-b) Dati Particolari sullo Stato di Salute (Art. 9, par. 2, lett. h GDPR): anamnesi clinica, sintomatologia muscolo-scheletrica, pregresse patologie o interventi chirurgici, diagnosi e prescrizioni mediche specialistiche, referti di diagnostica per immagini (es. RM, RX, ecografie) e diario dei trattamenti fisioterapici ed osteopatici.
+b) Dati Particolari sullo Stato di Salute (Art. 9, par. 2, lett. h GDPR): anamnesi clinica, sintomatologia muscolo-scheletrica, pregresse patologie o interventi chirurgici, diagnosi e prescrizioni mediche specialistiche, referti di diagnostica per immagini (es. RM, RX, ecografie) e diario dei trattamenti fisioterapici e riabilitativi.
 c) Dati di navigazione tecnica: indirizzi IP anonimizzati, log di sistema necessari al regolare funzionamento dell'infrastruttura web.`
   },
   {
     title: '3. Finalità del Trattamento e Basi Giuridiche (Art. 6 e Art. 9 GDPR)',
     content: `I dati personali sono raccolti e trattati per le seguenti finalità:
-1. Erogazione delle cure sanitarie e riabilitative: Valutazione fisioterapica iniziale, pianificazione terapeutica personalizzata, svolgimento di sedute di terapia manuale, riabilitazione post-traumatica e osteopatia (Base giuridica: Art. 9, par. 2, lett. h GDPR - finalità di assistenza sanitaria o terapia medica svolta da un professionista soggetto a segreto professionale).
+1. Erogazione delle cure sanitarie e riabilitative: Valutazione fisioterapica iniziale, pianificazione terapeutica personalizzata, svolgimento di sedute di terapia manuale, riabilitazione post-traumatica e funzionale (Base giuridica: Art. 9, par. 2, lett. h GDPR - finalità di assistenza sanitaria o terapia medica svolta da un professionista soggetto a segreto professionale).
 2. Gestione degli appuntamenti: Convocazione, conferma oraria, modifiche o promemoria delle sedute prenotate (Base giuridica: Art. 6, par. 1, lett. b GDPR - esecuzione di misure contrattuali o precontrattuali).
 3. Adempimenti fiscali e di legge: Emissione di ricevute e fatture sanitarie esenti IVA ai sensi dell'art. 10 D.P.R. 633/72 e contestuale trasmissione dei dati al Sistema Tessera Sanitaria (STS) per consentire al paziente la detrazione IRPEF del 19%, salvo sua esplicita opposizione (Base giuridica: Art. 6, par. 1, lett. c GDPR - obbligo legale).
 4. Tutela dei diritti in sede giudiziaria: Difesa dei diritti e rispetto delle norme deontologiche sanitarie FNOFI (Base giuridica: legittimo interesse e tutela legale).`
@@ -154,7 +154,7 @@ La disabilitazione totale dei cookie tecnici essenziali potrebbe compromettere i
 export const TERMS_SECTIONS = [
   {
     title: '1. Oggetto del Servizio Sanitario',
-    content: `Il ${siteConfig.doctor.name} eroga prestazioni professionali sanitarie di Fisioterapia, Riabilitazione Funzionale, Terapia Manuale ed Osteopatia presso lo Studio di ${siteConfig.studio.fullAddress} conformemente alla normativa vigente e al profilo professionale DM 741/1994.`
+    content: `Il ${siteConfig.doctor.name} eroga prestazioni professionali sanitarie di Fisioterapia, Riabilitazione Funzionale e Terapia Manuale Ortopedica presso lo Studio di ${siteConfig.studio.fullAddress} conformemente alla normativa vigente e al profilo professionale DM 741/1994.`
   },
   {
     title: '2. Prenotazioni Online e Modalità di Accesso',

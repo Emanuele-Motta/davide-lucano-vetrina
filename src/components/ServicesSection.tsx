@@ -164,7 +164,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                 <button
                   type="button"
                   onClick={() => onOpenServiceDetails(service)}
-                  className="p-1.5 text-[#86868b] hover:text-[#006875] transition-colors duration-200 rounded-full hover:bg-black/[0.04] active:scale-[0.95]"
+                  className="p-1.5 text-[#5e5e62] hover:text-[#006875] transition-colors duration-200 rounded-full hover:bg-black/[0.04] active:scale-[0.95]"
                   title={t.services.clinicalDetails}
                   aria-label={`${t.services.clinicalDetails}: ${service.title}`}
                 >

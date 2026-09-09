@@ -88,13 +88,13 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({ isLoading = fals
       <div className="pt-3.5 border-t border-black/[0.06]">
         <div className="flex items-center justify-between gap-2">
           <div>
-            <h4 className="text-[13px] font-semibold text-[#1d1d1f] flex items-center gap-1 leading-snug">
+            <p className="text-[13px] font-semibold text-[#1d1d1f] flex items-center gap-1 leading-snug">
               {review.name}
               {review.verifiedPatient && (
                 <CheckCircle className="w-3 h-3 text-[#006875] shrink-0" title="Paziente verificato" />
               )}
-            </h4>
-            <p className="text-[11.5px] text-[#86868b] leading-normal">{review.role || review.date}</p>
+            </p>
+            <p className="text-[11.5px] text-[#5e5e62] leading-normal">{review.role || review.date}</p>
           </div>
           <span className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-[#f5f5f7] text-[#6e6e73] shrink-0">
             {review.treatment}
@@ -190,7 +190,7 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({ isLoading = fals
                 href={MIO_DOTTORE_CONFIG.profileUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Vedi tutte le recensioni verificate del Dott. Davide Lucano su MioDottore.it"
+                aria-label="Vedi su MioDottore: consulta le recensioni verificate del Dott. Davide Lucano"
                 className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-full bg-[#1d1d1f] hover:bg-black text-white text-[12.5px] font-medium transition-all shadow-2xs w-full sm:w-auto focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#006875] active:scale-[0.97]"
                 title="Apri il profilo ufficiale del Dott. Davide Lucano su MioDottore.it"
               >
@@ -211,7 +211,7 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({ isLoading = fals
               className={`px-3 py-1.5 rounded-full text-[12px] font-medium transition-all duration-200 cursor-pointer active:scale-[0.97] ${
                 selectedFilter === opt.id
                   ? 'bg-[#1d1d1f] text-white shadow-2xs'
-                  : 'bg-white text-[#6e6e73] hover:text-[#1d1d1f] hover:bg-[#f5f5f7] border border-black/[0.06]'
+                  : 'bg-white text-[#5e5e62] hover:text-[#1d1d1f] hover:bg-[#f5f5f7] border border-black/[0.06]'
               }`}
             >
               {opt.label}
@@ -237,7 +237,7 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({ isLoading = fals
         </div>
 
         {/* Mobile quick navigation indicator & controls */}
-        <div className="flex items-center justify-between px-5 pt-3 text-[12px] text-[#86868b]">
+        <div className="flex items-center justify-between px-5 pt-3 text-[12px] text-[#5e5e62]">
           <span className="flex items-center gap-1">
             <span>Scorri le recensioni ({displayList.length})</span>
           </span>

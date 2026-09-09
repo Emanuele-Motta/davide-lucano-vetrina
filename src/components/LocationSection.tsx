@@ -36,7 +36,7 @@ export const LocationSection: React.FC = () => {
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-[14.5px] font-semibold text-[#1d1d1f]">{t.location.cards.addressTitle}</h4>
+                  <h3 className="text-[14.5px] font-semibold text-[#1d1d1f]">{t.location.cards.addressTitle}</h3>
                   <p className="text-[13.5px] text-[#6e6e73] mt-0.5">{siteConfig.studio.fullAddress}</p>
                   <p className="text-[12px] text-[#006875] font-medium mt-1 flex items-center gap-1">
                     <Train className="w-3.5 h-3.5" />
@@ -51,7 +51,7 @@ export const LocationSection: React.FC = () => {
                   <Clock className="w-5 h-5" />
                 </div>
                 <div className="flex-1">
-                  <h4 className="text-[14.5px] font-semibold text-[#1d1d1f] mb-1.5">{t.location.cards.hoursTitle}</h4>
+                  <h3 className="text-[14.5px] font-semibold text-[#1d1d1f] mb-1.5">{t.location.cards.hoursTitle}</h3>
                   <div className="space-y-1 text-[13px] text-[#6e6e73]">
                     {siteConfig.studio.openingHours.map((h, i) => (
                       <div key={i} className="flex justify-between items-center py-0.5 border-b border-black/[0.04] last:border-0">
@@ -69,12 +69,12 @@ export const LocationSection: React.FC = () => {
                   <Phone className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-[14.5px] font-semibold text-[#1d1d1f]">{t.location.cards.contactsTitle}</h4>
+                  <h3 className="text-[14.5px] font-semibold text-[#1d1d1f]">{t.location.cards.contactsTitle}</h3>
                   <p className="text-[13.5px] text-[#6e6e73] mt-0.5">
                     <a 
                       href={`tel:${siteConfig.studio.phone.replace(/\s+/g, '')}`} 
                       className="hover:text-[#006875] transition-colors font-medium focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#006875] rounded"
-                      aria-label={`Chiama lo studio al ${siteConfig.studio.phone}`}
+                      title={`Chiama lo studio al ${siteConfig.studio.phone}`}
                     >
                       {siteConfig.studio.phone}
                     </a>
@@ -83,7 +83,7 @@ export const LocationSection: React.FC = () => {
                     <a 
                       href={`mailto:${siteConfig.studio.email}`} 
                       className="hover:text-[#006875] transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#006875] rounded"
-                      aria-label={`Invia un'email a ${siteConfig.studio.email}`}
+                      title={`Invia un'email a ${siteConfig.studio.email}`}
                     >
                       {siteConfig.studio.email}
                     </a>
@@ -149,7 +149,7 @@ export const LocationSection: React.FC = () => {
             {/* Bottom Map Info */}
             <div className="p-6 md:p-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div>
-                <h4 className="text-[15px] font-semibold text-[#1d1d1f]">{t.location.mapInfo.directionsTitle}</h4>
+                <h3 className="text-[15px] font-semibold text-[#1d1d1f]">{t.location.mapInfo.directionsTitle}</h3>
                 <p className="text-[13.5px] text-[#6e6e73] mt-0.5 leading-relaxed">
                   {t.location.mapInfo.directionsDesc}
                 </p>
@@ -160,7 +160,7 @@ export const LocationSection: React.FC = () => {
                 href={siteConfig.studio.googleMapsUrl}
                 target="_blank"
                 rel="noreferrer"
-                aria-label={`Apri indicazioni stradali su Google Maps per ${siteConfig.studio.fullAddress}`}
+                aria-label={`Apri in Google Maps: indicazioni stradali per lo studio di ${siteConfig.studio.fullAddress}`}
                 className="shrink-0 inline-flex items-center gap-2 bg-[#1d1d1f] text-white px-5 py-2.5 rounded-full text-[13px] font-medium hover:bg-black transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#006875] shadow-2xs active:scale-[0.98]"
               >
                 <Navigation className="w-3.5 h-3.5 opacity-80" />

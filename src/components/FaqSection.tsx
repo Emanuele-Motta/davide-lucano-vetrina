@@ -58,7 +58,7 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onBookClick }) => {
                     {faq.question}
                   </span>
                   <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-transform duration-200 ${
-                    isOpen ? 'bg-[#1d1d1f] text-white rotate-180' : 'bg-[#f5f5f7] text-[#86868b]'
+                    isOpen ? 'bg-[#1d1d1f] text-white rotate-180' : 'bg-[#f5f5f7] text-[#5e5e62]'
                   }`}>
                     <ChevronDown className="w-3.5 h-3.5" />
                   </div>
@@ -90,7 +90,7 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onBookClick }) => {
           return (
             <div className="mt-10 p-6 sm:p-7 rounded-2xl bg-white border border-black/[0.06] shadow-2xs flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
               <div>
-                <h4 className="text-[15px] font-semibold text-[#1d1d1f]">{banner.title}</h4>
+                <h3 className="text-[15px] font-semibold text-[#1d1d1f]">{banner.title}</h3>
                 <p className="text-[13.5px] text-[#6e6e73] mt-0.5">{banner.subtitle}</p>
               </div>
               <div className="flex items-center gap-2.5 shrink-0">

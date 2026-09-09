@@ -99,6 +99,7 @@ export const CookieBanner: React.FC<CookieBannerProps> = ({
     <aside 
       role="region"
       aria-label="Informativa Cookie e Consenso"
+      data-lenis-prevent
       className="fixed bottom-0 inset-x-0 z-50 bg-white/95 backdrop-blur-xl border-t border-black/[0.08] shadow-[0_-8px_30px_rgba(0,0,0,0.06)] animate-in fade-in slide-in-from-bottom-3 duration-300"
     >
       {/* Expanded Preferences Drawer (shown only if user clicks Personalizza) */}
@@ -117,7 +118,7 @@ export const CookieBanner: React.FC<CookieBannerProps> = ({
             <button
               type="button"
               onClick={() => setShowPreferences(false)}
-              className="text-[#86868b] hover:text-[#1d1d1f] text-[12px] font-medium cursor-pointer"
+              className="text-[#5e5e62] hover:text-[#1d1d1f] text-[12px] font-medium cursor-pointer"
             >
               Nascondi
             </button>
@@ -130,7 +131,7 @@ export const CookieBanner: React.FC<CookieBannerProps> = ({
                 <span className="font-semibold text-[12px] text-[#1d1d1f] block">
                   Tecnici & Sicurezza
                 </span>
-                <span className="text-[10.5px] text-[#86868b] block">Sempre attivi (indispensabili)</span>
+                <span className="text-[10.5px] text-[#5e5e62] block">Sempre attivi (indispensabili)</span>
               </div>
               <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-medium shrink-0">
                 Attivi
@@ -220,7 +221,7 @@ export const CookieBanner: React.FC<CookieBannerProps> = ({
         
         {/* Left: Non-intrusive text */}
         <div className="flex items-center gap-2.5 w-full md:w-auto">
-          <Cookie className="w-4 h-4 text-[#86868b] shrink-0 hidden sm:block" />
+          <Cookie className="w-4 h-4 text-[#5e5e62] shrink-0 hidden sm:block" />
           <p className="leading-snug text-[#515154]">
             Questo sito utilizza cookie tecnici e, previo consenso, cookie analitici.
             <button
@@ -277,7 +278,7 @@ export const CookieBanner: React.FC<CookieBannerProps> = ({
           <button
             type="button"
             onClick={handleRejectAll}
-            className="p-1.5 text-[#86868b] hover:text-[#1d1d1f] rounded-full hover:bg-black/[0.04] transition-colors shrink-0 cursor-pointer ml-0.5"
+            className="p-1.5 text-[#5e5e62] hover:text-[#1d1d1f] rounded-full hover:bg-black/[0.04] transition-colors shrink-0 cursor-pointer ml-0.5"
             title="Chiudi e continua solo con i cookie essenziali"
             aria-label="Chiudi e continua solo con i cookie tecnici essenziali"
           >

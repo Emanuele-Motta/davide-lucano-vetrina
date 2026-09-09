@@ -2,10 +2,6 @@ import React from 'react';
 import { ConfirmedBooking } from '../types';
 import { STUDIO_INFO } from '../data/mockData';
 import { useTranslation } from '../i18n';
-import { 
-  getGoogleCalendarConfig, 
-  generateGoogleCalendarWebLink 
-} from '../services/googleCalendar';
 import { useBodyScrollLock } from '../hooks/useBodyScrollLock';
 import { 
   CheckCircle2, 
@@ -15,8 +11,7 @@ import {
   MapPin, 
   Download, 
   User, 
-  CreditCard,
-  ExternalLink
+  CreditCard
 } from 'lucide-react';
 
 interface BookingSuccessModalProps {
@@ -27,8 +22,6 @@ interface BookingSuccessModalProps {
 export const BookingSuccessModal: React.FC<BookingSuccessModalProps> = ({ booking, onClose }) => {
   const { t } = useTranslation();
   useBodyScrollLock(true);
-  const calendarConfig = getGoogleCalendarConfig();
-  const googleCalendarWebUrl = generateGoogleCalendarWebLink(booking);
 
   // Generate .ics calendar download
   const handleDownloadICS = () => {
@@ -70,8 +63,16 @@ export const BookingSuccessModal: React.FC<BookingSuccessModalProps> = ({ bookin
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-in fade-in duration-200 overscroll-contain">
-      <div className="bg-white rounded-[28px] max-w-lg w-full p-6 sm:p-8 apple-shadow relative border border-gray-100 max-h-[90vh] overflow-y-auto overscroll-contain modal-scrollable-content">
+    <div 
+      role="dialog"
+      aria-modal="true"
+      data-lenis-prevent
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-in fade-in duration-200 overscroll-contain"
+    >
+      <div 
+        data-lenis-prevent
+        className="bg-white rounded-[28px] max-w-lg w-full p-6 sm:p-8 apple-shadow relative border border-gray-100 max-h-[90vh] overflow-y-auto overscroll-contain modal-scrollable-content"
+      >
         
         {/* Close Button */}
         <button
@@ -95,21 +96,6 @@ export const BookingSuccessModal: React.FC<BookingSuccessModalProps> = ({ bookin
           <p className="text-[14px] text-[#5f5e5e] mt-1">
             {t.modals.bookingSuccess.subtitle}
           </p>
-        </div>
-
-        {/* Google Calendar Status Pill */}
-        <div className="mb-4 flex items-center justify-center">
-          {calendarConfig.isConfigured ? (
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[12px] font-medium">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Google Calendar sincronizzato ({calendarConfig.calendarId})</span>
-            </div>
-          ) : (
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 text-[#006875] border border-sky-200 text-[12px] font-medium">
-              <span className="w-2 h-2 rounded-full bg-[#006875]" />
-              <span>Predisposizione Google Calendar attiva (1-Click Add disponibile)</span>
-            </div>
-          )}
         </div>
 
         {/* Appointment Recap Card */}
@@ -154,34 +140,20 @@ export const BookingSuccessModal: React.FC<BookingSuccessModalProps> = ({ bookin
 
         {/* Calendar Action Buttons */}
         <div className="space-y-2.5">
-          {/* Direct Google Calendar Web link (works instantly for all devices) */}
-          <a
-            href={googleCalendarWebUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-[#00E5FF] text-[#121212] rounded-full text-[14px] font-semibold hover:bg-[#00d0e6] transition-colors interactive shadow-sm"
+          <button
+            onClick={handleDownloadICS}
+            className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-[#006875] text-white rounded-full text-[14px] font-semibold hover:bg-[#004f58] transition-colors interactive shadow-xs cursor-pointer"
           >
-            <Calendar className="w-4 h-4" />
-            <span>Aggiungi a Google Calendar</span>
-            <ExternalLink className="w-3.5 h-3.5 opacity-70" />
-          </a>
-
-          <div className="flex flex-col sm:flex-row gap-2.5">
-            <button
-              onClick={handleDownloadICS}
-              className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 bg-[#FAFAFA] border border-gray-300 text-[#121212] rounded-full text-[13.5px] font-medium hover:bg-gray-100 transition-colors"
-            >
-              <Download className="w-4 h-4 text-[#006875]" />
-              <span>Scarica File .ics (Apple / Outlook)</span>
-            </button>
-            
-            <button
-              onClick={onClose}
-              className="py-2.5 px-6 bg-white border border-gray-300 text-[#121212] rounded-full text-[13.5px] font-medium hover:bg-[#FAFAFA] transition-colors"
-            >
-              {t.modals.bookingSuccess.closeButton}
-            </button>
-          </div>
+            <Download className="w-4 h-4" />
+            <span>Aggiungi al Calendario (Scarica .ics)</span>
+          </button>
+          
+          <button
+            onClick={onClose}
+            className="w-full py-2.5 px-6 bg-white border border-gray-300 text-[#121212] rounded-full text-[13.5px] font-medium hover:bg-[#FAFAFA] transition-colors cursor-pointer"
+          >
+            {t.modals.bookingSuccess.closeButton}
+          </button>
         </div>
 
       </div>

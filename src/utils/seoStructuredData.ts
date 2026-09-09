@@ -23,7 +23,7 @@ export function generateStructuredData(baseUrl = 'https://fisioterapiamilano.it'
           `Fisioterapia Milano ${siteConfig.doctor.name}`,
           `Studio Fisioterapico ${siteConfig.doctor.name}`,
         ],
-        description: siteConfig.doctor.bio || 'Attività professionale di fisioterapia, osteopatia e riabilitazione funzionale 1-a-1.',
+        description: siteConfig.doctor.bio || 'Attività professionale di fisioterapia, terapia manuale e riabilitazione funzionale 1-a-1.',
         url: baseUrl,
         telephone: siteConfig.studio.phone,
         email: siteConfig.studio.email,

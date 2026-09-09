@@ -22,8 +22,16 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
   if (!service) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-in fade-in duration-200 overscroll-contain">
-      <div className="bg-white rounded-[28px] max-w-lg w-full p-6 sm:p-8 apple-shadow relative border border-gray-100 max-h-[90vh] overflow-y-auto overscroll-contain modal-scrollable-content">
+    <div 
+      role="dialog"
+      aria-modal="true"
+      data-lenis-prevent
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-in fade-in duration-200 overscroll-contain"
+    >
+      <div 
+        data-lenis-prevent
+        className="bg-white rounded-[28px] max-w-lg w-full p-6 sm:p-8 apple-shadow relative border border-gray-100 max-h-[90vh] overflow-y-auto overscroll-contain modal-scrollable-content"
+      >
         
         {/* Close Button */}
         <button
