@@ -14,14 +14,14 @@ export const BASE_SITE_URL = 'https://fisioterapiamilano.it';
 export const DEFAULT_SEO_METADATA: SectionSeoMetadata = {
   id: 'hero',
   title: 'Dott. Davide Lucano | Fisioterapista a Milano',
-  description: 'Studio di fisioterapia specialistica, riabilitazione funzionale e terapia manuale a Milano e Pieve Emanuele. Trattamenti 1-a-1 personalizzati con il Dott. Davide Lucano.',
+  description: 'Studio di fisioterapia specialistica, riabilitazione funzionale e terapia manuale a Milano. Trattamenti 1-a-1 personalizzati con il Dott. Davide Lucano.',
   url: `${BASE_SITE_URL}/`,
   keywords: [
     'fisioterapista milano',
-    'fisioterapia pieve emanuele',
+    'fisioterapia milano',
     'riabilitazione milano',
-    'terapia manuale',
-    'davide lucano',
+    'terapia manuale milano',
+    'davide lucano fisioterapista',
   ],
 };
 

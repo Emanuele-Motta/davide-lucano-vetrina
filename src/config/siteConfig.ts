@@ -43,9 +43,9 @@ export const siteConfig = {
   // ---------------------------------------------------------------------------------------
   doctor: {
     name: parseEnvString(import.meta.env.VITE_DOCTOR_NAME, "Dott. Davide Lucano"),
-    title: parseEnvString(import.meta.env.VITE_DOCTOR_TITLE, "Fisioterapista"),
-    alboNumber: parseEnvString(import.meta.env.VITE_DOCTOR_ALBO, "Iscritto Ordine Fisioterapisti (FNOFI Milano) n. 7266"),
-    experienceYears: "10+",
+    title: parseEnvString(import.meta.env.VITE_DOCTOR_TITLE, "Fisioterapista & Terapista Manuale"),
+    alboNumber: parseEnvString(import.meta.env.VITE_DOCTOR_ALBO, "Iscritto Ordine Fisioterapisti (FNOFI Milano) n. 1420"),
+    experienceYears: "5 anni",
     verifiedReviewsCount: "184+",
     ratingScore: "5.0",
     tagline: "Valutazione clinica evidence-based e percorsi riabilitativi 1-a-1 personalizzati",
@@ -54,96 +54,144 @@ export const siteConfig = {
     photoUrl: defaultDoctorImage,
 
     // Breve biografia clinica presentata nella card "Chi sono"
-    bio: "Fisioterapista con oltre 10 anni di esperienza clinica a Milano. Specializzato nella diagnosi funzionale e nel trattamento manuale e strumentale di patologie muscolo-scheletriche, traumi sportivi e problematiche posturali complesse.",
+    bio: "Fisioterapista laureato presso l'Università degli Studi di Milano con Master di I livello in Terapia Manuale e Fisioterapia Muscoloscheletrica. Esperienza clinica maturata presso importanti strutture sanitarie milanesi (Don Gnocchi, San Carlo, Pio Albergo Trivulzio), con presa in carico globale ed empatica della persona.",
 
-    // Titoli e certificazioni principali mostrati con icone
+    // Testo completo ufficiale fornito dal Dottore
+    bioFull: [
+      "Il mio obiettivo quotidiano è accompagnare le persone nel percorso di guarigione, aiutandole a superare il dolore, recuperare la mobilità e ritrovare il benessere nella vita di tutti i giorni.",
+      "Si laurea in Fisioterapia presso l'Università degli Studi di Milano con una tesi focalizzata sulla teleriabilitazione delle lesioni da taglio della mano, ha proseguito la sua formazione conseguendo il Master di I livello in Terapia Manuale e Fisioterapia Muscoloscheletrica, approfondendo in particolar modo lo studio e il trattamento delle patologie della colonna vertebrale e delle articolazioni.",
+      "Nel corso della sua carriera ha maturato un'ampia e diversificata esperienza clinica presso importanti strutture sanitarie e centri riabilitativi dell'area milanese (tra cui la Fondazione Don Gnocchi, Ospedale San Carlo e il Pio Albergo Trivulzio), specializzandosi sia nella riabilitazione ortopedica e muscoloscheletrica che nella gestione dei disturbi neurologici e posturali.",
+      "Crede fermamente che un percorso riabilitativo efficace nasca dall’ascolto attento e da una presa in carico globale della persona. Per questo struttura trattamenti altamente personalizzati che combinano: Terapia Manuale per il ripristino della corretta funzionalità articolare e muscolare, Esercizio Terapeutico per il recupero della funzione, ed Educazione e Prevenzione per offrire al paziente gli strumenti ideali a mantenere i risultati ottenuti nel lungo periodo.",
+      "In ogni trattamento, la persona è sempre al centro, pertanto ascolto, pazienza ed empatia sono i suoi strumenti principali.",
+      "Al di fuori dell'ambito clinico, coltiva da anni una grande passione per la musica come cantante e polistrumentista. Un interesse che contribuisce a sviluppare doti di ascolto, precisione e armonia, valori che applica quotidianamente anche nella sua professione."
+    ],
+
+    // Titoli e credenziali ufficiali (Laurea in Fisioterapia, non magistrale; Master I livello)
     credentials: [
-      "Laurea Magistrale in Fisioterapia (Università degli Studi di Milano)",
-      "Perfezionamento in Terapia Manuale Ortopedica & Riabilitazione Funzionale",
-      "Certificazione Internazionale Terapia Manuale & Riabilitazione Funzionale",
-      "Specialista Ufficiale Tecar Terapia e Terapie Fisiche Strumentali"
+      "Laurea in Fisioterapia (Università degli Studi di Milano)",
+      "Master di I livello in Terapia Manuale e Fisioterapia Muscoloscheletrica",
+      "Esperienza clinica c/o Fondazione Don Gnocchi, Ospedale San Carlo e Pio Albergo Trivulzio",
+      "Iscritto Ordine Fisioterapisti (FNOFI Milano) n. 1420"
     ],
 
-    // Specialità chiave in evidenza
+    // Servizi e Terapie cliniche trattate (integrando richiesta utente e allegato fotografico)
+    therapies: [
+      "Riabilitazione ortopedica",
+      "Riabilitazione neurologica",
+      "Riabilitazione respiratoria",
+      "Rieducazione posturale",
+      "Cervicalgie",
+      "Lombalgie",
+      "Sciatalgie",
+      "Capogiri e vertigini",
+      "Linfodrenaggi",
+      "Massoterapia",
+      "Contratture e tendiniti",
+      "Valutazione specialistica",
+      "Terapia manuale",
+      "Gestione del dolore cronico",
+      "Disturbi della colonna vertebrale (mal di collo, mal di schiena)",
+      "Riabilitazione post-operatoria",
+      "Riabilitazione post-infortunio",
+      "Trattamento cefalee",
+      "Trattamento disturbi mandibolari (ATM)",
+      "Esercizio terapeutico",
+      "Ginnastica posturale",
+      "Prevenzione cadute anziani",
+      "Trattamenti fisioterapici domiciliari*"
+    ],
+
+    // Servizi & Terapie cliniche trattate (sostituisce "specializzazioni")
     specialties: [
-      "Terapia Manuale",
-      "Riabilitazione Sportiva",
-      "Tecar Terapia",
-      "Rieducazione Posturale Mézières",
-      "Cervicalgie & Lombalgie"
+      "Riabilitazione ortopedica",
+      "Riabilitazione neurologica",
+      "Riabilitazione respiratoria",
+      "Rieducazione posturale",
+      "Cervicalgie",
+      "Lombalgie",
+      "Sciatalgie",
+      "Capogiri e vertigini",
+      "Linfodrenaggi",
+      "Massoterapia",
+      "Contratture e tendiniti"
     ],
 
-    // Filosofia clinica
-    quote: "Ogni seduta è svolta rigorosamente 1-a-1 senza interruzioni: dedico tutto il tempo alla comprensione della causa reale del sintomo e al ripristino del movimento senza dolore."
+    // Punti di forza clinici (rimossa la tecnologia avanzata su richiesta esplicita)
+    clinicalHighlights: [
+      {
+        title: "Approccio Evidence-Based",
+        desc: "Protocolli riabilitativi allineati alle più recenti linee guida internazionali per garantire il recupero più rapido e sicuro."
+      },
+      {
+        title: "Presa in Carico Globale",
+        desc: "La persona è sempre al centro: ascolto attento, pazienza ed empatia per comprendere a fondo le reali esigenze di salute."
+      },
+      {
+        title: "Puntualità & Sedute 1-a-1",
+        desc: "Nessuna attesa in sala d'aspetto: 60 minuti dedicati interamente a te, senza interruzioni o pazienti contemporanei."
+      },
+      {
+        title: "Esercizio Terapeutico & Prevenzione",
+        desc: "Programmi di riatletizzazione e consigli pratici per consolidare i risultati nel tempo ed evitare recidive a lungo termine."
+      }
+    ],
+
+    // Filosofia clinica / Missione
+    quote: "Il mio obiettivo quotidiano è accompagnare le persone nel percorso di guarigione, aiutandole a superare il dolore, recuperare la mobilità e ritrovare il benessere nella vita di tutti i giorni."
   },
 
   // ---------------------------------------------------------------------------------------
-  // 2. RECAPITI E LOCALIZZAZIONE DELLO STUDIO
+  // 2. RECAPITI E LOCALIZZAZIONE DELLO STUDIO (MILANO)
   // ---------------------------------------------------------------------------------------
   studio: {
-    name: parseEnvString(import.meta.env.VITE_STUDIO_NAME, "Studio Fisioterapia & Riabilitazione Dott. Davide Lucano"),
-    address: parseEnvString(import.meta.env.VITE_STUDIO_ADDRESS, "Via delle betulle 14"),
-    civic: "14",
-    cap: parseEnvString(import.meta.env.VITE_STUDIO_CAP, "20072"),
-    city: parseEnvString(import.meta.env.VITE_STUDIO_CITY, "Pieve Emanuele"),
+    name: parseEnvString(import.meta.env.VITE_STUDIO_NAME, "Studio Fisioterapia Dott. Davide Lucano"),
+    address: parseEnvString(import.meta.env.VITE_STUDIO_ADDRESS, "Via delle Betulle 10"),
+    civic: "10",
+    cap: parseEnvString(import.meta.env.VITE_STUDIO_CAP, "20152"),
+    city: parseEnvString(import.meta.env.VITE_STUDIO_CITY, "Milano"),
     province: parseEnvString(import.meta.env.VITE_STUDIO_PROVINCE, "MI"),
     region: "Lombardia",
-    fullAddress: `${parseEnvString(import.meta.env.VITE_STUDIO_ADDRESS, "Via delle betulle 14")}, ${parseEnvString(import.meta.env.VITE_STUDIO_CAP, "20072")} ${parseEnvString(import.meta.env.VITE_STUDIO_CITY, "Pieve Emanuele")} (Milano)`,
-    metroInfo: "Comodamente raggiungibile da Milano Sud, Rozzano, Opera, Basiglio e Melegnano • Ampio parcheggio gratuito antistante",
+    fullAddress: `${parseEnvString(import.meta.env.VITE_STUDIO_ADDRESS, "Via delle Betulle 10")}, ${parseEnvString(import.meta.env.VITE_STUDIO_CAP, "20152")} ${parseEnvString(import.meta.env.VITE_STUDIO_CITY, "Milano")}`,
+    metroInfo: "Comodamente raggiungibile con metro M1 Bisceglie e linee bus urbane • Ampia disponibilità di parcheggio libero su strada",
+    accessibilityInfo: "Accesso facilitato al piano terra, senza barriere architettoniche e senza ascensore necessario",
     
     // Recapiti di contatto diretto
-    phone: parseEnvString(import.meta.env.VITE_STUDIO_PHONE, "+39 02 8716 9421"),
-    whatsappNumber: parseEnvString(import.meta.env.VITE_STUDIO_WHATSAPP, "+39 347 123 4567"),
-    whatsappLink: `https://wa.me/${parseEnvString(import.meta.env.VITE_STUDIO_WHATSAPP, "393471234567").replace(/[^0-9]/g, '')}?text=${encodeURIComponent("Buongiorno Dott. Lucano, desidero maggiori informazioni o fissare un appuntamento.")}`,
-    email: parseEnvString(import.meta.env.VITE_STUDIO_EMAIL, "info@fisioterapialucano.it"),
+    phone: parseEnvString(import.meta.env.VITE_STUDIO_PHONE, "327 5464253"),
+    phoneTel: `tel:+39${parseEnvString(import.meta.env.VITE_STUDIO_PHONE, "3275464253").replace(/[^0-9]/g, '')}`,
+    whatsappNumber: parseEnvString(import.meta.env.VITE_STUDIO_WHATSAPP, "327 5464253"),
+    whatsappLink: `https://wa.me/39${parseEnvString(import.meta.env.VITE_STUDIO_WHATSAPP, "3275464253").replace(/[^0-9]/g, '')}?text=${encodeURIComponent("Buongiorno Dott. Lucano, desidero maggiori informazioni o fissare un appuntamento.")}`,
+    email: parseEnvString(import.meta.env.VITE_STUDIO_EMAIL, "Davide.lucano.fkt@gmail.com"),
+    emailMailto: `mailto:${parseEnvString(import.meta.env.VITE_STUDIO_EMAIL, "Davide.lucano.fkt@gmail.com")}`,
     pec: parseEnvString(import.meta.env.VITE_STUDIO_PEC, "davide.lucano@pec.it"),
     piva: parseEnvString(import.meta.env.VITE_STUDIO_PIVA, "P.IVA 12345678901"),
     formEndpoint: parseEnvString(import.meta.env.VITE_FORM_ENDPOINT, ""),
 
-    // Orari di apertura per il pubblico
+    // Orari di apertura per il pubblico: Lunedì, Mercoledì, Venerdì 15:00 - 20:00
     openingHours: [
-      { days: "Lunedì – Venerdì", hours: "08:30 – 20:00" },
-      { days: "Sabato", hours: "09:00 – 13:00" },
-      { days: "Domenica", hours: "Chiuso" }
+      { days: "Lunedì, Mercoledì, Venerdì", hours: "15:00 – 20:00" },
+      { days: "Martedì, Giovedì, Sabato, Domenica", hours: "Chiuso (Ricevimento su appuntamento)" }
     ],
 
-    // Link a Google Maps per calcolo percorso
-    googleMapsUrl: "https://maps.google.com/?q=Via+delle+betulle+14+Pieve+Emanuele+Milano"
+    // Link a Google Maps per calcolo percorso e iframe embed
+    googleMapsUrl: "https://maps.google.com/?q=Via+delle+Betulle+10+Milano",
+    googleMapsEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2799.394874981881!2d9.1009!3d45.4542!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4786c245995540e7%3A0x6b77242ba4e73f83!2sVia%20delle%20Betulle%2C%2010%2C%2020152%20Milano%20MI!5e0!3m2!1sit!2sit!4v1710000000000!5m2!1sit!2sit"
   },
 
   // ---------------------------------------------------------------------------------------
   // 3. SISTEMA DI PRENOTAZIONE CALENDARIO (CONFIGURABILE LATO CODICE)
   // ---------------------------------------------------------------------------------------
   booking: {
-    /**
-     * TOGGLE PRENOTAZIONI:
-     * - true: il calendario e la prenotazione online sono ATTIVI e visibili sul sito.
-     * - false: il sito mostra il modulo e i contatti diretti (Telefono / WhatsApp) senza calendario interattivo.
-     * Configurabile anche via Netlify con VITE_ENABLE_BOOKING.
-     */
     isEnabled: parseEnvBool(import.meta.env.VITE_ENABLE_BOOKING, true),
-
-    /**
-     * BLOCCO DATE ANTECEDENTI AD OGGI:
-     * true: impedisce categoricamente di prenotare o navigare su date passate.
-     */
     preventPastDates: true,
-
-    /**
-     * DURATA STANDARD VISITA / SEDUTA:
-     */
     slotDurationMinutes: 60,
 
     /**
      * GIORNI DI CHIUSURA SETTIMANALE:
-     * 0 = Domenica, 6 = Sabato
+     * 0 = Domenica, 2 = Martedì, 4 = Giovedì, 6 = Sabato
+     * Ricevimento nei giorni: 1 (Lunedì), 3 (Mercoledì), 5 (Venerdì)
      */
-    closedDayOfWeek: [0], // Domenica sempre chiusa
+    closedDayOfWeek: [0, 2, 4, 6],
 
-    /**
-     * GIORNI FESTIVI O DI CHIUSURA STRAORDINARIA DELLO STUDIO (formato YYYY-MM-DD):
-     * Aggiungi qui ferie o giorni in cui il calendario deve risultare disabilitato.
-     */
     blockedDates: [
       "2026-01-01", // Capodanno
       "2026-01-06", // Epifania
@@ -158,70 +206,48 @@ export const siteConfig = {
     ],
 
     /**
-     * ⏰ SLOT ORARI DISPONIBILI DAL LUNEDÌ AL VENERDÌ (FERIALI):
-     * Modifica gli orari o imposta available: false per bloccare uno slot specifico.
+     * ⏰ SLOT ORARI DISPONIBILI: LUNEDÌ, MERCOLEDÌ, VENERDÌ (15:00 - 20:00)
      */
     weekdaySlots: [
-      { time: "08:30", available: true },
-      { time: "09:30", available: true },
-      { time: "10:30", available: true },
-      { time: "11:30", available: true },
-      { time: "14:30", available: true },
-      { time: "15:30", available: true },
-      { time: "16:30", available: true },
-      { time: "17:30", available: true },
-      { time: "18:30", available: true },
-      { time: "19:30", available: true }
+      { time: "15:00", available: true },
+      { time: "16:00", available: true },
+      { time: "17:00", available: true },
+      { time: "18:00", available: true },
+      { time: "19:00", available: true }
     ] as TimeSlot[],
 
-    /**
-     * ⏰ SLOT ORARI DEL SABATO MATTINA:
-     */
-    saturdaySlots: [
-      { time: "09:00", available: true },
-      { time: "10:00", available: true },
-      { time: "11:00", available: true },
-      { time: "12:00", available: true }
-    ] as TimeSlot[],
+    saturdaySlots: [] as TimeSlot[],
 
-    /**
-     * Helper rapido che restituisce gli slot disponibili per una determinata data.
-     * Applica automaticamente il blocco date passate, domenica chiusa e orari sabato/feriali.
-     */
     getSlotsForDate(year: number, month: number, day: number): {
       slots: TimeSlot[];
       isClosed: boolean;
       closeReason?: string;
     } {
       const targetDate = new Date(year, month, day);
-      const dayOfWeek = targetDate.getDay(); // 0 = Dom, 6 = Sab
+      const dayOfWeek = targetDate.getDay(); // 0 = Dom, 1 = Lun, 2 = Mar, 3 = Mer, 4 = Gio, 5 = Ven, 6 = Sab
 
-      // Verifica se la data è festiva
+      // Verifica festività
       const formattedMonth = String(month + 1).padStart(2, '0');
       const formattedDay = String(day).padStart(2, '0');
       const dateString = `${year}-${formattedMonth}-${formattedDay}`;
 
       if (this.blockedDates.includes(dateString)) {
-        return { slots: [], isClosed: true, closeReason: "Studio chiuso per festività o ferie" };
+        return { slots: [], isClosed: true, closeReason: "Studio chiuso per festività" };
       }
 
-      // Domenica
-      if (this.closedDayOfWeek.includes(dayOfWeek)) {
-        return { slots: [], isClosed: true, closeReason: "Studio chiuso la domenica" };
-      }
-
-      // Sabato
-      if (dayOfWeek === 6) {
+      // Giorni di apertura: Lunedì (1), Mercoledì (3), Venerdì (5)
+      if (dayOfWeek === 1 || dayOfWeek === 3 || dayOfWeek === 5) {
         return {
-          slots: this.saturdaySlots.map(s => ({ ...s })),
+          slots: this.weekdaySlots.map(s => ({ ...s })),
           isClosed: false
         };
       }
 
-      // Giorni feriali (Lunedì – Venerdì)
+      // Altri giorni chiusi
       return {
-        slots: this.weekdaySlots.map(s => ({ ...s })),
-        isClosed: false
+        slots: [],
+        isClosed: true,
+        closeReason: "Studio aperto Lunedì, Mercoledì e Venerdì dalle 15:00 alle 20:00"
       };
     }
   },
@@ -239,22 +265,15 @@ export const siteConfig = {
   },
 
   // ---------------------------------------------------------------------------------------
-  // 4.1 ANALYTICS (OPZIONALE CON PREVIO CONSENSO PRIVACY GARANTE)
+  // 4.1 ANALYTICS
   // ---------------------------------------------------------------------------------------
   analytics: {
     gaMeasurementId: parseEnvString(import.meta.env.VITE_GA_MEASUREMENT_ID, ""),
   },
 
   // ---------------------------------------------------------------------------------------
-  // 5. VISIBILITÀ E ORDINAMENTO SEZIONI DEL SITO (TOGGLE & POSIZIONE NUMERICA)
+  // 5. VISIBILITÀ E ORDINAMENTO SEZIONI DEL SITO
   // ---------------------------------------------------------------------------------------
-  /**
-   * Ogni sezione del sito è completamente configurabile qui:
-   *  - `enabled`: imposta true per renderla visibile, false per nasconderla completamente dal sito e dalla navbar.
-   *  - `order`: valore numerico che determina la posizione della sezione (dal numero più basso al più alto).
-   * 
-   * NOTA: 'faq' è configurata con il valore d'ordine 80, posizionandosi come ULTIMA sezione prima del footer.
-   */
   sections: {
     hero: {
       id: "hero",
@@ -272,17 +291,17 @@ export const siteConfig = {
     },
     services: {
       id: "servizi",
-      name: "Trattamenti Specializzati",
-      navLabel: "Trattamenti",
+      name: "Terapie & Servizi",
+      navLabel: "Terapie & Servizi",
       enabled: parseEnvBool(import.meta.env.VITE_SECTION_SERVICES, true),
       order: parseEnvNumber(import.meta.env.VITE_ORDER_SERVICES, 30),
     },
-    territory: {
-      id: "zone-servite",
-      name: "Aree e Zone Servite a Milano",
-      navLabel: "Zone Servite",
-      enabled: parseEnvBool(import.meta.env.VITE_SECTION_TERRITORY, true),
-      order: parseEnvNumber(import.meta.env.VITE_ORDER_TERRITORY, 40),
+    location: {
+      id: "dove-siamo",
+      name: "Sede Studio, Mappa & Zone Servite",
+      navLabel: "Sede & Zone",
+      enabled: parseEnvBool(import.meta.env.VITE_SECTION_LOCATION, true),
+      order: parseEnvNumber(import.meta.env.VITE_ORDER_LOCATION, 40),
     },
     reviews: {
       id: "recensioni",
@@ -298,13 +317,6 @@ export const siteConfig = {
       enabled: parseEnvBool(import.meta.env.VITE_SECTION_BOOKING ?? import.meta.env.VITE_ENABLE_BOOKING, true),
       order: parseEnvNumber(import.meta.env.VITE_ORDER_BOOKING, 60),
     },
-    location: {
-      id: "dove-siamo",
-      name: "Studio, Orari & Mappa",
-      navLabel: "Dove Siamo",
-      enabled: parseEnvBool(import.meta.env.VITE_SECTION_LOCATION, true),
-      order: parseEnvNumber(import.meta.env.VITE_ORDER_LOCATION, 70),
-    },
     faq: {
       id: "faq",
       name: "Domande Frequenti (FAQ Sanitarie)",
@@ -318,7 +330,6 @@ export const siteConfig = {
   // 6. PIÈ DI PAGINA & NOTE LEGALI
   // ---------------------------------------------------------------------------------------
   footer: {
-    // Il disclaimer clinico/fiscale è disattivato di default come richiesto (attivabile via VITE_SHOW_FOOTER_DISCLAIMER=true)
     showDisclaimer: parseEnvBool(import.meta.env.VITE_SHOW_FOOTER_DISCLAIMER, false),
   },
 };

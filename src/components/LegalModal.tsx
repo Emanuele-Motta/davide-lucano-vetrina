@@ -68,7 +68,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({
                 {activeTab === 'terms' && 'Termini e Condizioni delle Prestazioni Fisioterapiche'}
               </h2>
               <p className="text-[12px] text-[#006875] font-medium">
-                Dott. Davide Lucano • Fisioterapista (Albo FNOFI Milano n. 7266)
+                Dott. Davide Lucano • Fisioterapista (Albo FNOFI Milano n. 1420)
               </p>
             </div>
           </div>

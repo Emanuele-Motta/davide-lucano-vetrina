@@ -1,27 +1,26 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
-import { Navbar } from './components/Navbar';
-import { Hero } from './components/Hero';
-import { ServicesSection } from './components/ServicesSection';
-import { BookingSection } from './components/BookingSection';
-import { AboutSection } from './components/AboutSection';
-import { TerritorySection } from './components/TerritorySection';
-import { FaqSection } from './components/FaqSection';
-import { LocationSection } from './components/LocationSection';
-import { ReviewsSection } from './components/ReviewsSection';
-import { Footer } from './components/Footer';
+import { Navbar, Footer } from './components/layout';
+import { 
+  Hero, 
+  AboutSection, 
+  ServicesSection, 
+  BookingSection, 
+  ReviewsSection, 
+  LocationSection, 
+  FaqSection 
+} from './sections';
 import { CookieBanner } from './components/CookieBanner';
 import { CookiePreferencesButton } from './components/CookiePreferencesButton';
 import { useBookingToggle } from './context/FeatureToggleContext';
 import { ConfirmedBooking, Service } from './types';
-import { SERVICES } from './data/mockData';
+import { SERVICES_DATA } from './constants/data';
 import { useTranslation } from './i18n';
 import { getOrderedSections, SiteSectionKey, siteConfig } from './config/siteConfig';
 import { initializeAnalyticsIfConsented } from './services/cookieConsent';
 import { injectDynamicStructuredData } from './utils/seoStructuredData';
-import { setLenisInstance } from './utils/lenis';
-import Lenis from 'lenis';
+import { useSmoothScroll } from './hooks/useSmoothScroll';
 
-// Code-splitting of modals to minimize initial bundle size and optimize Core Web Vitals
+// Code-splitting dei modali per minimizzare il bundle size iniziale
 const BookingSuccessModal = lazy(() =>
   import('./components/BookingSuccessModal').then((m) => ({ default: m.BookingSuccessModal }))
 );
@@ -41,10 +40,17 @@ export default function App() {
   const { t } = useTranslation();
   const { isBookingEnabled } = useBookingToggle();
 
-  // Selected service for the booking form
+  // Scroll fluido inerziale stile Apple con Lenis
+  const { scrollTo } = useSmoothScroll({
+    duration: 1.1,
+    smoothWheel: true,
+    anchorOffset: -85,
+  });
+
+  // Servizio selezionato per la richiesta/prenotazione
   const [selectedServiceId, setSelectedServiceId] = useState<string>('terapia-manuale');
 
-  // Stored user bookings
+  // Storico prenotazioni utente salvate in localStorage
   const [bookings, setBookings] = useState<ConfirmedBooking[]>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
@@ -54,66 +60,24 @@ export default function App() {
     }
   });
 
-  // Modal states
+  // Stati modali
   const [newlyConfirmedBooking, setNewlyConfirmedBooking] = useState<ConfirmedBooking | null>(null);
   const [isBookingsListOpen, setIsBookingsListOpen] = useState(false);
   const [activeServiceDetail, setActiveServiceDetail] = useState<Service | null>(null);
   const [legalModalType, setLegalModalType] = useState<'privacy' | 'cookies' | 'terms' | null>(null);
   const [isCookiePreferencesOpen, setIsCookiePreferencesOpen] = useState(false);
 
-  // Initial loading state to show skeleton placeholders during initial load
+  // Stato di caricamento iniziale
   const [isInitialLoading, setIsInitialLoading] = useState(true);
 
   // Toast banner
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.0,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-      touchMultiplier: 1.2,
-    });
-
-    setLenisInstance(lenis);
-
-    let rafId: number;
-    function raf(time: number) {
-      lenis.raf(time);
-      rafId = requestAnimationFrame(raf);
-    }
-
-    rafId = requestAnimationFrame(raf);
-
-    // Smooth anchor navigation with Lenis
-    const handleAnchorClick = (e: MouseEvent) => {
-      const target = (e.target as HTMLElement).closest('a');
-      if (!target) return;
-      const href = target.getAttribute('href');
-      if (href && href.startsWith('#') && href.length > 1) {
-        const element = document.querySelector(href);
-        if (element) {
-          e.preventDefault();
-          lenis.scrollTo(element as HTMLElement, { offset: -90 });
-        }
-      }
-    };
-
-    document.addEventListener('click', handleAnchorClick);
-
-    return () => {
-      cancelAnimationFrame(rafId);
-      document.removeEventListener('click', handleAnchorClick);
-      setLenisInstance(null);
-      lenis.destroy();
-    };
-  }, []);
-
-  useEffect(() => {
-    // Inietta / aggiorna dinamicamente i dati strutturati Schema.org (JSON-LD)
+    // Iniezione dinamica dati strutturati Schema.org (JSON-LD)
     injectDynamicStructuredData();
 
-    // Check and initialize analytics only if previous consent exists
+    // Inizializza analytics solo se precedentemente acconsentito
     initializeAnalyticsIfConsented(siteConfig.analytics.gaMeasurementId);
 
     const handleConsentUpdate = () => {
@@ -121,10 +85,10 @@ export default function App() {
     };
     window.addEventListener('cookie_consent_updated', handleConsentUpdate);
 
-    // Brief initial load simulation to provide seamless perceived performance
+    // Perceived performance delay
     const timer = setTimeout(() => {
       setIsInitialLoading(false);
-    }, 600);
+    }, 500);
 
     return () => {
       window.removeEventListener('cookie_consent_updated', handleConsentUpdate);
@@ -147,17 +111,14 @@ export default function App() {
     }, 4000);
   };
 
-  const scrollToSection = (sectionId: string) => {
-    const el = document.getElementById(sectionId);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
+  const handleScrollTo = (sectionId: string) => {
+    scrollTo(`#${sectionId}`);
   };
 
   const handleSelectServiceFromCard = (serviceId: string) => {
     setSelectedServiceId(serviceId);
-    scrollToSection('prenota');
-    const srv = SERVICES.find(s => s.id === serviceId);
+    handleScrollTo('prenota');
+    const srv = SERVICES_DATA.find(s => s.id === serviceId);
     if (srv) {
       if (isBookingEnabled) {
         showToast(`Selezionato: ${srv.title}. Scegli data e orario nel calendario.`);
@@ -187,17 +148,17 @@ export default function App() {
         return (
           <Hero 
             key="hero"
-            onBookClick={() => scrollToSection('prenota')}
-            onExploreAbout={() => scrollToSection('chi-sono')}
-            onExploreServices={() => scrollToSection('servizi')}
+            onBookClick={() => handleScrollTo('prenota')}
+            onExploreAbout={() => handleScrollTo('chi-sono')}
+            onExploreServices={() => handleScrollTo('servizi')}
           />
         );
       case 'about':
         return (
           <AboutSection 
             key="about"
-            onExploreServices={() => scrollToSection('servizi')}
-            onBookClick={() => scrollToSection('prenota')}
+            onExploreServices={() => handleScrollTo('servizi')}
+            onBookClick={() => handleScrollTo('prenota')}
           />
         );
       case 'services':
@@ -207,13 +168,6 @@ export default function App() {
             isLoading={isInitialLoading}
             onSelectServiceForBooking={handleSelectServiceFromCard}
             onOpenServiceDetails={(service) => setActiveServiceDetail(service)}
-          />
-        );
-      case 'territory':
-        return (
-          <TerritorySection 
-            key="territory"
-            onBookClick={() => scrollToSection('prenota')} 
           />
         );
       case 'reviews':
@@ -237,13 +191,14 @@ export default function App() {
         return (
           <LocationSection 
             key="location"
+            onBookClick={() => handleScrollTo('prenota')}
           />
         );
       case 'faq':
         return (
           <FaqSection 
             key="faq"
-            onBookClick={() => scrollToSection('prenota')} 
+            onBookClick={() => handleScrollTo('prenota')} 
           />
         );
       default:
@@ -252,9 +207,9 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#fafafa] text-[#1d1d1f] flex flex-col font-sans antialiased">
+    <div className="min-h-screen bg-[#fafafa] text-[#1d1d1f] flex flex-col font-sans antialiased selection:bg-[#006875]/20 selection:text-[#006875]">
       
-      {/* Skip to main content link for screen readers & keyboard accessibility (WCAG 2.1 AAA) */}
+      {/* Skip link accessibilità (WCAG 2.1 AAA) */}
       <a 
         href="#main-content" 
         className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-50 bg-[#1d1d1f] text-white px-5 py-2.5 rounded-full font-medium shadow-2xl ring-2 ring-[#006875] focus:outline-hidden text-[13px]"
@@ -262,7 +217,7 @@ export default function App() {
         Salta direttamente al contenuto principale
       </a>
 
-      {/* Toast notification */}
+      {/* Toast Notifiche */}
       {toastMessage && (
         <div 
           role="status"
@@ -274,25 +229,25 @@ export default function App() {
         </div>
       )}
 
-      {/* Top Navbar */}
+      {/* Navbar di Layout */}
       <Navbar 
-        onBookClick={() => scrollToSection('prenota')}
+        onBookClick={() => handleScrollTo('prenota')}
         bookingCount={bookings.length}
         onViewBookings={() => setIsBookingsListOpen(true)}
       />
 
-      {/* Main Content Sections with Accessible Landmark */}
+      {/* Landmark Semantico Contenuto Principale */}
       <main id="main-content" role="main" tabIndex={-1} className="flex-1 focus:outline-hidden">
         {orderedSections.map(({ key }) => renderSection(key))}
       </main>
 
-      {/* Footer */}
+      {/* Footer di Layout */}
       <Footer 
         onOpenLegal={(type) => setLegalModalType(type)} 
         onOpenCookiePreferences={() => setIsCookiePreferencesOpen(true)}
       />
 
-      {/* Lazy Loaded Modals wrapped in Suspense */}
+      {/* Modali Lazy con Suspense */}
       <Suspense fallback={null}>
         {isBookingEnabled && newlyConfirmedBooking && (
           <BookingSuccessModal 
@@ -306,7 +261,7 @@ export default function App() {
             bookings={bookings}
             onClose={() => setIsBookingsListOpen(false)}
             onCancelBooking={handleCancelBooking}
-            onNewBookingClick={() => scrollToSection('prenota')}
+            onNewBookingClick={() => handleScrollTo('prenota')}
           />
         )}
 
@@ -327,14 +282,14 @@ export default function App() {
         )}
       </Suspense>
 
-      {/* Cookie Banner & Consent Management (Garante Privacy & GDPR 2021) */}
+      {/* Cookie Banner & Gestione Consenso GDPR */}
       <CookieBanner 
         onOpenLegal={(type) => setLegalModalType(type)}
         forceOpen={isCookiePreferencesOpen}
         onCloseForceOpen={() => setIsCookiePreferencesOpen(false)}
       />
 
-      {/* Persistent Cookie Preferences Trigger */}
+      {/* Trigger Preferenze Cookie */}
       <CookiePreferencesButton 
         onClick={() => setIsCookiePreferencesOpen(true)}
       />

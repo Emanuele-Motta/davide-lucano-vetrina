@@ -1,6 +1,6 @@
 import React from 'react';
 import { ConfirmedBooking } from '../types';
-import { STUDIO_INFO } from '../data/mockData';
+import { siteConfig } from '../config/siteConfig';
 import { useTranslation } from '../i18n';
 import { useBodyScrollLock } from '../hooks/useBodyScrollLock';
 import { 
@@ -11,7 +11,7 @@ import {
   MapPin, 
   Download, 
   User, 
-  CreditCard
+  ShieldCheck
 } from 'lucide-react';
 
 interface BookingSuccessModalProps {
@@ -38,15 +38,15 @@ export const BookingSuccessModal: React.FC<BookingSuccessModalProps> = ({ bookin
     const icsContent = [
       'BEGIN:VCALENDAR',
       'VERSION:2.0',
-      'PRODID:-//Dott. Davide Lucano//Fisioterapia//IT',
+      `PRODID:-//${siteConfig.doctor.name}//Fisioterapia//IT`,
       'BEGIN:VEVENT',
       `UID:${booking.id}@fisioterapiamilano.it`,
       `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z`,
       `DTSTART:${startISO}`,
       `DTEND:${endISO}`,
-      `SUMMARY:${booking.serviceTitle} - Dott. Davide Lucano`,
-      `DESCRIPTION:Appuntamento per ${booking.serviceTitle} con il Dott. Davide Lucano.\\nPaziente: ${booking.fullName}\\nCodice: ${booking.id}`,
-      `LOCATION:${STUDIO_INFO.address}`,
+      `SUMMARY:${booking.serviceTitle} - ${siteConfig.doctor.name}`,
+      `DESCRIPTION:Appuntamento per ${booking.serviceTitle} con il ${siteConfig.doctor.name}.\\nPaziente: ${booking.fullName}\\nCodice: ${booking.id}`,
+      `LOCATION:${siteConfig.studio.fullAddress}`,
       'STATUS:CONFIRMED',
       'END:VEVENT',
       'END:VCALENDAR'
@@ -127,13 +127,13 @@ export const BookingSuccessModal: React.FC<BookingSuccessModalProps> = ({ bookin
 
           <div className="flex items-center gap-3 text-[14px] text-[#121212]">
             <MapPin className="w-4 h-4 text-[#006875] shrink-0" />
-            <span className="text-[13px] text-[#5f5e5e]">{STUDIO_INFO.address}</span>
+            <span className="text-[13px] text-[#5f5e5e]">{siteConfig.studio.fullAddress}</span>
           </div>
 
           <div className="flex items-center gap-3 text-[14px] text-[#121212] pt-2 border-t border-gray-200/60">
-            <CreditCard className="w-4 h-4 text-[#006875] shrink-0" />
+            <ShieldCheck className="w-4 h-4 text-[#006875] shrink-0" />
             <span className="text-[13px] text-[#5f5e5e]">
-              {t.modals.bookingSuccess.rateLabel}: <strong className="text-[#121212]">{booking.servicePrice}</strong> (saldo al termine della seduta, detraibile al 19%)
+              Prestazione sanitaria esente IVA (art. 10 DPR 633/72) e detraibile fiscalmente al 19%
             </span>
           </div>
         </div>

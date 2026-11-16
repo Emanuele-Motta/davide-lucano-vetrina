@@ -39,36 +39,31 @@ export function generateStructuredData(baseUrl = 'https://fisioterapiamilano.it'
         },
         geo: {
           '@type': 'GeoCoordinates',
-          latitude: 45.3536,
-          longitude: 9.2015,
+          latitude: 45.4578,
+          longitude: 9.1024,
         },
         openingHoursSpecification: [
           {
             '@type': 'OpeningHoursSpecification',
-            dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-            opens: '08:30',
+            dayOfWeek: ['Monday', 'Wednesday', 'Friday'],
+            opens: '15:00',
             closes: '20:00',
-          },
-          {
-            '@type': 'OpeningHoursSpecification',
-            dayOfWeek: 'Saturday',
-            opens: '09:00',
-            closes: '13:00',
           },
         ],
         medicalSpecialty: [
           'Physiotherapy',
           'Musculoskeletal',
-          'SportsMedicine',
+          'Orthopedics',
+          'Neurology',
         ],
         areaServed: [
-          { '@type': 'City', name: 'Pieve Emanuele' },
           { '@type': 'City', name: 'Milano' },
           { '@type': 'AdministrativeArea', name: 'Città Metropolitana di Milano' },
-          { '@type': 'City', name: 'Rozzano' },
-          { '@type': 'City', name: 'Basiglio' },
-          { '@type': 'City', name: 'Opera' },
-          { '@type': 'City', name: 'Locate di Triulzi' },
+          { '@type': 'City', name: 'Corsico' },
+          { '@type': 'City', name: 'Cesano Boscone' },
+          { '@type': 'City', name: 'Trezzano sul Naviglio' },
+          { '@type': 'City', name: 'Buccinasco' },
+          { '@type': 'City', name: 'Settimo Milanese' },
           { '@type': 'City', name: 'Assago' },
         ],
         founder: {
@@ -89,15 +84,12 @@ export function generateStructuredData(baseUrl = 'https://fisioterapiamilano.it'
           '@type': 'OfferCatalog',
           name: 'Prestazioni Fisioterapiche e Riabilitative',
           itemListElement: SERVICES.map((service) => {
-            const rawPrice = service.price.replace(/[^0-9.]/g, '');
             return {
               '@type': 'Offer',
               itemOffered: {
                 '@type': 'MedicalProcedure',
                 name: service.title,
                 description: service.shortDesc,
-                price: rawPrice || '85.00',
-                priceCurrency: 'EUR',
               },
             };
           }),

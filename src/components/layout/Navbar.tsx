@@ -1,21 +1,19 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { LOGO_URL } from '../data/mockData';
 import { 
   Menu, 
   X, 
   CalendarCheck2, 
   Phone, 
   MessageCircle, 
-  ShieldCheck,
-  Calendar,
-  Clock
+  Calendar
 } from 'lucide-react';
-import { useTranslation } from '../i18n';
-import { useBookingToggle } from '../context/FeatureToggleContext';
-import { siteConfig, getOrderedSections } from '../config/siteConfig';
-import { useBodyScrollLock } from '../hooks/useBodyScrollLock';
+import { useTranslation } from '../../i18n';
+import { useBookingToggle } from '../../context/FeatureToggleContext';
+import { siteConfig, getOrderedSections } from '../../config/siteConfig';
+import { DOCTOR_DATA, STUDIO_DATA, ASSETS } from '../../constants/data';
+import { useBodyScrollLock } from '../../hooks/useBodyScrollLock';
 
-interface NavbarProps {
+export interface NavbarProps {
   onBookClick: () => void;
   bookingCount: number;
   onViewBookings: () => void;
@@ -34,21 +32,22 @@ export const Navbar: React.FC<NavbarProps> = ({
   const { t } = useTranslation();
   const { isBookingEnabled } = useBookingToggle();
 
-  // Usa la sezione attiva passata dal genitore o quella rilevata internamente
+  // Sezione attiva controllata o rilevata
   const activeSection = propActiveSection !== undefined ? propActiveSection : internalActiveSection;
 
-  // Sezioni configurate e abilitate da mostrare nella navigazione (escludendo l'hero che è il logo)
+  // Sezioni configurate e abilitate nella navigazione
   const navSections = useMemo(() => {
     return getOrderedSections().filter(({ key }) => key !== 'hero');
   }, []);
 
-  // Gestione scroll e rilevamento della sezione attiva per accessibilità visiva
+  // Rilevamento sezione visibile e stato di scroll per blur
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
 
-      // Trova la sezione visibile corrente
-      const sections = navSections.map(s => document.getElementById(s.config.id)).filter(Boolean) as HTMLElement[];
+      const sections = navSections
+        .map(s => document.getElementById(s.config.id))
+        .filter(Boolean) as HTMLElement[];
       const scrollPos = window.scrollY + 180;
 
       for (let i = sections.length - 1; i >= 0; i--) {
@@ -66,7 +65,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     return () => window.removeEventListener('scroll', handleScroll);
   }, [navSections]);
 
-  // Gestione chiusura menu mobile con tasto Escape
+  // Chiusura menu mobile con tasto Escape
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && mobileMenuOpen) {
@@ -77,7 +76,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [mobileMenuOpen]);
 
-  // Blocca scroll body e sospende Lenis quando menu mobile aperto
+  // Blocco scroll body quando il menu mobile è aperto
   useBodyScrollLock(mobileMenuOpen);
 
   return (
@@ -86,25 +85,25 @@ export const Navbar: React.FC<NavbarProps> = ({
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
         isScrolled 
           ? 'bg-white/95 backdrop-blur-md shadow-xs border-b border-gray-200/80' 
-          : 'bg-[#f9f9f9]/90 backdrop-blur-md border-b border-gray-200/50'
+          : 'bg-[#fafafa]/90 backdrop-blur-md border-b border-gray-200/50'
       }`}
     >
-      {/* Main Navigation Bar */}
+      {/* Barra di Navigazione Principale */}
       <nav 
         aria-label="Navigazione principale del sito"
         className="max-w-[1200px] mx-auto flex justify-between items-center h-16 sm:h-17 px-4 sm:px-6 md:px-8 xl:px-0"
       >
-        {/* Brand Identity / Official Logo */}
+        {/* Logo Ufficiale del Medico & Studio */}
         <a 
           href="#hero" 
           id="nav-brand-logo"
-          aria-label={`${siteConfig.doctor.name} - Torna alla Home`}
+          aria-label={`${DOCTOR_DATA.name} - Torna alla Home`}
           className="flex items-center group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#006875] rounded-xl p-0.5"
         >
           <div className="relative h-9 sm:h-10 md:h-11 w-auto rounded-lg overflow-hidden shadow-2xs ring-1 ring-black/[0.08] hover:opacity-95 transition-opacity bg-[#006875]">
             <img 
-              src={LOGO_URL} 
-              alt={`Logo Studio ${siteConfig.doctor.name} - Fisioterapista`} 
+              src={ASSETS.logoFull} 
+              alt={`Logo Studio ${DOCTOR_DATA.name} - ${DOCTOR_DATA.title}`} 
               width={110}
               height={44}
               loading="eager"
@@ -116,7 +115,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
         </a>
 
-        {/* Desktop Navigation Links */}
+        {/* Link di Navigazione Desktop */}
         <div className="hidden lg:flex items-center gap-1">
           {navSections.map(({ config }) => {
             const isActive = activeSection === config.id;
@@ -137,11 +136,11 @@ export const Navbar: React.FC<NavbarProps> = ({
           })}
         </div>
 
-        {/* Header CTAs & Actions */}
+        {/* Pulsanti di Azione Destra Desktop */}
         <div className="hidden lg:flex items-center gap-2.5">
-          {/* Quick WhatsApp link */}
+          {/* Link Diretto WhatsApp */}
           <a
-            href={siteConfig.studio.whatsappLink}
+            href={STUDIO_DATA.whatsappLink}
             target="_blank"
             rel="noopener noreferrer"
             className="p-2 rounded-full text-[#6e6e73] hover:text-emerald-700 hover:bg-emerald-50 transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-emerald-500"
@@ -151,7 +150,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <MessageCircle className="w-4 h-4" />
           </a>
 
-          {/* User Bookings count button */}
+          {/* Badge Prenotazioni Utente Salve */}
           {isBookingEnabled && bookingCount > 0 && (
             <button
               onClick={onViewBookings}
@@ -164,7 +163,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
           )}
 
-          {/* Primary CTA button */}
+          {/* Pulsante Principale CTA */}
           <button 
             onClick={onBookClick}
             id="nav-cta-prenota"
@@ -184,7 +183,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
         </div>
 
-        {/* Mobile Nav Trigger & Actions */}
+        {/* Trigger Menu & Azioni Mobile */}
         <div className="flex items-center gap-2 lg:hidden">
           {isBookingEnabled && bookingCount > 0 && (
             <button
@@ -197,9 +196,9 @@ export const Navbar: React.FC<NavbarProps> = ({
           )}
 
           <a
-            href={`tel:${siteConfig.studio.phone.replace(/\s+/g, '')}`}
+            href={STUDIO_DATA.phoneTel}
             className="p-2 rounded-full bg-black/[0.04] text-[#1d1d1f] hover:bg-black/[0.08] transition-colors"
-            aria-label={`Chiama lo studio al numero ${siteConfig.studio.phone}`}
+            aria-label={`Chiama lo studio al numero ${STUDIO_DATA.phone}`}
           >
             <Phone className="w-4 h-4 text-[#006875]" />
           </a>
@@ -218,7 +217,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       </nav>
     </header>
 
-    {/* Mobile Drawer Navigation - Positioned OUTSIDE <header> to ensure full viewport height on mobile */}
+    {/* Menu Drawer Mobile */}
     {mobileMenuOpen && (
       <div 
         id="mobile-nav-menu"
@@ -276,7 +275,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           <div className="grid grid-cols-2 gap-2.5">
             <a
-              href={`tel:${siteConfig.studio.phone.replace(/\s+/g, '')}`}
+              href={STUDIO_DATA.phoneTel}
               className="flex items-center justify-center gap-1.5 py-3 px-3 rounded-full border border-black/[0.08] text-[#1d1d1f] text-[13px] font-medium bg-[#f5f5f7] hover:bg-[#e8e8ed]"
             >
               <Phone className="w-3.5 h-3.5 text-[#006875]" />
@@ -284,7 +283,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </a>
 
             <a
-              href={siteConfig.studio.whatsappLink}
+              href={STUDIO_DATA.whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-1.5 py-3 px-3 rounded-full border border-emerald-200 text-emerald-800 text-[13px] font-medium bg-emerald-50 hover:bg-emerald-100"
@@ -295,7 +294,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           <div className="text-center pt-2 text-[12px] text-[#5e5e62] leading-tight">
-            {siteConfig.studio.fullAddress}
+            {STUDIO_DATA.fullAddress}
           </div>
         </div>
       </div>
@@ -303,3 +302,5 @@ export const Navbar: React.FC<NavbarProps> = ({
     </>
   );
 };
+
+export default Navbar;

@@ -100,6 +100,14 @@ export interface Translations {
     categories: string[];
     items: Testimonial[];
   };
+  testimonials?: {
+    badge: string;
+    title: string;
+    subtitle: string;
+    verifiedPatient?: string;
+    categories?: string[];
+    items?: Testimonial[];
+  };
   faq: {
     badge: string;
     title: string;
@@ -250,37 +258,37 @@ export interface Translations {
 export const itTranslations: Translations = {
   brand: {
     name: "Dott. Davide Lucano",
-    fullName: "Dott. Davide Lucano - Fisioterapista",
-    studioName: "Dott. Davide Lucano",
+    fullName: "Dott. Davide Lucano - Fisioterapista & Terapista Manuale",
+    studioName: "Studio Fisioterapia Dott. Davide Lucano",
     doctorName: "Dott. Davide Lucano",
     doctorRole: "Fisioterapista",
-    registration: "Iscrizione Albo FNOFI n. 4821",
-    address: "Via delle betulle 10",
+    registration: "Iscrizione Albo FNOFI Milano n. 1420",
+    address: "Via delle Betulle 10",
     addressCity: "20152 Milano (MI)",
-    phone: "+39 02 8492 1104",
-    mobile: "+39 333 1234567",
-    email: "info@fisioterapiamilano.it",
+    phone: "327 5464253",
+    mobile: "327 5464253",
+    email: "Davide.lucano.fkt@gmail.com",
     piva: "IT10948200965",
-    openingHours: "Lun - Ven: 08:30 - 20:00 | Sab: 09:00 - 13:00"
+    openingHours: "Lun, Mer, Ven: 15:00 - 20:00 (Su appuntamento)"
   },
   nav: {
     studioTag: "Dott. Davide Lucano",
     about: "Chi Sono",
-    services: "Servizi",
-    territory: "Milano & Dintorni",
+    services: "Terapie & Servizi",
+    territory: "Dove Riceve",
     reviews: "Recensioni",
     faq: "FAQ",
-    location: "Dove Riceve",
+    location: "Sede Studio",
     myBookings: "I miei appuntamenti",
     bookOnline: "Prenota Online"
   },
   hero: {
-    pill: "Dott. Davide Lucano • Studio di Fisioterapia a Milano",
+    pill: "Dott. Davide Lucano • Fisioterapista a Milano",
     titleStart: "Ritrova il movimento.",
     titleHighlight: "Senza dolore.",
-    subtitle: "Fisioterapia avanzata e percorsi su misura a Milano. Per tornare a vivere, lavorare e fare sport al massimo.",
+    subtitle: "Valutazione evidence-based e percorsi personalizzati di terapia manuale e riabilitazione 1-a-1 a Milano.",
     ctaBook: "Prenota una valutazione",
-    ctaServices: "Specializzazioni",
+    ctaServices: "Terapie & Servizi",
     badges: {
       alboTitle: "Albo FNOFI Milano",
       alboDesc: "Iscrizione n. 1420",
@@ -293,197 +301,202 @@ export const itTranslations: Translations = {
   about: {
     badge: "Filosofia Clinica",
     title: "Al centro ci sei tu, non la patologia.",
-    subtitle: "Niente percorsi standard. Solo ascolto, diagnosi accurate e un piano di recupero disegnato sui tuoi ritmi.",
+    subtitle: "Ascolto attento, diagnosi funzionale rigorosa e un piano di recupero terapeutico disegnato sulle tue esigenze.",
     doctor: {
       name: "Dott. Davide Lucano",
       title: "Fisioterapista • Albo FNOFI Milano n. 1420",
-      bio: "Fisioterapista con oltre 10 anni di esperienza clinica a Milano. Specializzato in disturbi della colonna vertebrale, traumatologia sportiva e riabilitazione ortopedica.",
+      bio: "Fisioterapista laureato presso l'Università degli Studi di Milano con Master di I livello in Terapia Manuale e Fisioterapia Muscoloscheletrica. Esperienza clinica maturata presso importanti strutture sanitarie milanesi (Don Gnocchi, San Carlo, Pio Albergo Trivulzio).",
       credentials: [
-        "Laurea in Fisioterapia • Università degli Studi di Milano",
-        "Master Specialistico in Fisioterapia & Riabilitazione Sportiva",
-        "Perfezionamento in Terapia Manuale Ortopedica & Riabilitazione Funzionale"
+        "Laurea in Fisioterapia (Università degli Studi di Milano)",
+        "Master di I livello in Terapia Manuale e Fisioterapia Muscoloscheletrica",
+        "Esperienza clinica c/o Fondazione Don Gnocchi, Ospedale San Carlo e Pio Albergo Trivulzio",
+        "Iscritto all'Ordine dei Fisioterapisti FNOFI Milano n. 1420"
       ],
       individualSessions: "Sedute 1-a-1 dedicate"
     },
     highlights: {
       evidence: {
         title: "Metodo Evidence-Based",
-        desc: "Protocolli clinici validati dalla ricerca scientifica per risultati stabili nel tempo."
+        desc: "Protocolli clinici validati dalla ricerca scientifica internazionale per risultati duraturi."
       },
       technology: {
-        title: "Tecnologia Avanzata",
-        desc: "Tecar terapia ed elettromedicali di ultima generazione per accelerare la rigenerazione."
+        title: "Presa in Carico Globale",
+        desc: "La persona è sempre al centro: ascolto attento, pazienza ed empatia per comprendere a fondo le reali esigenze di salute."
       },
       punctuality: {
-        title: "Ascolto & Puntualità",
+        title: "Puntualità & Sedute 1-a-1",
         desc: "Riceve su appuntamento in ambiente riservato: zero attese, tempo dedicato al 100% a te."
       },
       exercises: {
-        title: "Prevenzione Attiva",
+        title: "Esercizio Terapeutico & Prevenzione",
         desc: "Esercizi mirati e consigli ergonomici per consolidare i benefici ed evitare ricadute."
       }
     }
   },
   services: {
     badge: "Aree di Intervento",
-    title: "Specializzazioni.",
-    subtitle: "Percorsi mirati per liberare il movimento ed eliminare il dolore.",
+    title: "Servizi & Terapie.",
+    subtitle: "Percorsi mirati per liberare il movimento, eliminare il dolore e ritrovare il benessere.",
     allCategory: "Tutti",
     bookNow: "Prenota ora",
     clinicalDetails: "Dettagli clinici",
     items: [
       {
-        id: "terapia-manuale",
-        title: "Terapia Manuale & Riabilitazione Ortopedica",
-        shortDesc: "Libera le articolazioni, scioglie le contratture e riduce l'infiammazione fin dalla prima seduta.",
-        fullDesc: "Mobilizzazione vertebrale, manipolazione miofasciale e decompressione articolare per la risoluzione rapida del dolore e il ripristino dell'escursione articolare.",
-        duration: "45 min",
-        price: "€ 85",
-        category: "Clinico",
-        icon: "HandMetal",
-        benefits: [
-          "Sollievo immediato da lombalgia, cervicalgia e colpo di frusta",
-          "Decompressione radicolare per sciatalgie e cruralgie",
-          "Disattivazione specifica dei trigger point miofasciali",
-          "Ripristino istantaneo della mobilità funzionale"
-        ]
-      },
-      {
-        id: "riabilitazione-sportiva",
-        title: "Riabilitazione Sportiva & Return-to-Play",
-        shortDesc: "Riprendi il tuo sport in totale sicurezza con test funzionali e riatletizzazione progressiva.",
-        fullDesc: "Programmi evidence-based di recupero funzionale e riatletizzazione dopo infortuni muscolari, distorsioni o interventi chirurgici.",
-        duration: "60 min",
-        price: "€ 95",
-        category: "Performance",
-        icon: "Activity",
-        benefits: [
-          "Test funzionali e misurazioni dinamometriche di forza",
-          "Riatletizzazione progressiva e riprogrammazione del gesto",
-          "Prevenzione mirata di sovraccarichi tendinei",
-          "Ritorno sicuro e performante all'attività sportiva"
-        ]
-      },
-      {
-        id: "posturale",
-        title: "Rieducazione Posturale Globale (RPG)",
-        shortDesc: "Ritrova l'equilibrio della colonna e correggi le tensioni causate dalla sedentarietà.",
-        fullDesc: "Integrazione dei metodi Mézières e Souchard per riequilibrare le catene muscolari e risolvere tensioni da prolungata sedentarietà.",
-        duration: "50 min",
-        price: "€ 80",
-        category: "Rieducazione",
-        icon: "Accessibility",
-        benefits: [
-          "Valutazione posturale approfondita della colonna",
-          "Allungamento decompensato delle catene muscolari",
-          "Esercizi propriocettivi e respirazione diaframmatica",
-          "Consigli ergonomici per il lavoro quotidiano"
-        ]
-      },
-      {
-        id: "tecar-terapia",
-        title: "Tecar Terapia Capacitiva & Resistiva",
-        shortDesc: "Accelera i tempi biologici di riparazione dei tessuti e spegne il dolore rapidamente.",
-        fullDesc: "Tecnologia a radiofrequenza per stimolare i processi biologici di autoriparazione, drenare edemi e ridurre il dolore rapidamente.",
-        duration: "30 min",
-        price: "€ 70",
-        category: "Strumentale",
-        icon: "Zap",
-        benefits: [
-          "Attivazione immediata della microcircolazione",
-          "Rapido riassorbimento di edemi e contratture",
-          "Azione analgesica e antinfiammatoria naturale",
-          "Integrazione sinergica con la terapia manuale"
-        ]
-      },
-      {
         id: "prima-visita",
-        title: "Prima Visita Fisioterapica & Valutazione",
-        shortDesc: "Anamnesi accurata, test biomeccanici mirati e primo trattamento terapeutico immediato.",
-        fullDesc: "Valutazione di 60 minuti: esame della documentazione clinica, test ortopedici, diagnosi funzionale e primo trattamento terapeutico erogato nella seduta.",
+        title: "Prima Visita & Valutazione Specialistica",
+        shortDesc: "Anamnesi accurata, esame biomeccanico, test ortopedici e primo trattamento terapeutico immediato.",
+        fullDesc: "Valutazione clinica di 60 minuti: esame della documentazione sanitaria, test articolari e posturali, diagnosi funzionale e primo trattamento terapeutico incluso nella seduta.",
         duration: "60 min",
-        price: "€ 100",
+        price: "",
         category: "Diagnostica",
-        icon: "ClipboardCheck",
+        icon: "Stethoscope",
         benefits: [
-          "Anamnesi clinica e visione esami (RMN, RX, eco)",
+          "Anamnesi clinica e visione esami strumentali (RMN, RX, eco)",
           "Test specifici di mobilità e provocazione del sintomo",
           "Primo trattamento fisioterapico incluso nella seduta",
           "Piano terapeutico personalizzato e trasparente"
         ]
       },
       {
-        id: "controllo",
-        title: "Seduta di Controllo & Trattamento",
-        shortDesc: "Verifica dei miglioramenti ottenuti, perfezionamento delle tecniche ed evoluzione del piano.",
-        fullDesc: "Seduta individuale di consolidamento dei risultati, rivalutazione dei parametri di mobilità e progressione del programma di esercizi.",
-        duration: "40 min",
-        price: "€ 75",
-        category: "Follow-up",
-        icon: "Repeat",
+        id: "terapia-manuale",
+        title: "Terapia Manuale & Riabilitazione Muscoloscheletrica",
+        shortDesc: "Mobilizzazioni articolari, trazioni, rilascio miofasciale e trattamento di colonna e articolazioni.",
+        fullDesc: "Mobilizzazione vertebrale, manipolazione miofasciale e decompressione articolare per la risoluzione rapida del dolore e il ripristino dell'escursione articolare.",
+        duration: "60 min",
+        price: "",
+        category: "Manuale",
+        icon: "HandMetal",
         benefits: [
-          "Misurazione oggettiva del recupero funzionale",
-          "Affinamento del trattamento terapeutico",
-          "Aggiornamento della guida agli esercizi domiciliari",
-          "Prevenzione a lungo termine delle recidive"
+          "Sollievo immediato da lombalgia, cervicalgia e colpo di frusta",
+          "Decompressione per sciatalgie e disturbi radicolari",
+          "Trattamento disturbi dell'articolazione temporo-mandibolare (ATM) e cefalee",
+          "Ripristino istantaneo della mobilità funzionale"
+        ]
+      },
+      {
+        id: "riabilitazione-ortopedica",
+        title: "Riabilitazione Ortopedica & Traumatologica",
+        shortDesc: "Recupero post-infortunio e post-operatorio, riatletizzazione e prevenzione delle recidive.",
+        fullDesc: "Programmi evidence-based di recupero funzionale dopo traumi articolari, fratture, protesi (anca, ginocchio) o interventi legamentosi.",
+        duration: "60 min",
+        price: "",
+        category: "Ortopedia",
+        icon: "Activity",
+        benefits: [
+          "Test funzionali progressivi di forza e mobilità",
+          "Riatletizzazione e riprogrammazione del gesto atletico",
+          "Prevenzione mirata di sovraccarichi tendinei e contratture",
+          "Ritorno sicuro e performante alle attività quotidiane e sportive"
+        ]
+      },
+      {
+        id: "posturale",
+        title: "Rieducazione & Ginnastica Posturale",
+        shortDesc: "Riequilibrio delle catene muscolari, correzione dismorfismi e allungamento miofasciale.",
+        fullDesc: "Integrazione dei metodi Mézières e rieducazione posturale per riequilibrare le catene muscolari e risolvere tensioni da prolungata sedentarietà o sovraccarichi.",
+        duration: "60 min",
+        price: "",
+        category: "Postura",
+        icon: "Accessibility",
+        benefits: [
+          "Valutazione posturale approfondita della colonna",
+          "Allungamento decompensato delle catene muscolari",
+          "Esercizi propriocettivi e respirazione diaframmatica",
+          "Consigli ergonomici e prevenzione a lungo termine"
+        ]
+      },
+      {
+        id: "riabilitazione-neurologica",
+        title: "Riabilitazione Neurologica & Prevenzione Cadute",
+        shortDesc: "Rieducazione neuromotoria, equilibrio, coordinazione e prevenzione delle cadute nell’anziano.",
+        fullDesc: "Interventi terapeutici dedicati a persone con patologie o esiti neurologici, deficit di equilibrio, capogiri, vertigini e instabilità posturale.",
+        duration: "60 min",
+        price: "",
+        category: "Neurologia",
+        icon: "ShieldCheck",
+        benefits: [
+          "Rieducazione dell'equilibrio e del passo",
+          "Trattamento di capogiri e vertigini posturali",
+          "Esercizi di coordinazione neuromuscolare",
+          "Autonomia e sicurezza nelle attività quotidiane"
+        ]
+      },
+      {
+        id: "massoterapia-linfodrenaggio",
+        title: "Massoterapia & Linfodrenaggi",
+        shortDesc: "Massaggio terapeutico decontratturante, drenaggio linfatico manuale e riduzione del dolore cronico.",
+        fullDesc: "Trattamenti manuali specifici per stimolare la circolazione sanguigna e linfatica, drenare edemi post-traumatici o post-chirurgici e sciogliere contratture muscolari profonde.",
+        duration: "60 min",
+        price: "",
+        category: "Terapie",
+        icon: "HeartPulse",
+        benefits: [
+          "Drenaggio dei liquidi interstiziali e riduzione gonfiori",
+          "Decontrazione profonda di trigger point e fasce muscolari",
+          "Gestione del dolore muscolare cronico",
+          "Miglioramento dell'elasticità tissutale"
         ]
       }
     ]
   },
   territory: {
-    badge: "Lo Studio",
+    badge: "Sede Studio & Zone",
     title: "Posizione & Raggiungibilità",
-    subtitle: "Facilmente raggiungibile da Milano e comuni limitrofi, con ampio parcheggio gratuito e nessun vincolo ZTL.",
-    districtsTitle: "Milano & Hinterland",
-    districtsSubtitle: "Collegamenti rapidi per visite individuali",
+    subtitle: "Lo studio è situato in Via delle Betulle 10 a Milano, comodamente accessibile al piano terra con parcheggio libero su strada.",
+    districtsTitle: "Milano & Hinterland Ovest/Sud",
+    districtsSubtitle: "Collegamenti rapidi per visite individuali su appuntamento",
     districtsHeading: "Zone Principali",
     districts: [
-      "Milano Sud & Centro",
-      "Pieve Emanuele & Rozzano",
-      "Basiglio & Opera",
-      "San Donato & Melegnano",
-      "Assago Milanofiori"
+      "Milano Ovest (Bisceglie, Baggio)",
+      "Forze Armate & San Siro",
+      "Lorenteggio & Inganni",
+      "Corsico & Cesano Boscone",
+      "Trezzano & Buccinasco"
     ],
     districtsList: [
-      "Milano Sud & Centro",
-      "Pieve Emanuele & Rozzano",
-      "Basiglio & Opera",
-      "San Donato & Melegnano",
-      "Assago Milanofiori"
+      "Milano Ovest (Bisceglie, Baggio)",
+      "Forze Armate & San Siro",
+      "Lorenteggio & Inganni",
+      "Corsico & Cesano Boscone",
+      "Trezzano & Buccinasco"
     ],
     surroundingHeading: "Tempi di Raggiungimento",
     surroundingTitle: "Tempi di Raggiungimento",
     surroundingTowns: [
-      { name: "Rozzano & Basiglio", time: "5-10 min" },
-      { name: "Opera & Locate", time: "5-10 min" },
-      { name: "Milano Sud (Famagosta)", time: "12-15 min" },
-      { name: "Assago (Milanofiori)", time: "10-15 min" },
-      { name: "Melegnano & San Donato", time: "15-20 min" },
-      { name: "Milano Centro", time: "20-25 min" }
+      { name: "Cesano Boscone & Corsico", time: "5-7 min" },
+      { name: "Trezzano sul Naviglio", time: "8-10 min" },
+      { name: "Buccinasco & Settimo Milanese", time: "8-10 min" },
+      { name: "Milano De Angeli / Wagner", time: "10-12 min" },
+      { name: "Assago", time: "10-12 min" },
+      { name: "Milano Centro (Duomo M1)", time: "15 min" }
     ],
-    parkingAdvantage: "Parcheggio gratuito antistante",
-    transitAdvantage: "Collegamenti bus e passante ferroviario",
+    parkingAdvantage: "Ampia disponibilità di parcheggio libero su strada",
+    transitAdvantage: "Vicinanza metro M1 Bisceglie e linee bus 63, 67, 58",
     advantages: {
-      parking: "Parcheggio gratuito antistante",
-      transit: "Collegamenti bus e passante ferroviario"
+      parking: "Ampia disponibilità di parcheggio libero su strada",
+      transit: "Vicinanza metro M1 Bisceglie e linee bus 63, 67, 58"
     },
     pathologiesTitle: "Aree di Trattamento Principali",
     pathologiesSubtitle: "Approccio clinico evidence-based",
     pathologies: [
-      "Lombalgie, sciatalgie e protrusioni discali",
-      "Cervicalgie, vertigini e colpi di frusta",
-      "Spalla dolorosa e tendiniti della cuffia",
-      "Distorsioni di caviglia, ginocchio e lesioni legamentose",
-      "Recupero post-operatorio e protesico (anca, ginocchio, LCA)",
-      "Rieducazione posturale per smart working e sedentarietà"
+      "Riabilitazione ortopedica, neurologica e respiratoria",
+      "Rieducazione posturale e ginnastica posturale",
+      "Cervicalgie, lombalgie e sciatalgie",
+      "Capogiri, vertigini e cefalee",
+      "Contratture muscolari e tendiniti",
+      "Disturbi dell'ATM e della colonna vertebrale",
+      "Linfodrenaggi e massoterapia",
+      "Prevenzione cadute anziani e visite domiciliari*"
     ],
     pathologiesList: [
-      "Lombalgie, sciatalgie e protrusioni discali",
-      "Cervicalgie, vertigini e colpi di frusta",
-      "Spalla dolorosa e tendiniti della cuffia",
-      "Distorsioni di caviglia, ginocchio e lesioni legamentose",
-      "Recupero post-operatorio e protesico (anca, ginocchio, LCA)",
-      "Rieducazione posturale per smart working e sedentarietà"
+      "Riabilitazione ortopedica, neurologica e respiratoria",
+      "Rieducazione posturale e ginnastica posturale",
+      "Cervicalgie, lombalgie e sciatalgie",
+      "Capogiri, vertigini e cefalee",
+      "Contratture muscolari e tendiniti",
+      "Disturbi dell'ATM e della colonna vertebrale",
+      "Linfodrenaggi e massoterapia",
+      "Prevenzione cadute anziani e visite domiciliari*"
     ],
     cta: "Prenota con il Dott. Lucano",
     ctaBookEvaluation: "Prenota con il Dott. Lucano"
@@ -497,7 +510,7 @@ export const itTranslations: Translations = {
       "Tutte",
       "Terapia Manuale",
       "Riabilitazione Sportiva",
-      "Tecar Terapia",
+      "Massoterapia & Linfodrenaggi",
       "Rieducazione Posturale"
     ],
     items: [
@@ -557,6 +570,11 @@ export const itTranslations: Translations = {
       }
     ]
   },
+  testimonials: {
+    badge: "5.0 ★ MioDottore.it",
+    title: "Cosa dicono i pazienti.",
+    subtitle: "Esperienze reali di recupero e percorsi clinici individuali."
+  },
   faq: {
     badge: "FAQ",
     title: "Domande frequenti.",
@@ -572,7 +590,7 @@ export const itTranslations: Translations = {
       },
       {
         question: "Come si raggiunge lo studio e dove si parcheggia?",
-        answer: "Lo studio è in Via delle betulle 14 a Pieve Emanuele (Milano). Dispone di ampio parcheggio gratuito proprio di fronte all'ingresso, senza limitazioni ZTL."
+        answer: "Lo studio è in Via delle Betulle 10 a Milano. È comodamente accessibile al piano terra e dispone di ampia disponibilità di parcheggio libero su strada, senza limitazioni ZTL."
       },
       {
         question: "Quali problematiche vengono trattate principalmente?",
@@ -583,12 +601,12 @@ export const itTranslations: Translations = {
         answer: "Dura 60 minuti: include anamnesi clinica, visione degli esami diagnostici, test biomeccanici, primo trattamento terapeutico e piano di recupero su misura."
       },
       {
-        question: "La Tecar Terapia è dolorosa?",
-        answer: "No, è un trattamento del tutto indolore e piacevole. Genera un calore profondo rilassante che stimola la microcircolazione e riduce rapidamente l'infiammazione."
+        question: "Quali percorsi terapeutici vengono svolti nello studio?",
+        answer: "Il Dott. Davide Lucano struttura trattamenti personalizzati di Terapia Manuale, Riabilitazione Ortopedica, Neurologica, Respiratoria, Rieducazione Posturale, Esercizio Terapeutico, Massoterapia e Linfodrenaggio per dolori acuti e cronici."
       },
       {
-        question: "Come si prenota o si modifica un appuntamento?",
-        answer: "Puoi selezionare data e ora direttamente dal calendario online qui sopra. In alternativa, puoi scrivere su WhatsApp al +39 347 123 4567 per assistenza diretta."
+        question: "Come si prenota o si richiede un appuntamento?",
+        answer: "Puoi selezionare data e ora direttamente dal calendario online su questo sito. In alternativa, puoi telefonare o scrivere su WhatsApp al 327 5464253 o inviare un'email a Davide.lucano.fkt@gmail.com per assistenza diretta."
       }
     ],
     banner: {
@@ -617,8 +635,8 @@ export const itTranslations: Translations = {
       availableTimes: "Orari Disponibili",
       noSlotsForDate: "Nessuna disponibilità rimasta per questa data. Seleziona un altro giorno.",
       pickDateInstruction: "Scegli un giorno dal calendario per visualizzare gli slot orari disponibili.",
-      morning: "Mattina",
-      afternoon: "Pomeriggio"
+      morning: "Pomeriggio",
+      afternoon: "Sera"
     },
     form: {
       fullNameLabel: "Nome e Cognome *",
@@ -626,7 +644,7 @@ export const itTranslations: Translations = {
       emailLabel: "Email per conferma *",
       emailPlaceholder: "es. marco.rossi@email.it",
       phoneLabel: "Telefono / WhatsApp *",
-      phonePlaceholder: "es. +39 333 1234567",
+      phonePlaceholder: "es. +39 327 5464253",
       notesLabel: "Sintomi o note cliniche (opzionale)",
       notesPlaceholder: "Descrivi brevemente il disturbo, la zona dolorosa o se porti esami strumentali recenti...",
       privacyAcceptPrefix: "Accetto il trattamento dei dati personali secondo la ",
@@ -657,19 +675,19 @@ export const itTranslations: Translations = {
   location: {
     badge: "Dove Riceve il Dott. Davide Lucano",
     title: "Sede delle Visite & Contatti Diretti",
-    subtitle: "Il Dott. Davide Lucano riceve su appuntamento in Via delle betulle 10, 20152 Milano. Facilmente raggiungibile dal centro città e da tutti i comuni della provincia ovest e sud.",
+    subtitle: "Il Dott. Davide Lucano riceve su appuntamento in Via delle Betulle 10, 20152 Milano. Facilmente raggiungibile dal centro città e da tutti i comuni della provincia ovest e sud.",
     cards: {
       addressTitle: "Sede delle Visite",
-      addressSubtitle: "Accesso al piano terra, nessuna barriera architettonica.",
+      addressSubtitle: "Accesso comodo al piano terra, nessuna barriera architettonica.",
       hoursTitle: "Orari di Ricevimento",
-      hoursSubtitle: "Lun - Ven: 08:30 - 20:00 | Sab: 09:00 - 13:00",
+      hoursSubtitle: "Lunedì, Mercoledì, Venerdì: 15:00 – 20:00",
       hoursAppointmentOnly: "Si riceve esclusivamente su appuntamento.",
       contactsTitle: "Contatti Diretti",
       contactsSubtitle: "Telefono, WhatsApp e comunicazioni dirette."
     },
     mapInfo: {
       directionsTitle: "Come Raggiungere la Sede",
-      directionsDesc: "Situato in Via delle betulle 10, Milano. Accesso immediato al piano terra, ascensore e ampia disponibilità di parcheggio libero su strada. Nessuna complicazione legata a ZTL o traffico congesto del centro.",
+      directionsDesc: "Situato in Via delle Betulle 10, Milano. Accesso immediato e comodo al piano terra e ampia disponibilità di parcheggio libero su strada. Nessuna complicazione legata a ZTL o traffico congesto del centro.",
       openMaps: "Apri in Google Maps"
     }
   },

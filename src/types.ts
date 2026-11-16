@@ -2,12 +2,15 @@ export interface Service {
   id: string;
   title: string;
   shortDesc: string;
+  shortDescription?: string;
   fullDesc: string;
   duration: string;
   price: string;
   category: string;
   icon: string; // identifier for Lucide icon
   benefits: string[];
+  indications?: string[];
+  pathologyChips?: string[];
 }
 
 export interface BookingFormData {
@@ -38,6 +41,7 @@ export type ReviewSource = 'miodottore' | 'google' | 'diretta';
 export interface Testimonial {
   id: string;
   name: string;
+  author?: string;
   role: string;
   rating: number;
   content: string;

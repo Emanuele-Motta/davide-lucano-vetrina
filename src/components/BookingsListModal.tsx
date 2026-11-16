@@ -1,6 +1,6 @@
 import React from 'react';
 import { ConfirmedBooking } from '../types';
-import { STUDIO_INFO } from '../data/mockData';
+import { siteConfig } from '../config/siteConfig';
 import { useTranslation } from '../i18n';
 import { useBodyScrollLock } from '../hooks/useBodyScrollLock';
 import { X, Calendar, Clock, MapPin, Trash2, CalendarCheck2 } from 'lucide-react';
@@ -108,7 +108,7 @@ export const BookingsListModal: React.FC<BookingsListModalProps> = ({
                   </div>
                   <div className="flex items-center gap-2">
                     <MapPin className="w-3.5 h-3.5 text-[#006875]" />
-                    <span className="text-[12px]">{STUDIO_INFO.address}</span>
+                    <span className="text-[12px]">{siteConfig.studio.fullAddress}</span>
                   </div>
                 </div>
               </div>

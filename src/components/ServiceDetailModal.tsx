@@ -50,13 +50,13 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
           {service.title}
         </h3>
 
-        <div className="flex items-center gap-3 text-[14px] text-[#5f5e5e] mb-6">
-          <span className="flex items-center gap-1">
+        <div className="flex items-center gap-2 text-[13.5px] text-[#5f5e5e] mb-6">
+          <span className="flex items-center gap-1.5 font-medium text-[#006875]">
             <Clock className="w-4 h-4 text-[#006875]" />
-            {service.duration}
+            {service.duration || '60 min'}
           </span>
           <span>•</span>
-          <span className="font-semibold text-[#121212] text-[15px]">{service.price}</span>
+          <span>Seduta individuale 1-a-1</span>
         </div>
 
         <p className="text-[15px] text-[#5f5e5e] leading-relaxed mb-6">

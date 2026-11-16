@@ -1,6 +1,6 @@
 {
   "name": "Dott. Davide Lucano | Fisioterapista a Milano e Dintorni",
-  "description": "Fisioterapia specialistica e riabilitazione a cura del Dott. Davide Lucano a Milano e dintorni. Terapia manuale, riabilitazione sportiva, Tecar terapia e posturale con prenotazione online.",
+  "description": "Fisioterapia specialistica e riabilitazione a cura del Dott. Davide Lucano a Milano. Terapia manuale, riabilitazione ortopedica, neurologica, respiratoria e posturale con prenotazione online.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

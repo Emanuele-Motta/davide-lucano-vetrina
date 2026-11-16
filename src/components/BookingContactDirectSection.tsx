@@ -1,5 +1,5 @@
 import React from 'react';
-import { STUDIO_INFO } from '../data/mockData';
+import { siteConfig } from '../config/siteConfig';
 import { useTranslation } from '../i18n';
 import { 
   Phone, 
@@ -22,15 +22,9 @@ export const BookingContactDirectSection: React.FC<BookingContactDirectSectionPr
   onExploreServices
 }) => {
   const { t } = useTranslation();
-  const phoneClean = STUDIO_INFO.phone.replace(/\s+/g, '');
-  const whatsappUrl = `https://wa.me/390284921104?text=${encodeURIComponent(
-    'Buongiorno Dott. Lucano, vorrei informazioni per concordare un appuntamento di fisioterapia.'
-  )}`;
-  const mailtoUrl = `mailto:${STUDIO_INFO.email}?subject=${encodeURIComponent(
-    'Richiesta appuntamento fisioterapia - Dott. Davide Lucano'
-  )}&body=${encodeURIComponent(
-    'Buongiorno Dott. Lucano,\n\nVorrei richiedere un appuntamento per una visita/valutazione fisioterapica.\n\nNome e Cognome:\nRecapito telefonico:\nFascia oraria preferita:\nMotivo della visita/sintomi:\n\nGrazie.'
-  )}`;
+  const phoneTel = siteConfig.studio.phoneTel;
+  const whatsappUrl = siteConfig.studio.whatsappLink;
+  const mailtoUrl = siteConfig.studio.emailMailto;
 
   return (
     <section 
@@ -73,11 +67,11 @@ export const BookingContactDirectSection: React.FC<BookingContactDirectSectionPr
             </div>
             <div>
               <a
-                href={`tel:${phoneClean}`}
+                href={phoneTel}
                 className="w-full inline-flex items-center justify-center gap-2 bg-[#006875] text-white py-3 px-4 rounded-full text-[14px] font-semibold hover:bg-[#004f58] transition-colors cursor-pointer shadow-xs"
               >
                 <Phone className="w-4 h-4" />
-                <span>Chiama {STUDIO_INFO.phone}</span>
+                <span>Chiama {siteConfig.studio.phone}</span>
               </a>
             </div>
           </div>
@@ -147,7 +141,7 @@ export const BookingContactDirectSection: React.FC<BookingContactDirectSectionPr
                 Sede delle Visite & Orari di Ricevimento
               </h3>
               <p className="text-[14px] text-[#5f5e5e] leading-relaxed">
-                Le sedute si tengono presso lo studio in <strong>{STUDIO_INFO.address}</strong> (Milano Ovest / San Siro), comodamente raggiungibile sia con i mezzi pubblici che in auto con facilità di parcheggio.
+                Le sedute si tengono presso lo studio in <strong>{siteConfig.studio.fullAddress}</strong> (Milano Ovest / San Siro), comodamente raggiungibile sia con i mezzi pubblici che in auto con facilità di parcheggio.
               </p>
               
               <ul className="space-y-2 text-[13px] text-[#333]">
@@ -161,7 +155,7 @@ export const BookingContactDirectSection: React.FC<BookingContactDirectSectionPr
                 </li>
                 <li className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                  <span>Dott. Davide Lucano iscritto all&apos;Albo Fisioterapisti FNOFI (n. 4821)</span>
+                  <span>{siteConfig.doctor.name} {siteConfig.doctor.alboNumber}</span>
                 </li>
               </ul>
             </div>
@@ -171,8 +165,8 @@ export const BookingContactDirectSection: React.FC<BookingContactDirectSectionPr
                 <MapPin className="w-5 h-5 text-[#006875] shrink-0 mt-0.5" />
                 <div>
                   <span className="block text-[13px] font-bold text-[#121212]">Indirizzo</span>
-                  <span className="text-[13px] text-[#5f5e5e]">{STUDIO_INFO.address}, Milano</span>
-                  <span className="block text-[12px] text-[#888] mt-0.5">{STUDIO_INFO.metro}</span>
+                  <span className="text-[13px] text-[#5f5e5e]">{siteConfig.studio.fullAddress}</span>
+                  <span className="block text-[12px] text-[#888] mt-0.5">{siteConfig.studio.metroInfo}</span>
                 </div>
               </div>
 
@@ -181,10 +175,10 @@ export const BookingContactDirectSection: React.FC<BookingContactDirectSectionPr
                 <div>
                   <span className="block text-[13px] font-bold text-[#121212]">Orari di Ricevimento</span>
                   <div className="text-[12.5px] text-[#5f5e5e] space-y-0.5 mt-0.5">
-                    {STUDIO_INFO.hours.map((h, i) => (
+                    {siteConfig.studio.openingHours.map((h, i) => (
                       <div key={i} className="flex justify-between gap-4">
                         <span>{h.days}:</span>
-                        <span className="font-medium text-[#121212]">{h.time}</span>
+                        <span className="font-medium text-[#121212]">{h.hours}</span>
                       </div>
                     ))}
                   </div>
