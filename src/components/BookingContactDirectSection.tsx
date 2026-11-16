@@ -16,10 +16,12 @@ import {
 
 interface BookingContactDirectSectionProps {
   onExploreServices?: () => void;
+  onBackToCalendar?: () => void;
 }
 
 export const BookingContactDirectSection: React.FC<BookingContactDirectSectionProps> = ({
-  onExploreServices
+  onExploreServices,
+  onBackToCalendar
 }) => {
   const { t } = useTranslation();
   const phoneTel = siteConfig.studio.phoneTel;
@@ -33,6 +35,17 @@ export const BookingContactDirectSection: React.FC<BookingContactDirectSectionPr
     >
       <div className="max-w-[1100px] mx-auto px-4 sm:px-6 md:px-8">
         
+        {onBackToCalendar && (
+          <div className="text-center mb-6">
+            <button
+              onClick={onBackToCalendar}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#006875]/10 text-[#006875] text-[13.5px] font-semibold hover:bg-[#006875]/20 transition-colors cursor-pointer shadow-xs"
+            >
+              <span>← Torna al calendario Cal.com</span>
+            </button>
+          </div>
+        )}
+
         {/* Section Heading */}
         <div className="text-center mb-8 sm:mb-10 max-w-2xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#00E5FF]/15 text-[#006875] text-[13px] font-semibold mb-3 border border-[#00E5FF]/25">

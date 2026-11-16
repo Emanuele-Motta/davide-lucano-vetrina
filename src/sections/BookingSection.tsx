@@ -2,18 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { 
   Calendar as CalendarIcon, 
   AlertCircle, 
-  Phone, 
   MessageCircle, 
   ExternalLink, 
   RefreshCw,
-  Clock,
   ShieldCheck,
-  CheckCircle2,
-  CalendarCheck
+  CalendarCheck,
+  Phone
 } from 'lucide-react';
 import { useTranslation } from '../i18n';
-import { useBookingToggle } from '../context/FeatureToggleContext';
-import { BOOKING_DATA, STUDIO_DATA, DOCTOR_DATA } from '../constants/data';
+import { BOOKING_DATA, DOCTOR_DATA, STUDIO_DATA } from '../constants/data';
 import { BookingContactDirectSection } from '../components/BookingContactDirectSection';
 import { Button } from '../components/common/Button';
 import { ConfirmedBooking } from '../types';
@@ -27,9 +24,8 @@ export interface BookingSectionProps {
 
 export const BookingSection: React.FC<BookingSectionProps> = () => {
   const { t } = useTranslation();
-  const { isBookingEnabled } = useBookingToggle();
   
-  // Stato caricamento iframe Google Calendar
+  // Stato caricamento iframe Cal.com
   const [isIframeLoading, setIsIframeLoading] = useState(true);
   const [hasIframeError, setHasIframeError] = useState(false);
   const [showDirectFallback, setShowDirectFallback] = useState(false);
@@ -52,9 +48,9 @@ export const BookingSection: React.FC<BookingSectionProps> = () => {
     };
   }, []);
 
-  // Se la prenotazione online è disattivata globalmente o l'utente seleziona il fallback diretto
-  if (!isBookingEnabled || showDirectFallback) {
-    return <BookingContactDirectSection />;
+  // Se l'utente richiede esplicitamente il fallback diretto o se c'è un errore di rete persistente
+  if (showDirectFallback || hasIframeError && !isOnline) {
+    return <BookingContactDirectSection onBackToCalendar={() => { setShowDirectFallback(false); setHasIframeError(false); }} />;
   }
 
   const handleIframeLoad = () => {
@@ -81,18 +77,18 @@ export const BookingSection: React.FC<BookingSectionProps> = () => {
           <div className="text-center mb-8 sm:mb-10 max-w-2xl mx-auto">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#006875]/10 text-[#006875] text-[12.5px] font-medium mb-3.5 border border-[#006875]/15">
               <CalendarIcon className="w-3.5 h-3.5 text-[#006875]" />
-              <span>{BOOKING_DATA.badge}</span>
+              <span>Agenda Cal.com 24/7</span>
             </div>
 
             <h2 
               id="booking-section-heading"
               className="text-[30px] sm:text-[36px] md:text-[40px] font-semibold text-[#1d1d1f] tracking-tight leading-[1.15] mb-3"
             >
-              {BOOKING_DATA.title}
+              Prenota la Tua Seduta con Cal.com
             </h2>
 
             <p className="text-[15px] sm:text-[16px] text-[#6e6e73] leading-relaxed">
-              {BOOKING_DATA.subtitle}
+              Scegli comodamente data e orario in tempo reale nell'agenda ufficiale Cal.com del Dott. Davide Lucano.
             </p>
 
             {/* Micro-promemoria trasparenza fiscale */}
@@ -102,7 +98,7 @@ export const BookingSection: React.FC<BookingSectionProps> = () => {
             </div>
           </div>
 
-          {/* Area Widget Google Calendar con Skeleton Loader */}
+          {/* Area Widget Cal.com con Skeleton Loader */}
           <div className="relative w-full rounded-[20px] overflow-hidden bg-[#fbfbfd] border border-black/[0.06] min-h-[640px] sm:min-h-[720px]">
             
             {/* SKELETON LOADER MINIMAL DURANTE IL CARICAMENTO DELL'IFRAME */}
@@ -122,10 +118,10 @@ export const BookingSection: React.FC<BookingSectionProps> = () => {
                 </div>
 
                 <div className="text-[15px] font-medium text-[#1d1d1f] tracking-tight mb-1">
-                  Caricamento Programma Appuntamenti...
+                  Caricamento Agenda Cal.com...
                 </div>
                 <p className="text-[13px] text-[#6e6e73] max-w-sm">
-                  Collegamento in tempo reale all'agenda di Google Calendar del Dott. Davide Lucano.
+                  Connessione in tempo reale al sistema di prenotazione Cal.com del Dott. Davide Lucano.
                 </p>
 
                 {/* Shimmer Placeholder Bars (Skeleton) */}
@@ -148,12 +144,12 @@ export const BookingSection: React.FC<BookingSectionProps> = () => {
                   <AlertCircle className="w-6 h-6" />
                 </div>
                 <h3 className="text-[18px] font-semibold text-[#1d1d1f] mb-2">
-                  Impossibile caricare il calendario
+                  Impossibile caricare il calendario Cal.com
                 </h3>
                 <p className="text-[14px] text-[#6e6e73] max-w-md mb-6 leading-relaxed">
                   {!isOnline 
-                    ? "Sembra che il tuo dispositivo sia attualmente offline. Controlla la tua connessione o chiama direttamente lo studio." 
-                    : "Il widget di Google Calendar non è momentaneamente raggiungibile a causa delle impostazioni di sicurezza o di rete."}
+                    ? "Sembra che il tuo dispositivo sia attualmente offline. Controlla la tua connessione o visualizza i contatti diretti." 
+                    : "Il widget Cal.com non è momentaneamente raggiungibile a causa delle impostazioni di rete o del server."}
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-3">
                   <Button 
@@ -168,18 +164,18 @@ export const BookingSection: React.FC<BookingSectionProps> = () => {
                     variant="primary"
                     size="sm"
                     onClick={() => setShowDirectFallback(true)}
-                    leftIcon={<MessageCircle className="w-3.5 h-3.5" />}
+                    leftIcon={<Phone className="w-3.5 h-3.5" />}
                   >
-                    Contatta su WhatsApp
+                    Visualizza Contatti Diretti
                   </Button>
                 </div>
               </div>
             )}
 
-            {/* IFRAME GOOGLE CALENDAR APPOINTMENT SCHEDULING WIDGET */}
+            {/* IFRAME CAL.COM EMBED WIDGET */}
             <iframe
-              src={BOOKING_DATA.googleCalendarUrl}
-              title={`Programma Appuntamenti Google Calendar - ${DOCTOR_DATA.name}`}
+              src={BOOKING_DATA.calUrl}
+              title={`Agenda Cal.com - ${DOCTOR_DATA.name}`}
               className="w-full h-full min-h-[640px] sm:min-h-[720px] border-0"
               onLoad={handleIframeLoad}
               onError={() => setHasIframeError(true)}
@@ -191,30 +187,30 @@ export const BookingSection: React.FC<BookingSectionProps> = () => {
           {/* Barra di Assistenza e Azioni Rapide Stile Apple */}
           <div className="mt-7 pt-6 border-t border-black/[0.06] flex flex-col md:flex-row items-center justify-between gap-4 text-[13px] text-[#6e6e73]">
             <div className="flex items-center gap-2 text-center md:text-left">
-              <AlertCircle className="w-4 h-4 text-[#006875] shrink-0" />
+              <Phone className="w-4 h-4 text-[#006875] shrink-0" />
               <span>{BOOKING_DATA.phoneAssistanceText}</span>
             </div>
 
             <div className="flex flex-wrap items-center justify-center gap-3">
               {/* Apri esternamente in nuova scheda */}
               <a
-                href={BOOKING_DATA.googleCalendarUrl}
+                href={`https://cal.com/${BOOKING_DATA.calLink}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[#1d1d1f] hover:bg-black/[0.04] border border-black/[0.08] transition-colors font-medium text-[12.5px]"
               >
-                <span>{BOOKING_DATA.openExternalCalendarText}</span>
+                <span>Apri in Cal.com</span>
                 <ExternalLink className="w-3 h-3 text-[#6e6e73]" />
               </a>
 
-              {/* Toggle canali diretti */}
+              {/* Tasto Fallback / Contatto Diretto */}
               <button
                 type="button"
                 onClick={() => setShowDirectFallback(true)}
                 className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[#006875] bg-[#006875]/8 hover:bg-[#006875]/15 transition-colors font-medium text-[12.5px] cursor-pointer"
               >
                 <MessageCircle className="w-3.5 h-3.5" />
-                <span>{BOOKING_DATA.directFallbackButtonText}</span>
+                <span>Preferisci Contatto Diretto?</span>
               </button>
             </div>
           </div>

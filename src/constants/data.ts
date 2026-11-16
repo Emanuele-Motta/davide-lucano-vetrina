@@ -44,6 +44,7 @@ export const BOOKING_DATA = {
   
   calNamespace: "visita",
   calLink: parseEnvString(import.meta.env.VITE_CAL_LINK, "emanuele-motta-advnc8/visita"),
+  calUrl: `https://cal.com/${parseEnvString(import.meta.env.VITE_CAL_LINK, "emanuele-motta-advnc8/visita")}?embed=true`,
 
   badge: "Agenda Digitale 24/7",
   title: "Prenota la Tua Seduta Online",
