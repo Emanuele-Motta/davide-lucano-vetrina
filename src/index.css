@@ -1,8 +1,16 @@
 @import "tailwindcss";
+@import "@fontsource/manrope/400.css";
+@import "@fontsource/manrope/500.css";
+@import "@fontsource/manrope/600.css";
+@import "@fontsource/manrope/700.css";
+
+@theme {
+  --font-sans: "Manrope", sans-serif;
+}
 
 @layer base {
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: "Manrope", sans-serif;
     color: #1d1d1f;
     background-color: #fafafa;
     line-height: 1.6;
@@ -94,6 +102,16 @@ body.lenis-stopped {
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee {
     animation: none;
+  }
+}
+
+@media (max-width: 640px) {
+  :where(a[href], button, input, select, textarea, [role="switch"]) {
+    min-height: 44px;
+  }
+
+  :where(a[aria-label], button[aria-label]) {
+    min-width: 44px;
   }
 }
 

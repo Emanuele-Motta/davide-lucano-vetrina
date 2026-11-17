@@ -9,12 +9,12 @@ export interface SectionSeoMetadata {
   keywords?: string[];
 }
 
-export const BASE_SITE_URL = 'https://fisioterapiamilano.it';
+export const BASE_SITE_URL = siteConfig.siteUrl;
 
 export const DEFAULT_SEO_METADATA: SectionSeoMetadata = {
   id: 'hero',
   title: 'Dott. Davide Lucano | Fisioterapista a Milano',
-  description: 'Studio di fisioterapia specialistica, riabilitazione funzionale e terapia manuale a Milano. Trattamenti 1-a-1 personalizzati con il Dott. Davide Lucano.',
+  description: 'Fisioterapia a Milano con il Dott. Davide Lucano: valutazione fisioterapica, terapia manuale e percorsi di riabilitazione personalizzati.',
   url: `${BASE_SITE_URL}/`,
   keywords: [
     'fisioterapista milano',
@@ -90,10 +90,15 @@ export function injectDynamicMetaTags(metadata: SectionSeoMetadata): void {
   setMetaElement('meta[property="og:title"]', 'property', 'og:title', metadata.title);
   setMetaElement('meta[property="og:description"]', 'property', 'og:description', metadata.description);
   setMetaElement('meta[property="og:url"]', 'property', 'og:url', metadata.url);
+  setMetaElement('meta[property="og:image"]', 'property', 'og:image', `${BASE_SITE_URL}/doctor_davide_lucano.jpg`);
+
+  const canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+  if (canonical) canonical.href = `${BASE_SITE_URL}/`;
 
   // 4. Aggiorna Twitter Card Title & Description
   setMetaElement('meta[name="twitter:title"]', 'name', 'twitter:title', metadata.title);
   setMetaElement('meta[name="twitter:description"]', 'name', 'twitter:description', metadata.description);
+  setMetaElement('meta[name="twitter:image"]', 'name', 'twitter:image', `${BASE_SITE_URL}/doctor_davide_lucano.jpg`);
 
   // 5. Notifica eventi personalizzati (utile per tracking analitico / debug)
   if (typeof window !== 'undefined') {

@@ -53,7 +53,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal, onOpenCookiePrefere
             </div>
 
             <p className="text-[13px] text-[#6e6e73] leading-relaxed">
-              Attività professionale sanitaria di fisioterapia specialistica, terapia manuale, riabilitazione ortopedica e posturale a Milano e provincia.
+              Fisioterapia e riabilitazione a Milano. Consulta le informazioni su trattamenti, sede e appuntamenti.
             </p>
 
             <div className="space-y-1.5 pt-1 text-[12px] text-[#555]">
@@ -62,15 +62,17 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal, onOpenCookiePrefere
                 <span className="font-medium text-[#1d1d1f]">{DOCTOR_DATA.name}</span>
                 <span>• {DOCTOR_DATA.alboNumber}</span>
               </div>
-              <p className="text-[#6e6e73] pl-5.5">
-                {STUDIO_DATA.piva}
-              </p>
+              {STUDIO_DATA.piva && (
+                <p className="text-[#6e6e73] pl-5.5">
+                  {STUDIO_DATA.piva}
+                </p>
+              )}
             </div>
           </div>
 
           {/* Colonna 2: Navigazione Veloce (2 cols) */}
           <div className="lg:col-span-2 space-y-3">
-            <div className="text-[12px] font-semibold text-[#1d1d1f] uppercase tracking-wider">
+            <div className="text-[12px] font-semibold text-[#1d1d1f] uppercase">
               Navigazione
             </div>
             <ul className="space-y-2 text-[13px]">
@@ -89,7 +91,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal, onOpenCookiePrefere
 
           {/* Colonna 3: Trattamenti & Prestazioni (3 cols) */}
           <div className="lg:col-span-3 space-y-3">
-            <div className="text-[12px] font-semibold text-[#1d1d1f] uppercase tracking-wider">
+            <div className="text-[12px] font-semibold text-[#1d1d1f] uppercase">
               Trattamenti Principali
             </div>
             <ul className="space-y-2 text-[13px]">
@@ -108,48 +110,49 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal, onOpenCookiePrefere
 
           {/* Colonna 4: Recapiti Studio & Orari (3 cols) */}
           <div className="lg:col-span-3 space-y-3">
-            <div className="text-[12px] font-semibold text-[#1d1d1f] uppercase tracking-wider">
+            <div className="text-[12px] font-semibold text-[#1d1d1f] uppercase">
               Studio & Contatti
             </div>
             <ul className="space-y-2.5 text-[13px]">
-              <li className="flex items-start gap-2">
+              <li className="grid grid-cols-[16px_minmax(0,1fr)] items-start gap-2">
                 <MapPin className="w-4 h-4 text-[#006875] shrink-0 mt-0.5" />
-                <span>{STUDIO_DATA.fullAddress}</span>
+                <span className="min-w-0">{STUDIO_DATA.fullAddress}</span>
               </li>
-              <li className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-[#006875] shrink-0" />
+              <li className="grid grid-cols-[16px_minmax(0,1fr)] items-start gap-2">
+                <Phone className="w-4 h-4 text-[#006875] shrink-0 mt-0.5" />
                 <a 
                   href={STUDIO_DATA.phoneTel} 
-                  className="hover:text-[#006875] transition-colors"
+                  className="min-w-0 break-words hover:text-[#006875] transition-colors"
                 >
                   {STUDIO_DATA.phone}
                 </a>
               </li>
-              <li className="flex items-center gap-2">
-                <MessageCircle className="w-4 h-4 text-emerald-600 shrink-0" />
+              <li className="grid grid-cols-[16px_minmax(0,1fr)] items-start gap-2">
+                <MessageCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                 <a 
                   href={STUDIO_DATA.whatsappLink} 
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-emerald-700 transition-colors"
+                  className="min-w-0 break-words hover:text-emerald-700 transition-colors"
                 >
                   WhatsApp: {STUDIO_DATA.whatsappNumber}
                 </a>
               </li>
-              <li className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-[#006875] shrink-0" />
+              <li className="grid grid-cols-[16px_minmax(0,1fr)] items-start gap-2">
+                <Mail className="w-4 h-4 text-[#006875] shrink-0 mt-0.5" />
                 <a 
                   href={STUDIO_DATA.emailMailto} 
-                  className="hover:text-[#006875] transition-colors"
+                  className="min-w-0 break-words hover:text-[#006875] transition-colors"
                 >
                   {STUDIO_DATA.email}
                 </a>
               </li>
-              <li className="flex items-start gap-2 pt-1 border-t border-black/[0.04]">
+              <li className="grid grid-cols-[16px_minmax(0,1fr)] items-start gap-2 pt-1 border-t border-black/[0.04]">
                 <Clock className="w-4 h-4 text-[#6e6e73] shrink-0 mt-0.5" />
                 <div className="text-[12px] leading-relaxed">
-                  <div>Lun - Ven: 08:30 - 20:00</div>
-                  <div>Sabato: 09:00 - 13:00</div>
+                  {STUDIO_DATA.openingHours.map(({ days, hours }) => (
+                    <div key={days}>{days}: {hours}</div>
+                  ))}
                 </div>
               </li>
             </ul>

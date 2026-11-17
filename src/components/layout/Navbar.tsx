@@ -167,7 +167,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button 
             onClick={onBookClick}
             id="nav-cta-prenota"
-            className="bg-[#1d1d1f] text-white px-4.5 py-2 rounded-full text-[13px] font-medium hover:bg-black transition-all cursor-pointer shadow-2xs active:scale-[0.98] flex items-center gap-1.5 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#006875]"
+            className="bg-[#006875] text-white px-4.5 py-2 rounded-full text-[13px] font-medium hover:bg-[#005560] transition-all cursor-pointer shadow-2xs active:scale-[0.98] flex items-center gap-1.5 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#006875]"
           >
             {isBookingEnabled ? (
               <>
@@ -197,7 +197,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           <a
             href={STUDIO_DATA.phoneTel}
-            className="p-2 rounded-full bg-black/[0.04] text-[#1d1d1f] hover:bg-black/[0.08] transition-colors"
+            className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-black/[0.04] text-[#1d1d1f] hover:bg-black/[0.08] transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#006875]"
             aria-label={`Chiama lo studio al numero ${STUDIO_DATA.phone}`}
           >
             <Phone className="w-4 h-4 text-[#006875]" />
@@ -229,7 +229,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         style={{ height: 'calc(100dvh - 64px)' }}
       >
         <div className="flex flex-col space-y-1">
-          <div className="text-[11px] font-semibold uppercase tracking-wider text-[#5e5e62] px-3.5 py-1 mb-2 text-center">
+          <div className="text-[11px] font-semibold uppercase text-[#5e5e62] px-3.5 py-1 mb-2 text-center">
             Menu di Navigazione
           </div>
 
@@ -258,7 +258,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               setMobileMenuOpen(false);
               onBookClick();
             }}
-            className="w-full bg-[#1d1d1f] text-white py-3.5 rounded-full text-[14px] font-medium text-center hover:bg-black transition-colors flex items-center justify-center gap-2 shadow-xs cursor-pointer active:scale-[0.98]"
+            className="w-full bg-[#006875] text-white py-3.5 rounded-full text-[14px] font-medium text-center hover:bg-[#005560] transition-colors flex items-center justify-center gap-2 shadow-xs cursor-pointer active:scale-[0.98]"
           >
             {isBookingEnabled ? (
               <>

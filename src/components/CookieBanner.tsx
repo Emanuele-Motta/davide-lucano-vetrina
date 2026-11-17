@@ -112,7 +112,7 @@ export const CookieBanner: React.FC<CookieBannerProps> = ({
                 <span>Gestione Consensi Cookie</span>
               </h3>
               <p className="text-[11.5px] text-[#6e6e73]">
-                Conformità Linee Guida Garante Privacy 2021 & GDPR.
+                Gestisci le categorie opzionali e consulta le preferenze salvate.
               </p>
             </div>
             <button
@@ -149,10 +149,11 @@ export const CookieBanner: React.FC<CookieBannerProps> = ({
               <button
                 type="button"
                 role="switch"
+                aria-label="Cookie di preferenza"
                 aria-checked={preferences.preferences}
                 onClick={() => setPreferences(prev => ({ ...prev, preferences: !prev.preferences }))}
                 className={`w-8 h-4.5 rounded-full transition-colors relative cursor-pointer shrink-0 ${
-                  preferences.preferences ? 'bg-[#0071e3]' : 'bg-gray-300'
+                  preferences.preferences ? 'bg-[#006875]' : 'bg-gray-300'
                 }`}
               >
                 <span
@@ -174,10 +175,11 @@ export const CookieBanner: React.FC<CookieBannerProps> = ({
               <button
                 type="button"
                 role="switch"
+                aria-label="Cookie analitici"
                 aria-checked={preferences.analytics}
                 onClick={() => setPreferences(prev => ({ ...prev, analytics: !prev.analytics }))}
                 className={`w-8 h-4.5 rounded-full transition-colors relative cursor-pointer shrink-0 ${
-                  preferences.analytics ? 'bg-[#0071e3]' : 'bg-gray-300'
+                  preferences.analytics ? 'bg-[#006875]' : 'bg-gray-300'
                 }`}
               >
                 <span
@@ -199,10 +201,11 @@ export const CookieBanner: React.FC<CookieBannerProps> = ({
               <button
                 type="button"
                 role="switch"
+                aria-label="Servizi di terze parti, incluse le mappe"
                 aria-checked={preferences.marketing}
                 onClick={() => setPreferences(prev => ({ ...prev, marketing: !prev.marketing }))}
                 className={`w-8 h-4.5 rounded-full transition-colors relative cursor-pointer shrink-0 ${
-                  preferences.marketing ? 'bg-[#0071e3]' : 'bg-gray-300'
+                  preferences.marketing ? 'bg-[#006875]' : 'bg-gray-300'
                 }`}
               >
                 <span
@@ -241,7 +244,7 @@ export const CookieBanner: React.FC<CookieBannerProps> = ({
             <button
               type="button"
               onClick={handleSaveCustom}
-              className="bg-[#0071e3] text-white py-1.5 px-4 rounded-full text-[12px] font-medium hover:bg-[#0077ed] transition-colors cursor-pointer shadow-2xs"
+              className="bg-[#006875] text-white py-1.5 px-4 rounded-full text-[12px] font-medium hover:bg-[#005560] transition-colors cursor-pointer shadow-2xs"
             >
               Salva scelte
             </button>
@@ -269,7 +272,7 @@ export const CookieBanner: React.FC<CookieBannerProps> = ({
           <button
             type="button"
             onClick={handleAcceptAll}
-            className="bg-[#1d1d1f] text-white py-1.5 px-4.5 rounded-full text-[12px] font-medium hover:bg-black transition-colors cursor-pointer shadow-2xs active:scale-[0.98]"
+            className="bg-[#006875] text-white py-1.5 px-4.5 rounded-full text-[12px] font-medium hover:bg-[#005560] transition-colors cursor-pointer shadow-2xs active:scale-[0.98]"
           >
             Accetta tutti
           </button>

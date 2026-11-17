@@ -1,9 +1,12 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
-import {defineConfig} from 'vite';
+import {defineConfig, loadEnv} from 'vite';
 
-export default defineConfig(() => {
+export default defineConfig(({ mode }) => {
+  const siteUrl = (loadEnv(mode, process.cwd(), 'VITE_').VITE_SITE_URL || 'https://davide-lucano.netlify.app')
+    .replace(/\/+$/, '');
+
   return {
     plugins: [
       react(),
@@ -11,7 +14,9 @@ export default defineConfig(() => {
       {
         name: 'safari-css-crossorigin-fix',
         transformIndexHtml(html) {
-          return html.replace(/<link rel="stylesheet" crossorigin href="([^"]+)">/g, '<link rel="stylesheet" href="$1">');
+          return html
+            .replace(/<link rel="stylesheet" crossorigin href="([^"]+)">/g, '<link rel="stylesheet" href="$1">')
+            .replace(/https:\/\/davide-lucano\.netlify\.app/g, siteUrl);
         },
       },
     ],

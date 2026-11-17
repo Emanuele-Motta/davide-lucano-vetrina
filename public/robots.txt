@@ -2,5 +2,4 @@ User-agent: *
 Allow: /
 
 # Sitemaps
-Sitemap: https://fisioterapiamilano.it/sitemap.xml
 Sitemap: https://davide-lucano.netlify.app/sitemap.xml

@@ -24,7 +24,14 @@ export const getStoredCookieConsent = (): CookieConsentRecord | null => {
     const parsed: CookieConsentRecord = JSON.parse(raw);
     
     // Check if valid version and not expired
-    if (!parsed || parsed.version !== CONSENT_VERSION) return null;
+    if (
+      !parsed ||
+      parsed.version !== CONSENT_VERSION ||
+      !parsed.categories ||
+      typeof parsed.categories.analytics !== 'boolean' ||
+      typeof parsed.categories.marketing !== 'boolean' ||
+      typeof parsed.categories.preferences !== 'boolean'
+    ) return null;
     const consentDate = new Date(parsed.timestamp).getTime();
     if (isNaN(consentDate) || Date.now() - consentDate > CONSENT_MAX_AGE_MS) {
       return null;
@@ -57,12 +64,12 @@ export const saveCookieConsent = (
 
   try {
     localStorage.setItem(COOKIE_STORAGE_KEY, JSON.stringify(record));
-    // Trigger custom event for external scripts/analytics to react
-    window.dispatchEvent(
-      new CustomEvent('cookie_consent_updated', { detail: record })
-    );
   } catch (e) {
     console.error('Errore nel salvataggio del consenso cookie:', e);
+  }
+
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('cookie_consent_updated', { detail: record }));
   }
 
   return record;
@@ -85,11 +92,28 @@ export const initializeAnalyticsIfConsented = (measurementId?: string) => {
 
   const consent = getStoredCookieConsent();
   if (!consent || !consent.categories.analytics) {
+    (window as unknown as Record<string, unknown>)[`ga-disable-${measurementId}`] = true;
+    if (window.dataLayer) {
+      window.dataLayer.push(['consent', 'update', { analytics_storage: 'denied' }]);
+    }
+    document.getElementById('ga-gtag-script')?.remove();
+    document.cookie.split(';').forEach((cookie) => {
+      const name = cookie.split('=')[0].trim();
+      if (!/^_ga(?:_|$)|^_gid$|^_gat/.test(name)) return;
+      document.cookie = `${name}=; Max-Age=0; path=/; SameSite=Lax`;
+      document.cookie = `${name}=; Max-Age=0; path=/; domain=${window.location.hostname}; SameSite=Lax`;
+    });
     return;
   }
 
+  (window as unknown as Record<string, unknown>)[`ga-disable-${measurementId}`] = false;
+
   // Se già caricato, non reinserire
-  if (document.getElementById('ga-gtag-script')) return;
+  if (document.getElementById('ga-gtag-script')) {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(['consent', 'update', { analytics_storage: 'granted' }]);
+    return;
+  }
 
   const script = document.createElement('script');
   script.id = 'ga-gtag-script';
@@ -101,9 +125,12 @@ export const initializeAnalyticsIfConsented = (measurementId?: string) => {
   function gtag(...args: unknown[]) {
     window.dataLayer.push(args);
   }
+  gtag('consent', 'update', { analytics_storage: 'granted' });
   gtag('js', new Date());
   gtag('config', measurementId, {
     anonymize_ip: true,
+    allow_google_signals: false,
+    allow_ad_personalization_signals: false,
   });
 };
 

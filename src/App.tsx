@@ -12,12 +12,12 @@ import {
 import { CookieBanner } from './components/CookieBanner';
 import { CookiePreferencesButton } from './components/CookiePreferencesButton';
 import { useBookingToggle } from './context/FeatureToggleContext';
-import { ConfirmedBooking, Service } from './types';
-import { SERVICES_DATA } from './constants/data';
+import { ConfirmedBooking } from './types';
 import { useTranslation } from './i18n';
 import { getOrderedSections, SiteSectionKey, siteConfig } from './config/siteConfig';
 import { initializeAnalyticsIfConsented } from './services/cookieConsent';
 import { injectDynamicStructuredData } from './utils/seoStructuredData';
+import { injectSectionMeta } from './utils/dynamicMetaTags';
 import { useSmoothScroll } from './hooks/useSmoothScroll';
 
 // Code-splitting dei modali per minimizzare il bundle size iniziale
@@ -26,9 +26,6 @@ const BookingSuccessModal = lazy(() =>
 );
 const BookingsListModal = lazy(() =>
   import('./components/BookingsListModal').then((m) => ({ default: m.BookingsListModal }))
-);
-const ServiceDetailModal = lazy(() =>
-  import('./components/ServiceDetailModal').then((m) => ({ default: m.ServiceDetailModal }))
 );
 const LegalModal = lazy(() =>
   import('./components/LegalModal').then((m) => ({ default: m.LegalModal }))
@@ -44,7 +41,7 @@ export default function App() {
   const { scrollTo } = useSmoothScroll({
     duration: 1.1,
     smoothWheel: true,
-    anchorOffset: -85,
+    anchorOffset: 0,
   });
 
   // Servizio selezionato per la richiesta/prenotazione
@@ -63,7 +60,6 @@ export default function App() {
   // Stati modali
   const [newlyConfirmedBooking, setNewlyConfirmedBooking] = useState<ConfirmedBooking | null>(null);
   const [isBookingsListOpen, setIsBookingsListOpen] = useState(false);
-  const [activeServiceDetail, setActiveServiceDetail] = useState<Service | null>(null);
   const [legalModalType, setLegalModalType] = useState<'privacy' | 'cookies' | 'terms' | null>(null);
   const [isCookiePreferencesOpen, setIsCookiePreferencesOpen] = useState(false);
 
@@ -74,6 +70,8 @@ export default function App() {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   useEffect(() => {
+    injectSectionMeta('hero');
+
     // Iniezione dinamica dati strutturati Schema.org (JSON-LD)
     injectDynamicStructuredData();
 
@@ -115,19 +113,6 @@ export default function App() {
     scrollTo(`#${sectionId}`);
   };
 
-  const handleSelectServiceFromCard = (serviceId: string) => {
-    setSelectedServiceId(serviceId);
-    handleScrollTo('prenota');
-    const srv = SERVICES_DATA.find(s => s.id === serviceId);
-    if (srv) {
-      if (isBookingEnabled) {
-        showToast(`Selezionato: ${srv.title}. Scegli data e orario nel calendario.`);
-      } else {
-        showToast(`Selezionato: ${srv.title}. Contatta lo studio per concordare la visita.`);
-      }
-    }
-  };
-
   const handleBookingConfirmed = (booking: ConfirmedBooking) => {
     setBookings(prev => [booking, ...prev]);
     setNewlyConfirmedBooking(booking);
@@ -166,8 +151,6 @@ export default function App() {
           <ServicesSection 
             key="services"
             isLoading={isInitialLoading}
-            onSelectServiceForBooking={handleSelectServiceFromCard}
-            onOpenServiceDetails={(service) => setActiveServiceDetail(service)}
           />
         );
       case 'reviews':
@@ -225,7 +208,7 @@ export default function App() {
           className="fixed bottom-6 right-6 z-50 bg-[#1d1d1f] text-white px-5 py-3 rounded-2xl shadow-xl flex items-center gap-3 border border-white/10 animate-in fade-in slide-in-from-bottom-3 duration-200"
         >
           <span className="w-2 h-2 rounded-full bg-emerald-400" />
-          <span className="text-[13.5px] font-medium tracking-tight">{toastMessage}</span>
+          <span className="text-[13.5px] font-medium">{toastMessage}</span>
         </div>
       )}
 
@@ -262,14 +245,6 @@ export default function App() {
             onClose={() => setIsBookingsListOpen(false)}
             onCancelBooking={handleCancelBooking}
             onNewBookingClick={() => handleScrollTo('prenota')}
-          />
-        )}
-
-        {activeServiceDetail && (
-          <ServiceDetailModal 
-            service={activeServiceDetail}
-            onClose={() => setActiveServiceDetail(null)}
-            onBookThisService={handleSelectServiceFromCard}
           />
         )}
 

@@ -10,8 +10,7 @@ import {
   Clock, 
   MapPin, 
   Download, 
-  User, 
-  ShieldCheck
+  User
 } from 'lucide-react';
 
 interface BookingSuccessModalProps {
@@ -40,7 +39,7 @@ export const BookingSuccessModal: React.FC<BookingSuccessModalProps> = ({ bookin
       'VERSION:2.0',
       `PRODID:-//${siteConfig.doctor.name}//Fisioterapia//IT`,
       'BEGIN:VEVENT',
-      `UID:${booking.id}@fisioterapiamilano.it`,
+      `UID:${booking.id}@${new URL(siteConfig.siteUrl).hostname}`,
       `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z`,
       `DTSTART:${startISO}`,
       `DTEND:${endISO}`,
@@ -84,13 +83,13 @@ export const BookingSuccessModal: React.FC<BookingSuccessModalProps> = ({ bookin
         </button>
 
         {/* Success Icon */}
-        <div className="w-16 h-16 rounded-full bg-[#00E5FF]/20 text-[#006875] flex items-center justify-center mx-auto mb-5">
+        <div className="w-16 h-16 rounded-full bg-[#006875]/10 text-[#006875] flex items-center justify-center mx-auto mb-5">
           <CheckCircle2 className="w-10 h-10 text-[#006875]" />
         </div>
 
         {/* Title */}
         <div className="text-center mb-6">
-          <h3 className="text-[24px] font-bold text-[#121212] tracking-tight">
+          <h3 className="text-[24px] font-bold text-[#121212]">
             {t.modals.bookingSuccess.title}
           </h3>
           <p className="text-[14px] text-[#5f5e5e] mt-1">
@@ -101,7 +100,7 @@ export const BookingSuccessModal: React.FC<BookingSuccessModalProps> = ({ bookin
         {/* Appointment Recap Card */}
         <div className="bg-[#FAFAFA] rounded-2xl p-5 border border-gray-200/80 mb-6 space-y-3.5">
           <div className="flex justify-between items-center pb-3 border-b border-gray-200/60">
-            <span className="text-[12px] font-bold tracking-wider uppercase text-[#006875]">
+            <span className="text-[12px] font-bold uppercase text-[#006875]">
               {t.modals.bookingSuccess.codeLabel}
             </span>
             <span className="font-mono font-bold text-[14px] text-[#121212] bg-white px-2.5 py-1 rounded-md border border-gray-200">
@@ -130,12 +129,6 @@ export const BookingSuccessModal: React.FC<BookingSuccessModalProps> = ({ bookin
             <span className="text-[13px] text-[#5f5e5e]">{siteConfig.studio.fullAddress}</span>
           </div>
 
-          <div className="flex items-center gap-3 text-[14px] text-[#121212] pt-2 border-t border-gray-200/60">
-            <ShieldCheck className="w-4 h-4 text-[#006875] shrink-0" />
-            <span className="text-[13px] text-[#5f5e5e]">
-              Prestazione sanitaria esente IVA (art. 10 DPR 633/72) e detraibile fiscalmente al 19%
-            </span>
-          </div>
         </div>
 
         {/* Calendar Action Buttons */}

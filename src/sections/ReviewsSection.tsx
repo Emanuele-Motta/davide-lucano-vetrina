@@ -1,8 +1,10 @@
-import React, { useState, useRef } from 'react';
-import { Star, CheckCircle, ExternalLink, ShieldCheck, ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { Star, CheckCircle, ExternalLink, ShieldCheck } from 'lucide-react';
 import { useTranslation } from '../i18n';
 import { MIO_DOTTORE_CONFIG, getAllReviews, getReviewsOverview } from '../data/reviewsConfig';
 import { Testimonial } from '../types';
+import { fetchLiveReviews } from '../services/mioDottoreService';
+import { siteConfig } from '../config/siteConfig';
 
 export interface ReviewsSectionProps {
   isLoading?: boolean;
@@ -10,9 +12,32 @@ export interface ReviewsSectionProps {
 
 export const ReviewsSection: React.FC<ReviewsSectionProps> = ({ isLoading = false }) => {
   const { t } = useTranslation();
-  const reviewsOverview = getReviewsOverview();
-  const allReviews = getAllReviews();
-  const mobileScrollRef = useRef<HTMLDivElement>(null);
+  const [allReviews, setAllReviews] = useState<Testimonial[]>(getAllReviews);
+  const [reviewsLoading, setReviewsLoading] = useState(true);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    let active = true;
+
+    fetchLiveReviews(controller.signal)
+      .then((reviews) => {
+        if (active) setAllReviews(reviews);
+      })
+      .catch(() => {
+        if (active) setAllReviews(getAllReviews());
+      })
+      .finally(() => {
+        if (active) setReviewsLoading(false);
+      });
+
+    return () => {
+      active = false;
+      controller.abort();
+    };
+  }, []);
+
+  const reviewsOverview = getReviewsOverview(allReviews);
+  const loading = isLoading || reviewsLoading;
 
   const filterOptions = [
     { id: 'all', label: `Tutte (${allReviews.length})` },
@@ -37,15 +62,6 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({ isLoading = fals
   const displayList = filteredReviews.length > 0 ? filteredReviews : allReviews;
   const repeatCount = displayList.length <= 2 ? 4 : displayList.length <= 4 ? 3 : 2;
   const marqueeItems = Array.from({ length: repeatCount }, () => displayList).flat();
-
-  const handleScrollMobile = (direction: 'left' | 'right') => {
-    if (!mobileScrollRef.current) return;
-    const scrollAmount = mobileScrollRef.current.clientWidth * 0.82;
-    mobileScrollRef.current.scrollBy({
-      left: direction === 'left' ? -scrollAmount : scrollAmount,
-      behavior: 'smooth'
-    });
-  };
 
   const renderReviewCard = (review: Testimonial, isMarquee = false) => (
     <div
@@ -84,8 +100,14 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({ isLoading = fals
         <div className="flex items-center justify-between gap-2">
           <div>
             <div className="flex items-center gap-1.5">
-              <span className="text-[13.5px] font-semibold text-[#1d1d1f]">{review.author || review.name}</span>
-              <CheckCircle className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+              {review.profileUrl ? (
+                <a href={review.profileUrl} target="_blank" rel="noopener noreferrer" className="text-[13.5px] font-semibold text-[#1d1d1f] hover:underline">
+                  {review.author || review.name}
+                </a>
+              ) : (
+                <span className="text-[13.5px] font-semibold text-[#1d1d1f]">{review.author || review.name}</span>
+              )}
+              {review.verifiedPatient && <CheckCircle className="w-3.5 h-3.5 text-emerald-600 shrink-0" aria-label="Recensione verificata dalla piattaforma" />}
             </div>
             <span className="text-[11.5px] text-[#6e6e73] font-medium">{review.treatment}</span>
           </div>
@@ -106,67 +128,65 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({ isLoading = fals
         
         {/* Intestazione Sezione */}
         <div className="text-center mb-8 sm:mb-10 max-w-2xl mx-auto">
-          <span className="text-[12px] font-medium tracking-wide uppercase text-[#006875] bg-[#006875]/10 px-3 py-1 rounded-full">
-            {t.reviews?.badge || "Recensioni Verificate"}
+          <span className="text-[12px] font-medium uppercase text-[#006875] bg-[#006875]/10 px-3 py-1 rounded-full">
+            {t.reviews?.badge || "Profilo recensioni"}
           </span>
           <h2 
             id="reviews-heading"
-            className="text-[32px] sm:text-[38px] font-semibold text-[#1d1d1f] tracking-tight mt-3 mb-3 leading-[1.15]"
+            className="text-[32px] sm:text-[38px] font-semibold text-[#1d1d1f] mt-3 mb-3 leading-[1.15]"
           >
             {t.reviews?.title || "Cosa dicono i pazienti."}
           </h2>
           <p className="text-[16px] text-[#6e6e73] leading-[1.6]">
-            {t.reviews?.subtitle || "Esperienze reali di recupero e percorsi clinici individuali."}
+            {t.reviews?.subtitle || "Consulta le recensioni pubblicate direttamente sul profilo del professionista."}
           </p>
 
-          {/* Badge MioDottore Ufficiale */}
           <div className="mt-4 inline-flex items-center gap-3 bg-white px-4 py-2 rounded-full border border-black/[0.06] shadow-2xs text-[12.5px]">
-            <span className="font-semibold text-[#1d1d1f]">MioDottore.it:</span>
-            <div className="flex items-center gap-1 text-amber-500 font-bold">
-              <span>★ 5.0</span>
-              <span className="text-[#6e6e73] font-normal">({reviewsOverview.mioDottoreCount} recensioni verificate)</span>
-            </div>
-            <a
-              href={MIO_DOTTORE_CONFIG.profileUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#006875] hover:underline font-medium inline-flex items-center gap-1 ml-1"
-            >
-              <span>Vedi profilo</span>
-              <ExternalLink className="w-3 h-3" />
+            <a href="https://www.miodottore.it/profilo/davide-lucano#profile-reviews" target="_blank" rel="noopener noreferrer" className="text-[#006875] hover:underline font-medium inline-flex items-center gap-1 ml-1">
+              <span>MioDottore</span><ExternalLink className="w-3 h-3" />
             </a>
           </div>
         </div>
 
-        {/* Filtri Recensioni */}
-        <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto pb-4 mb-6 scrollbar-none">
-          {filterOptions.map(opt => (
-            <button
-              key={opt.id}
-              onClick={() => setSelectedFilter(opt.id)}
-              className={`px-3.5 py-1.5 rounded-full text-[12.5px] font-medium transition-colors shrink-0 cursor-pointer ${
-                selectedFilter === opt.id
-                  ? 'bg-[#1d1d1f] text-white'
-                  : 'bg-white border border-black/[0.08] text-[#6e6e73] hover:text-[#1d1d1f] hover:bg-black/[0.02]'
-              }`}
-            >
-              {opt.label}
-            </button>
-          ))}
-        </div>
+        {allReviews.length > 0 && (
+          <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto pb-4 mb-6 scrollbar-none">
+            {filterOptions.map(opt => (
+              <button
+                key={opt.id}
+                onClick={() => setSelectedFilter(opt.id)}
+                className={`px-3.5 py-1.5 rounded-full text-[12.5px] font-medium transition-colors shrink-0 cursor-pointer ${
+                  selectedFilter === opt.id
+                    ? 'bg-[#006875] text-white'
+                    : 'bg-white border border-black/[0.08] text-[#6e6e73] hover:text-[#1d1d1f] hover:bg-black/[0.02]'
+                }`}
+              >
+                {opt.label}
+              </button>
+            ))}
+          </div>
+        )}
 
       </div>
 
-      {/* Marquee Recensioni Continuo */}
-      <div className="relative w-full overflow-hidden group">
-        <div className="flex gap-4 animate-marquee py-2 px-4 hover:[animation-play-state:paused]">
-          {marqueeItems.map((review, idx) => (
-            <div key={`${review.id}-${idx}`}>
-              {renderReviewCard(review, true)}
-            </div>
-          ))}
+      {/* {allReviews.length > 0 ? (
+        <div className="relative w-full overflow-hidden group">
+          <div className="flex gap-4 animate-marquee py-2 px-4 hover:[animation-play-state:paused]">
+            {marqueeItems.map((review, idx) => (
+              <div key={`${review.id}-${idx}`}>
+                {renderReviewCard(review, true)}
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      ) : loading ? (
+        <p className="text-center text-sm text-[#6e6e73]" role="status" aria-live="polite">
+          Caricamento recensioni…
+        </p>
+      ) : (
+        <p className="text-center text-sm text-[#6e6e73]">
+          Nessuna recensione disponibile nel feed. Consulta i profili MioDottore o Google dai collegamenti qui sopra.
+        </p>
+      )} */}
     </section>
   );
 };

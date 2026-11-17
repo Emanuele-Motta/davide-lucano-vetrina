@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { DOCTOR_DATA, STUDIO_DATA, TERRITORY_DATA } from '../constants/data';
 import { MapPin, Phone, Mail, Clock, Navigation, Train, Car, MessageCircle, Calendar, ShieldCheck } from 'lucide-react';
 import { useTranslation } from '../i18n';
 import { useBookingToggle } from '../context/FeatureToggleContext';
+import { getStoredCookieConsent } from '../services/cookieConsent';
 
 export interface LocationSectionProps {
   onBookClick?: () => void;
@@ -11,6 +12,18 @@ export interface LocationSectionProps {
 export const LocationSection: React.FC<LocationSectionProps> = ({ onBookClick }) => {
   const { t } = useTranslation();
   const { isBookingEnabled } = useBookingToggle();
+  const [canLoadMap, setCanLoadMap] = useState(
+    () => getStoredCookieConsent()?.categories.marketing === true
+  );
+
+  useEffect(() => {
+    const updateMapConsent = () => {
+      setCanLoadMap(getStoredCookieConsent()?.categories.marketing === true);
+    };
+
+    window.addEventListener('cookie_consent_updated', updateMapConsent);
+    return () => window.removeEventListener('cookie_consent_updated', updateMapConsent);
+  }, []);
 
   return (
     <section 
@@ -28,7 +41,7 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ onBookClick })
           </div>
           <h2 
             id="location-heading"
-            className="text-[32px] sm:text-[38px] font-semibold text-[#1d1d1f] tracking-tight mb-3 leading-[1.15]"
+            className="text-[32px] sm:text-[38px] font-semibold text-[#1d1d1f] mb-3 leading-[1.15]"
           >
             {t.location.title}
           </h2>
@@ -90,7 +103,7 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ onBookClick })
                   <p className="text-[13.5px] text-[#6e6e73] mt-0.5">
                     <a 
                       href={STUDIO_DATA.phoneTel} 
-                      className="hover:text-[#006875] transition-colors font-medium focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#006875] rounded"
+                      className="inline-flex min-h-11 items-center px-2 font-medium transition-colors hover:text-[#006875] focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#006875] rounded"
                       title={`Chiama lo studio al ${STUDIO_DATA.phone}`}
                     >
                       {STUDIO_DATA.phone}
@@ -100,7 +113,7 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ onBookClick })
                     <Mail className="w-3.5 h-3.5 text-[#006875]" />
                     <a 
                       href={STUDIO_DATA.emailMailto} 
-                      className="hover:text-[#006875] transition-colors"
+                      className="inline-flex min-h-11 max-w-full items-center break-all transition-colors hover:text-[#006875]"
                     >
                       {STUDIO_DATA.email}
                     </a>
@@ -126,11 +139,8 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ onBookClick })
                 </div>
                 <div className="grid grid-cols-2 gap-2 text-[12px]">
                   {TERRITORY_DATA.surroundingTowns.slice(1, 5).map((town, idx) => (
-                    <div key={idx} className="flex justify-between items-center p-2 bg-[#fbfbfd] rounded-lg border border-black/[0.04]">
-                      <span className="font-medium text-[#1d1d1f] truncate mr-1">{town.name}</span>
-                      <span className="text-[#006875] font-semibold bg-white px-1.5 py-0.5 rounded text-[11px] shrink-0 border border-black/[0.04]">
-                        ~{town.time}
-                      </span>
+                    <div key={idx} className="flex items-center p-2 bg-[#fbfbfd] rounded-lg border border-black/[0.04]">
+                      <span className="font-medium text-[#1d1d1f]">{town.name}</span>
                     </div>
                   ))}
                 </div>
@@ -144,7 +154,7 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ onBookClick })
                 href={STUDIO_DATA.googleMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 bg-[#1d1d1f] text-white py-2.5 px-4 rounded-full text-[13px] font-medium hover:bg-black transition-colors flex items-center justify-center gap-2 shadow-2xs"
+                className="flex-1 bg-[#006875] text-white py-2.5 px-4 rounded-full text-[13px] font-medium hover:bg-[#005560] transition-colors flex items-center justify-center gap-2 shadow-2xs"
               >
                 <Navigation className="w-3.5 h-3.5" />
                 <span>Calcola Percorso</span>
@@ -176,13 +186,30 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ onBookClick })
           {/* Colonna Destra: Mappa Google Interattiva & Vantaggi */}
           <div className="lg:col-span-6 bg-white rounded-[24px] border border-black/[0.06] shadow-2xs overflow-hidden flex flex-col justify-between">
             <div className="w-full h-[360px] sm:h-[420px] lg:h-full relative min-h-[380px]">
-              <iframe
-                src={STUDIO_DATA.googleMapsEmbedUrl}
-                title={`Mappa Studio ${DOCTOR_DATA.name} - ${STUDIO_DATA.address}`}
-                className="w-full h-full border-0 absolute inset-0"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
+              {canLoadMap ? (
+                <iframe
+                  src={STUDIO_DATA.googleMapsEmbedUrl}
+                  title={`Mappa Studio ${DOCTOR_DATA.name} - ${STUDIO_DATA.address}`}
+                  className="w-full h-full border-0 absolute inset-0"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              ) : (
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[#f5f5f7] px-6 text-center">
+                  <MapPin className="h-8 w-8 text-[#006875]" aria-hidden="true" />
+                  <p className="max-w-sm text-sm leading-relaxed text-[#555]">
+                    La mappa viene caricata solo dopo il consenso ai servizi di terze parti.
+                  </p>
+                  <a
+                    href={STUDIO_DATA.googleMapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex min-h-11 items-center justify-center rounded-full bg-[#006875] px-5 text-sm font-medium text-white hover:bg-[#005560] focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#006875]"
+                  >
+                    Apri la mappa
+                  </a>
+                </div>
+              )}
             </div>
 
             {/* Vantaggi di Accesso & Parcheggio */}

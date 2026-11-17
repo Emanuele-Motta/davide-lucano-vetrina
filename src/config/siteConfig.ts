@@ -38,6 +38,11 @@ const parseEnvString = (val: unknown, defaultVal: string): string => {
  */
 
 export const siteConfig = {
+  siteUrl: parseEnvString(
+    import.meta.env.VITE_SITE_URL,
+    'https://davide-lucano.netlify.app'
+  ).replace(/\/+$/, ''),
+
   // ---------------------------------------------------------------------------------------
   // 1. DATI DEL PROFESSIONISTA
   // ---------------------------------------------------------------------------------------
@@ -46,8 +51,6 @@ export const siteConfig = {
     title: parseEnvString(import.meta.env.VITE_DOCTOR_TITLE, "Fisioterapista & Terapista Manuale"),
     alboNumber: parseEnvString(import.meta.env.VITE_DOCTOR_ALBO, "Iscritto Ordine Fisioterapisti (FNOFI Milano) n. 1420"),
     experienceYears: "5 anni",
-    verifiedReviewsCount: "184+",
-    ratingScore: "5.0",
     tagline: "Valutazione clinica evidence-based e percorsi riabilitativi 1-a-1 personalizzati",
     
     // Foto del dottore: usa l'immagine locale ottimizzata oppure un URL diretto esterno
@@ -60,7 +63,7 @@ export const siteConfig = {
     bioFull: [
       "Il mio obiettivo quotidiano è accompagnare le persone nel percorso di guarigione, aiutandole a superare il dolore, recuperare la mobilità e ritrovare il benessere nella vita di tutti i giorni.",
       "Si laurea in Fisioterapia presso l'Università degli Studi di Milano con una tesi focalizzata sulla teleriabilitazione delle lesioni da taglio della mano, ha proseguito la sua formazione conseguendo il Master di I livello in Terapia Manuale e Fisioterapia Muscoloscheletrica, approfondendo in particolar modo lo studio e il trattamento delle patologie della colonna vertebrale e delle articolazioni.",
-      "Nel corso della sua carriera ha maturato un'ampia e diversificata esperienza clinica presso importanti strutture sanitarie e centri riabilitativi dell'area milanese (tra cui la Fondazione Don Gnocchi, Ospedale San Carlo e il Pio Albergo Trivulzio), specializzandosi sia nella riabilitazione ortopedica e muscoloscheletrica che nella gestione dei disturbi neurologici e posturali.",
+      "Nel corso della sua carriera ha maturato esperienza clinica presso strutture sanitarie e centri riabilitativi dell'area milanese, tra cui la Fondazione Don Gnocchi, l'Ospedale San Carlo e il Pio Albergo Trivulzio, occupandosi di riabilitazione ortopedica, muscoloscheletrica, neurologica e posturale.",
       "Crede fermamente che un percorso riabilitativo efficace nasca dall’ascolto attento e da una presa in carico globale della persona. Per questo struttura trattamenti altamente personalizzati che combinano: Terapia Manuale per il ripristino della corretta funzionalità articolare e muscolare, Esercizio Terapeutico per il recupero della funzione, ed Educazione e Prevenzione per offrire al paziente gli strumenti ideali a mantenere i risultati ottenuti nel lungo periodo.",
       "In ogni trattamento, la persona è sempre al centro, pertanto ascolto, pazienza ed empatia sono i suoi strumenti principali.",
       "Al di fuori dell'ambito clinico, coltiva da anni una grande passione per la musica come cantante e polistrumentista. Un interesse che contribuisce a sviluppare doti di ascolto, precisione e armonia, valori che applica quotidianamente anche nella sua professione."
@@ -87,7 +90,7 @@ export const siteConfig = {
       "Linfodrenaggi",
       "Massoterapia",
       "Contratture e tendiniti",
-      "Valutazione specialistica",
+      "Valutazione fisioterapica",
       "Terapia manuale",
       "Gestione del dolore cronico",
       "Disturbi della colonna vertebrale (mal di collo, mal di schiena)",
@@ -120,7 +123,7 @@ export const siteConfig = {
     clinicalHighlights: [
       {
         title: "Approccio Evidence-Based",
-        desc: "Protocolli riabilitativi allineati alle più recenti linee guida internazionali per garantire il recupero più rapido e sicuro."
+        desc: "Valutazione e trattamento vengono definiti in base alle evidenze disponibili e alle esigenze della persona."
       },
       {
         title: "Presa in Carico Globale",
@@ -128,7 +131,7 @@ export const siteConfig = {
       },
       {
         title: "Puntualità & Sedute 1-a-1",
-        desc: "Nessuna attesa in sala d'aspetto: 60 minuti dedicati interamente a te, senza interruzioni o pazienti contemporanei."
+        desc: "Le sedute si svolgono su appuntamento e sono dedicate individualmente al paziente."
       },
       {
         title: "Esercizio Terapeutico & Prevenzione",
@@ -152,8 +155,8 @@ export const siteConfig = {
     province: parseEnvString(import.meta.env.VITE_STUDIO_PROVINCE, "MI"),
     region: "Lombardia",
     fullAddress: `${parseEnvString(import.meta.env.VITE_STUDIO_ADDRESS, "Via delle Betulle 10")}, ${parseEnvString(import.meta.env.VITE_STUDIO_CAP, "20152")} ${parseEnvString(import.meta.env.VITE_STUDIO_CITY, "Milano")}`,
-    metroInfo: "Comodamente raggiungibile con metro M1 Bisceglie e linee bus urbane • Ampia disponibilità di parcheggio libero su strada",
-    accessibilityInfo: "Accesso facilitato al piano terra, senza barriere architettoniche e senza ascensore necessario",
+    metroInfo: "Consulta la mappa e i servizi di trasporto locali per pianificare il percorso.",
+    accessibilityInfo: "Per informazioni sull'accessibilità della sede, contatta lo studio prima dell'appuntamento.",
     
     // Recapiti di contatto diretto
     phone: parseEnvString(import.meta.env.VITE_STUDIO_PHONE, "327 5464253"),
@@ -163,7 +166,7 @@ export const siteConfig = {
     email: parseEnvString(import.meta.env.VITE_STUDIO_EMAIL, "Davide.lucano.fkt@gmail.com"),
     emailMailto: `mailto:${parseEnvString(import.meta.env.VITE_STUDIO_EMAIL, "Davide.lucano.fkt@gmail.com")}`,
     pec: parseEnvString(import.meta.env.VITE_STUDIO_PEC, "davide.lucano@pec.it"),
-    piva: parseEnvString(import.meta.env.VITE_STUDIO_PIVA, "P.IVA 12345678901"),
+    piva: parseEnvString(import.meta.env.VITE_STUDIO_PIVA, ''),
     formEndpoint: parseEnvString(import.meta.env.VITE_FORM_ENDPOINT, ""),
 
     // Orari di apertura per il pubblico: Lunedì, Mercoledì, Venerdì 15:00 - 20:00
@@ -184,6 +187,7 @@ export const siteConfig = {
     isEnabled: parseEnvBool(import.meta.env.VITE_ENABLE_BOOKING, true),
     preventPastDates: true,
     slotDurationMinutes: 60,
+    calLink: parseEnvString(import.meta.env.VITE_CAL_LINK, ''),
 
     /**
      * GIORNI DI CHIUSURA SETTIMANALE:
@@ -258,9 +262,6 @@ export const siteConfig = {
   mioDottore: {
     profileUrl: parseEnvString(import.meta.env.VITE_MIODOTTORE_URL, "https://www.miodottore.it/davide-lucano/fisioterapista/milano"),
     doctorSlug: "davide-lucano",
-    overallRating: 5.0,
-    totalReviewsCount: "184+",
-    recommendationPercentage: "100%",
     badgeLabel: "Profilo Ufficiale Certificato MioDottore"
   },
 

@@ -2,6 +2,8 @@ import { useEffect, useRef, useCallback } from 'react';
 import Lenis from 'lenis';
 import { setLenisInstance } from '../utils/lenis';
 
+const defaultEasing = (time: number) => Math.min(1, 1.001 - Math.pow(2, -10 * time));
+
 interface UseSmoothScrollOptions {
   duration?: number;
   easing?: (t: number) => number;
@@ -19,8 +21,7 @@ interface UseSmoothScrollOptions {
 export const useSmoothScroll = (options: UseSmoothScrollOptions = {}) => {
   const {
     duration = 1.1,
-    // Easing esponenziale fluido stile Apple
-    easing = (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    easing = defaultEasing,
     smoothWheel = true,
     touchMultiplier = 1.15,
   } = options;
@@ -29,6 +30,11 @@ export const useSmoothScroll = (options: UseSmoothScrollOptions = {}) => {
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setLenisInstance(null);
+      return;
+    }
+
     // Inizializza l'istanza Lenis
     const lenis = new Lenis({
       duration,
@@ -104,10 +110,10 @@ export const useSmoothScroll = (options: UseSmoothScrollOptions = {}) => {
     if (typeof target === 'string') {
       const el = document.getElementById(target.replace('#', ''));
       if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
+        el.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
       }
     } else if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
+      target.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
     }
   }, [offset]);
 

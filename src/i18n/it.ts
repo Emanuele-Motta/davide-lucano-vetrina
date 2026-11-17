@@ -1,4 +1,5 @@
 import { Service, Testimonial } from '../types';
+import { siteConfig } from '../config/siteConfig';
 
 export interface Translations {
   brand: {
@@ -263,13 +264,13 @@ export const itTranslations: Translations = {
     doctorName: "Dott. Davide Lucano",
     doctorRole: "Fisioterapista",
     registration: "Iscrizione Albo FNOFI Milano n. 1420",
-    address: "Via delle Betulle 10",
-    addressCity: "20152 Milano (MI)",
-    phone: "327 5464253",
-    mobile: "327 5464253",
-    email: "Davide.lucano.fkt@gmail.com",
-    piva: "IT10948200965",
-    openingHours: "Lun, Mer, Ven: 15:00 - 20:00 (Su appuntamento)"
+    address: siteConfig.studio.address,
+    addressCity: `${siteConfig.studio.cap} ${siteConfig.studio.city} (${siteConfig.studio.province})`,
+    phone: siteConfig.studio.phone,
+    mobile: siteConfig.studio.whatsappNumber,
+    email: siteConfig.studio.email,
+    piva: siteConfig.studio.piva,
+    openingHours: siteConfig.studio.openingHours.map(({ days, hours }) => `${days}: ${hours}`).join(' · ')
   },
   nav: {
     studioTag: "Dott. Davide Lucano",
@@ -284,24 +285,24 @@ export const itTranslations: Translations = {
   },
   hero: {
     pill: "Dott. Davide Lucano • Fisioterapista a Milano",
-    titleStart: "Ritrova il movimento.",
-    titleHighlight: "Senza dolore.",
-    subtitle: "Valutazione evidence-based e percorsi personalizzati di terapia manuale e riabilitazione 1-a-1 a Milano.",
+    titleStart: "Ritrova il movimento",
+    titleHighlight: "Senza dolore",
+    subtitle: "Valutazione fisioterapica e percorsi personalizzati di terapia manuale e riabilitazione.",
     ctaBook: "Prenota una valutazione",
     ctaServices: "Terapie & Servizi",
     badges: {
       alboTitle: "Albo FNOFI Milano",
       alboDesc: "Iscrizione n. 1420",
-      taxTitle: "Sedute 1-a-1",
-      taxDesc: "Esclusive e dedicate",
-      locationTitle: "Detraibilità 19%",
-      locationDesc: "Spesa sanitaria 730"
+      taxTitle: "Sedute individuali",
+      taxDesc: "Su appuntamento",
+      locationTitle: "Informazioni fiscali",
+      locationDesc: "Per dettagli, contatta lo studio"
     }
   },
   about: {
     badge: "Filosofia Clinica",
     title: "Al centro ci sei tu, non la patologia.",
-    subtitle: "Ascolto attento, diagnosi funzionale rigorosa e un piano di recupero terapeutico disegnato sulle tue esigenze.",
+    subtitle: "Ascolto e valutazione funzionale per definire insieme un percorso adatto alle tue esigenze.",
     doctor: {
       name: "Dott. Davide Lucano",
       title: "Fisioterapista • Albo FNOFI Milano n. 1420",
@@ -317,7 +318,7 @@ export const itTranslations: Translations = {
     highlights: {
       evidence: {
         title: "Metodo Evidence-Based",
-        desc: "Protocolli clinici validati dalla ricerca scientifica internazionale per risultati duraturi."
+        desc: "Valutazione e trattamento vengono definiti in base alle evidenze disponibili e alle esigenze della persona."
       },
       technology: {
         title: "Presa in Carico Globale",
@@ -325,7 +326,7 @@ export const itTranslations: Translations = {
       },
       punctuality: {
         title: "Puntualità & Sedute 1-a-1",
-        desc: "Riceve su appuntamento in ambiente riservato: zero attese, tempo dedicato al 100% a te."
+        desc: "Le sedute si svolgono su appuntamento e sono dedicate individualmente al paziente."
       },
       exercises: {
         title: "Esercizio Terapeutico & Prevenzione",
@@ -336,16 +337,16 @@ export const itTranslations: Translations = {
   services: {
     badge: "Aree di Intervento",
     title: "Servizi & Terapie.",
-    subtitle: "Percorsi mirati per liberare il movimento, eliminare il dolore e ritrovare il benessere.",
+    subtitle: "Percorsi di fisioterapia e riabilitazione definiti in base alla valutazione e agli obiettivi concordati.",
     allCategory: "Tutti",
     bookNow: "Prenota ora",
     clinicalDetails: "Dettagli clinici",
     items: [
       {
         id: "prima-visita",
-        title: "Prima Visita & Valutazione Specialistica",
-        shortDesc: "Anamnesi accurata, esame biomeccanico, test ortopedici e primo trattamento terapeutico immediato.",
-        fullDesc: "Valutazione clinica di 60 minuti: esame della documentazione sanitaria, test articolari e posturali, diagnosi funzionale e primo trattamento terapeutico incluso nella seduta.",
+        title: "Prima visita fisioterapica",
+        shortDesc: "Colloquio anamnestico, valutazione funzionale e definizione condivisa degli obiettivi.",
+        fullDesc: "La visita, della durata prevista di 60 minuti, comprende un colloquio anamnestico e una valutazione funzionale. In base alle esigenze della persona, possono seguire un trattamento iniziale e la definizione condivisa degli obiettivi riabilitativi.",
         duration: "60 min",
         price: "",
         category: "Diagnostica",
@@ -353,7 +354,7 @@ export const itTranslations: Translations = {
         benefits: [
           "Anamnesi clinica e visione esami strumentali (RMN, RX, eco)",
           "Test specifici di mobilità e provocazione del sintomo",
-          "Primo trattamento fisioterapico incluso nella seduta",
+          "Indicazioni e obiettivi condivisi",
           "Piano terapeutico personalizzato e trasparente"
         ]
       },
@@ -361,16 +362,16 @@ export const itTranslations: Translations = {
         id: "terapia-manuale",
         title: "Terapia Manuale & Riabilitazione Muscoloscheletrica",
         shortDesc: "Mobilizzazioni articolari, trazioni, rilascio miofasciale e trattamento di colonna e articolazioni.",
-        fullDesc: "Mobilizzazione vertebrale, manipolazione miofasciale e decompressione articolare per la risoluzione rapida del dolore e il ripristino dell'escursione articolare.",
+        fullDesc: "Il trattamento può includere mobilizzazioni, tecniche manuali ed esercizi, selezionati in base alla valutazione e agli obiettivi concordati.",
         duration: "60 min",
         price: "",
         category: "Manuale",
         icon: "HandMetal",
         benefits: [
-          "Sollievo immediato da lombalgia, cervicalgia e colpo di frusta",
+          "Interventi per la gestione di lombalgia e cervicalgia",
           "Decompressione per sciatalgie e disturbi radicolari",
           "Trattamento disturbi dell'articolazione temporo-mandibolare (ATM) e cefalee",
-          "Ripristino istantaneo della mobilità funzionale"
+          "Lavoro sulla mobilità funzionale"
         ]
       },
       {
@@ -393,7 +394,7 @@ export const itTranslations: Translations = {
         id: "posturale",
         title: "Rieducazione & Ginnastica Posturale",
         shortDesc: "Riequilibrio delle catene muscolari, correzione dismorfismi e allungamento miofasciale.",
-        fullDesc: "Integrazione dei metodi Mézières e rieducazione posturale per riequilibrare le catene muscolari e risolvere tensioni da prolungata sedentarietà o sovraccarichi.",
+        fullDesc: "Percorso individuale che può includere esercizi e posture guidate, in base alla valutazione e agli obiettivi concordati.",
         duration: "60 min",
         price: "",
         category: "Postura",
@@ -442,7 +443,7 @@ export const itTranslations: Translations = {
   territory: {
     badge: "Sede Studio & Zone",
     title: "Posizione & Raggiungibilità",
-    subtitle: "Lo studio è situato in Via delle Betulle 10 a Milano, comodamente accessibile al piano terra con parcheggio libero su strada.",
+    subtitle: `${siteConfig.studio.fullAddress}. ${siteConfig.studio.accessibilityInfo}.`,
     districtsTitle: "Milano & Hinterland Ovest/Sud",
     districtsSubtitle: "Collegamenti rapidi per visite individuali su appuntamento",
     districtsHeading: "Zone Principali",
@@ -460,21 +461,21 @@ export const itTranslations: Translations = {
       "Corsico & Cesano Boscone",
       "Trezzano & Buccinasco"
     ],
-    surroundingHeading: "Tempi di Raggiungimento",
-    surroundingTitle: "Tempi di Raggiungimento",
+    surroundingHeading: "Comuni limitrofi",
+    surroundingTitle: "Comuni limitrofi",
     surroundingTowns: [
-      { name: "Cesano Boscone & Corsico", time: "5-7 min" },
-      { name: "Trezzano sul Naviglio", time: "8-10 min" },
-      { name: "Buccinasco & Settimo Milanese", time: "8-10 min" },
-      { name: "Milano De Angeli / Wagner", time: "10-12 min" },
-      { name: "Assago", time: "10-12 min" },
-      { name: "Milano Centro (Duomo M1)", time: "15 min" }
+      { name: "Cesano Boscone & Corsico", time: "Zona limitrofa" },
+      { name: "Trezzano sul Naviglio", time: "Zona limitrofa" },
+      { name: "Buccinasco & Settimo Milanese", time: "Zona limitrofa" },
+      { name: "Milano De Angeli / Wagner", time: "Milano" },
+      { name: "Assago", time: "Zona limitrofa" },
+      { name: "Milano Centro", time: "Milano" }
     ],
-    parkingAdvantage: "Ampia disponibilità di parcheggio libero su strada",
-    transitAdvantage: "Vicinanza metro M1 Bisceglie e linee bus 63, 67, 58",
+    parkingAdvantage: "Verifica disponibilità e regole di sosta nelle vicinanze dello studio.",
+    transitAdvantage: "Consulta la mappa e i servizi di trasporto locali per pianificare il percorso.",
     advantages: {
-      parking: "Ampia disponibilità di parcheggio libero su strada",
-      transit: "Vicinanza metro M1 Bisceglie e linee bus 63, 67, 58"
+      parking: "Verifica disponibilità e regole di sosta nelle vicinanze dello studio.",
+      transit: "Consulta la mappa e i servizi di trasporto locali per pianificare il percorso."
     },
     pathologiesTitle: "Aree di Trattamento Principali",
     pathologiesSubtitle: "Approccio clinico evidence-based",
@@ -502,9 +503,9 @@ export const itTranslations: Translations = {
     ctaBookEvaluation: "Prenota con il Dott. Lucano"
   },
   reviews: {
-    badge: "5.0 ★ MioDottore.it",
-    title: "Cosa dicono i pazienti.",
-    subtitle: "Esperienze reali di recupero e percorsi clinici individuali.",
+    badge: "Profilo recensioni",
+    title: "Recensioni del professionista",
+    subtitle: "Consulta le recensioni pubblicate direttamente sul profilo del professionista.",
     verifiedPatient: "Paziente Verificato",
     categories: [
       "Tutte",
@@ -513,92 +514,37 @@ export const itTranslations: Translations = {
       "Massoterapia & Linfodrenaggi",
       "Rieducazione Posturale"
     ],
-    items: [
-      {
-        id: "1",
-        name: "Federico Bianchi",
-        role: "Maratoneta",
-        rating: 5,
-        content: "Dopo una distorsione tibio-tarsica che mi bloccava da 2 mesi, con poche sedute mirate di Tecar e riatletizzazione sono tornato a correre senza dolore. Competenza clinica impeccabile.",
-        treatment: "Riabilitazione Sportiva",
-        date: "2 settimane fa"
-      },
-      {
-        id: "2",
-        name: "Elena Marchesi",
-        role: "Senior Consultant",
-        rating: 5,
-        content: "Lavoro molte ore al computer e soffrivo di cervicalgia con vertigini. Il percorso posturale e la terapia manuale hanno risolto il problema fin dalle prime sedute. Puntualità perfetta.",
-        treatment: "Posturale & Terapia Manuale",
-        date: "1 mese fa"
-      },
-      {
-        id: "3",
-        name: "Matteo Vismara",
-        role: "Giocatore di Padel",
-        rating: 5,
-        content: "Epicondilite trattata con successo. Spiegazione scientifica chiara, Tecar ed esercizi di rinforzo specifici. Ho ripreso a giocare regolarmente.",
-        treatment: "Tecar Terapia",
-        date: "3 settimane fa"
-      },
-      {
-        id: "4",
-        name: "Sofia Brambilla",
-        role: "Danzatrice",
-        rating: 5,
-        content: "Recupero eccellente dopo ricostruzione del legamento crociato anteriore. Test funzionali progressivi e sedute 1-a-1 sempre con la massima dedizione.",
-        treatment: "Riabilitazione Sportiva",
-        date: "1 mese fa"
-      },
-      {
-        id: "5",
-        name: "Dott. Alessandro Rinaldi",
-        role: "Medico Chirurgo",
-        rating: 5,
-        content: "Solida formazione evidence-based e notevole manualità terapeutica. Ha risolto una lombalgia cronica che trascuravo da tempo con un approccio rigoroso e trasparente.",
-        treatment: "Terapia Manuale",
-        date: "2 mesi fa"
-      },
-      {
-        id: "6",
-        name: "Francesca Moretti",
-        role: "Sportiva amatoriale",
-        rating: 5,
-        content: "Sindrome da conflitto sub-acromiale della spalla risolta alla perfezione tra terapia manuale ed esercizi di centratura. Ora mi alleno con totale serenità.",
-        treatment: "Tecar Terapia",
-        date: "3 settimane fa"
-      }
-    ]
+    items: []
   },
   testimonials: {
-    badge: "5.0 ★ MioDottore.it",
-    title: "Cosa dicono i pazienti.",
-    subtitle: "Esperienze reali di recupero e percorsi clinici individuali."
+    badge: "Profilo recensioni",
+    title: "Recensioni del professionista",
+    subtitle: "Consulta le recensioni pubblicate direttamente sul profilo del professionista."
   },
   faq: {
     badge: "FAQ",
     title: "Domande frequenti.",
-    subtitle: "Informazioni utili su prescrizioni, detraibilità e modalità delle sedute.",
+    subtitle: "Informazioni su visite, trattamenti, sede e appuntamenti.",
     items: [
       {
         question: "Serve la ricetta medica per iniziare la fisioterapia?",
-        answer: "No, la prescrizione medica non è necessaria. Il Dott. Davide Lucano è un professionista sanitario abilitato (Albo FNOFI Milano n. 1420) e svolge in autonomia la valutazione clinica e il piano terapeutico."
+        answer: "Per informazioni su eventuali prescrizioni o documenti utili, contatta lo studio prima dell'appuntamento. Puoi portare con te referti o indicazioni cliniche già in tuo possesso."
       },
       {
         question: "Le sedute sono detraibili fiscalmente?",
-        answer: "Sì, al 100%. Le prestazioni fisioterapiche sono sanitarie, esenti da IVA (art. 10 DPR 633/72) e detraibili al 19% nel modello 730 con pagamenti tracciabili."
+        answer: "Le spese per prestazioni sanitarie possono essere detraibili secondo la normativa vigente e i requisiti applicabili. Per la tua situazione, verifica le condizioni con un professionista fiscale."
       },
       {
-        question: "Come si raggiunge lo studio e dove si parcheggia?",
-        answer: "Lo studio è in Via delle Betulle 10 a Milano. È comodamente accessibile al piano terra e dispone di ampia disponibilità di parcheggio libero su strada, senza limitazioni ZTL."
+        question: "Dove si trova lo studio?",
+        answer: `${siteConfig.studio.fullAddress}. ${siteConfig.studio.accessibilityInfo}. Per indicazioni aggiornate, consulta la mappa o contatta lo studio.`,
       },
       {
         question: "Quali problematiche vengono trattate principalmente?",
         answer: "Disturbi della colonna (cervicalgia, lombalgia, sciatalgia), infortuni sportivi e articolari, riabilitazione post-chirurgica e riequilibrio posturale."
       },
       {
-        question: "Cosa include la Prima Visita?",
-        answer: "Dura 60 minuti: include anamnesi clinica, visione degli esami diagnostici, test biomeccanici, primo trattamento terapeutico e piano di recupero su misura."
+        question: "Cosa comprende la prima visita?",
+        answer: `La visita, della durata prevista di ${siteConfig.booking.slotDurationMinutes} minuti, comprende un colloquio anamnestico e una valutazione funzionale. In base alle esigenze della persona, possono seguire un trattamento iniziale e la definizione condivisa degli obiettivi riabilitativi.`
       },
       {
         question: "Quali percorsi terapeutici vengono svolti nello studio?",
@@ -606,7 +552,7 @@ export const itTranslations: Translations = {
       },
       {
         question: "Come si prenota o si richiede un appuntamento?",
-        answer: "Puoi selezionare data e ora direttamente dal calendario online su questo sito. In alternativa, puoi telefonare o scrivere su WhatsApp al 327 5464253 o inviare un'email a Davide.lucano.fkt@gmail.com per assistenza diretta."
+        answer: `Puoi selezionare data e ora direttamente dal calendario online su questo sito. In alternativa, puoi telefonare o scrivere su WhatsApp al ${siteConfig.studio.whatsappNumber} o inviare un'email a ${siteConfig.studio.email} per assistenza diretta.`,
       }
     ],
     banner: {
@@ -625,7 +571,7 @@ export const itTranslations: Translations = {
   booking: {
     badge: "Prenotazione Online",
     title: "Il tuo percorso inizia qui.",
-    subtitle: "Scegli il giorno e l'orario più comodo in meno di due minuti.",
+    subtitle: "Consulta le disponibilità e scegli il trattamento, la data e l'orario.",
     steps: {
       step1: "1. Seleziona il Trattamento",
       step2: "2. Scegli Data e Ora",
@@ -652,8 +598,8 @@ export const itTranslations: Translations = {
       termsLink: "Termini del Servizio",
       submitButton: "Conferma Prenotazione",
       submittingButton: "Elaborazione in corso...",
-      taxNotice: "Spesa sanitaria detraibile 19% nel modello 730",
-      guaranteeNotice: "Seduta individuale 1-a-1 dedicata, zero code"
+      taxNotice: "Per informazioni sulla documentazione fiscale, contatta lo studio o il tuo consulente fiscale.",
+      guaranteeNotice: "Gli appuntamenti sono organizzati individualmente."
     },
     recap: {
       title: "Riepilogo Selezione",
@@ -675,26 +621,26 @@ export const itTranslations: Translations = {
   location: {
     badge: "Dove Riceve il Dott. Davide Lucano",
     title: "Sede delle Visite & Contatti Diretti",
-    subtitle: "Il Dott. Davide Lucano riceve su appuntamento in Via delle Betulle 10, 20152 Milano. Facilmente raggiungibile dal centro città e da tutti i comuni della provincia ovest e sud.",
+    subtitle: `${siteConfig.doctor.name} riceve su appuntamento in ${siteConfig.studio.fullAddress}.`,
     cards: {
       addressTitle: "Sede delle Visite",
       addressSubtitle: "Accesso comodo al piano terra, nessuna barriera architettonica.",
       hoursTitle: "Orari di Ricevimento",
-      hoursSubtitle: "Lunedì, Mercoledì, Venerdì: 15:00 – 20:00",
+      hoursSubtitle: siteConfig.studio.openingHours.map(({ days, hours }) => `${days}: ${hours}`).join(' · '),
       hoursAppointmentOnly: "Si riceve esclusivamente su appuntamento.",
       contactsTitle: "Contatti Diretti",
       contactsSubtitle: "Telefono, WhatsApp e comunicazioni dirette."
     },
     mapInfo: {
       directionsTitle: "Come Raggiungere la Sede",
-      directionsDesc: "Situato in Via delle Betulle 10, Milano. Accesso immediato e comodo al piano terra e ampia disponibilità di parcheggio libero su strada. Nessuna complicazione legata a ZTL o traffico congesto del centro.",
+      directionsDesc: `${siteConfig.studio.fullAddress}. Contatta lo studio per informazioni sull'accessibilità e su come raggiungerlo.`,
       openMaps: "Apri in Google Maps"
     }
   },
   modals: {
     bookingSuccess: {
       title: "Prenotazione Confermata!",
-      subtitle: "Riceverai una conferma via email e un promemoria SMS 24 ore prima dell'appuntamento.",
+      subtitle: "Riceverai le comunicazioni di conferma previste dal servizio di prenotazione.",
       codeLabel: "Codice Prenotazione",
       serviceLabel: "Trattamento",
       dateLabel: "Data & Ora",
@@ -725,26 +671,26 @@ export const itTranslations: Translations = {
       privacyText: [
         "Ai sensi del Regolamento UE 2016/679 (GDPR), il Dott. Davide Lucano informa che i dati personali e sensibili (relativi allo stato di salute) conferiti durante la prenotazione e il trattamento fisioterapico sono trattati nel pieno rispetto della riservatezza e del segreto professionale.",
         "Finalità del trattamento: erogazione di prestazioni sanitarie riabilitative, fatturazione fiscale e gestione degli appuntamenti. Il conferimento dei dati è indispensabile per l'erogazione delle cure.",
-        "Titolare del trattamento: Dott. Davide Lucano, Via delle betulle 10, Milano (P.IVA IT10948200965). Per esercitare i diritti di accesso, rettifica o cancellazione, inviare una mail a info@fisioterapiamilano.it."
+        `Titolare del trattamento: ${siteConfig.doctor.name}, ${siteConfig.studio.fullAddress}. Partita IVA: ${siteConfig.studio.piva || 'da configurare prima della pubblicazione'}. Per esercitare i diritti di accesso, rettifica o cancellazione, inviare una mail a ${siteConfig.studio.email}.`
       ],
       cookiesTitle: "Informativa sui Cookie",
       cookiesText: [
-        "Questo sito utilizza esclusivamente cookie tecnici essenziali necessari per il corretto funzionamento del modulo di prenotazione online e la memorizzazione locale delle preferenze della sessione.",
-        "Non vengono utilizzati cookie di profilazione o tracciamento pubblicitario di terze parti a scopo commerciale.",
-        "L'utente può in ogni momento disabilitare i cookie tramite le impostazioni del proprio browser, sebbene ciò possa limitare alcune funzionalità della prenotazione."
+        "Il sito salva la scelta del consenso nel localStorage. Analytics e la mappa Google vengono caricati solo se configurati e dopo l'autorizzazione delle rispettive categorie.",
+        "Il pulsante di prenotazione apre Cal.com in un servizio esterno; i dati inseriti lì sono trattati secondo l'informativa del fornitore.",
+        "Le preferenze possono essere riaperte e revocate tramite il pulsante Preferenze Cookie."
       ],
       termsTitle: "Termini e Condizioni del Servizio",
       termsText: [
-        "1. Prenotazioni: Gli orari prenotati online sono riservati in via esclusiva. Si richiede la massima puntualità per garantire la qualità del servizio.",
-        "2. Disdette: Le cancellazioni o modifiche di orario devono pervenire con almeno 24 ore di anticipo rispetto all'appuntamento fissato, contattando telefonicamente la segreteria.",
-        "3. Detraibilità Sanitaria: Le prestazioni fisioterapiche erogate da professionisti sanitari iscritti all'albo FNOFI sono esenti IVA ai sensi dell'art. 10 D.P.R. 633/72 e detraibili al 19% come spesa medica nella dichiarazione dei redditi."
+        "1. Prenotazioni: verifica i dettagli dell'appuntamento e le condizioni mostrate dal servizio di prenotazione.",
+        "2. Modifiche e disdette: segui le istruzioni riportate nella conferma o contatta lo studio. Le eventuali condizioni devono corrispondere a quelle effettivamente applicate.",
+        "3. Informazioni fiscali: il trattamento fiscale e l'eventuale detraibilità dipendono dalla prestazione, dai requisiti applicabili e dalla normativa vigente. Per il tuo caso, rivolgiti a un consulente fiscale."
       ],
       close: "Chiudi"
     }
   },
   footer: {
-    tagline: "Fisioterapia clinica d'eccellenza, terapia manuale, riabilitazione sportiva e funzionale a Milano a cura del Dott. Davide Lucano.",
-    taxNotice: "Prestazioni sanitarie esenti IVA ai sensi dell'art. 10 D.P.R. 633/72. Detraibili al 19% come spesa medica nella dichiarazione dei redditi.",
+    tagline: "Fisioterapia e riabilitazione a Milano. Informazioni su trattamenti, sede e appuntamenti.",
+    taxNotice: "Per informazioni sulla documentazione fiscale, contatta lo studio o il tuo consulente fiscale.",
     copyright: "Dott. Davide Lucano - Fisioterapista. Tutti i diritti riservati.",
     nav: {
       about: "Chi Sono",

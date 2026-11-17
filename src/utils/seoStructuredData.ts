@@ -3,11 +3,9 @@ import { SERVICES } from '../data/mockData';
 import { itTranslations } from '../i18n/it';
 
 /**
- * Genera l'oggetto Schema.org JSON-LD dinamico alimentato al 100% da siteConfig e dai dati dei servizi.
- * Garantisce massima conformità SEO e sincronizzazione con eventuali variabili di configurazione Netlify.
+ * Genera i dati strutturati usando i dati verificabili disponibili nella configurazione.
  */
-export function generateStructuredData(baseUrl = 'https://fisioterapiamilano.it') {
-  const cleanReviewsCount = siteConfig.mioDottore.totalReviewsCount.replace(/[^0-9]/g, '') || '184';
+export function generateStructuredData(baseUrl = siteConfig.siteUrl) {
   const faqs = itTranslations.faq.items;
 
   return {
@@ -17,17 +15,10 @@ export function generateStructuredData(baseUrl = 'https://fisioterapiamilano.it'
         '@type': ['Physiotherapy', 'MedicalBusiness', 'LocalBusiness'],
         '@id': `${baseUrl}/#studio`,
         name: `${siteConfig.doctor.name} - ${siteConfig.doctor.title}`,
-        alternateName: [
-          siteConfig.doctor.name,
-          `Fisioterapista ${siteConfig.doctor.name}`,
-          `Fisioterapia Milano ${siteConfig.doctor.name}`,
-          `Studio Fisioterapico ${siteConfig.doctor.name}`,
-        ],
         description: siteConfig.doctor.bio || 'Attività professionale di fisioterapia, terapia manuale e riabilitazione funzionale 1-a-1.',
         url: baseUrl,
         telephone: siteConfig.studio.phone,
         email: siteConfig.studio.email,
-        priceRange: '€€',
         image: siteConfig.doctor.photoUrl,
         address: {
           '@type': 'PostalAddress',
@@ -36,11 +27,6 @@ export function generateStructuredData(baseUrl = 'https://fisioterapiamilano.it'
           postalCode: siteConfig.studio.cap,
           addressRegion: 'MI',
           addressCountry: 'IT',
-        },
-        geo: {
-          '@type': 'GeoCoordinates',
-          latitude: 45.4578,
-          longitude: 9.1024,
         },
         openingHoursSpecification: [
           {
@@ -72,13 +58,6 @@ export function generateStructuredData(baseUrl = 'https://fisioterapiamilano.it'
           jobTitle: siteConfig.doctor.title,
           memberOf: siteConfig.doctor.alboNumber,
           alumniOf: 'Università degli Studi di Milano',
-        },
-        aggregateRating: {
-          '@type': 'AggregateRating',
-          ratingValue: String(siteConfig.mioDottore.overallRating),
-          reviewCount: cleanReviewsCount,
-          bestRating: '5',
-          worstRating: '1',
         },
         hasOfferCatalog: {
           '@type': 'OfferCatalog',

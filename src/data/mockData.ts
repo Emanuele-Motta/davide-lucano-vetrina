@@ -2,11 +2,12 @@ import { Service, Testimonial, TimeSlot } from '../types';
 import { itTranslations } from '../i18n/it';
 import { getAllReviews } from './reviewsConfig';
 import { siteConfig } from '../config/siteConfig';
+import heroBackground from '../assets/images/doctor_davide_lucano_800.webp';
 
 export const LOGO_URL = "/logo-full.svg";
 export const LOGO_ICON_URL = "/logo.svg";
 
-export const HERO_BG_URL = "https://lh3.googleusercontent.com/aida-public/AB6AXuA72HboJfwpGNx_IeuxhWziI3niXCw4HJR3neBpYuhMia-NSOq1lHAgazO-RCWsRo_zbjintUxGU3HHo64-T9YKfJ4wwQVe3cwOqpwZ16k_8LxVHld8AH40DhOOjOb1F3TDRZDbYMiFxlkTz4zhAs2hZ3Mn1Yfj7Xe56iQPnX_oO32WkPteXSCNoM2Fv3m0P36jLKO1qRYc29IVfB63ktRwSGYYlYD0kfbdop7oJZegZGZyLJZaW-PoEA";
+export const HERO_BG_URL = heroBackground;
 
 export const SERVICES: Service[] = itTranslations.services.items;
 

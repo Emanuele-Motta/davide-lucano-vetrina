@@ -7,7 +7,6 @@ import {
   Phone, 
   Calendar, 
   ArrowRight, 
-  Star, 
   ShieldCheck, 
   GraduationCap, 
   HeartHandshake,
@@ -73,10 +72,6 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
                       <span>Riceve a Milano</span>
                     </div>
 
-                    <div className="bg-black/75 backdrop-blur-md px-2.5 py-1 rounded-full text-[11px] font-medium text-white border border-white/20 shadow-xs flex items-center gap-1">
-                      <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
-                      <span>{DOCTOR_DATA.ratingScore} ({DOCTOR_DATA.verifiedReviewsCount})</span>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -84,7 +79,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
               {/* Testata Medico */}
               <div className="mb-4">
                 <div className="flex items-center gap-2 mb-1 flex-wrap">
-                  <p className="text-[22px] font-semibold text-[#1d1d1f] tracking-tight leading-snug">
+                  <p className="text-[22px] font-semibold text-[#1d1d1f] leading-snug">
                     {DOCTOR_DATA.name}
                   </p>
                   <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#006875]/10 text-[#006875] text-[11px] font-medium">
@@ -104,21 +99,13 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
               </div>
 
               {/* Statistiche Chiave */}
-              <div className="grid grid-cols-3 gap-2 py-3 px-3 bg-[#fbfbfd] rounded-xl border border-black/[0.04] mb-4 text-center">
+              <div className="grid grid-cols-2 gap-2 py-3 px-3 bg-[#fbfbfd] rounded-xl border border-black/[0.04] mb-4 text-center">
                 <div>
                   <span className="block text-[16px] font-semibold text-[#1d1d1f] leading-tight">
                     {DOCTOR_DATA.experienceYears}
                   </span>
                   <span className="text-[11px] text-[#5e5e62] leading-tight font-medium">
                     Esperienza
-                  </span>
-                </div>
-                <div className="border-x border-black/[0.06]">
-                  <span className="block text-[16px] font-semibold text-[#006875] leading-tight">
-                    {DOCTOR_DATA.ratingScore} ★
-                  </span>
-                  <span className="text-[11px] text-[#5e5e62] leading-tight font-medium">
-                    MioDottore
                   </span>
                 </div>
                 <div>
@@ -147,19 +134,19 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
               </div>
 
               {/* Azione Rapida WhatsApp */}
-              <div className="mt-4 pt-3.5 border-t border-black/[0.06] flex items-center justify-between gap-3">
+              <div className="mt-4 pt-3.5 border-t border-black/[0.06] flex flex-col items-start gap-1.5 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
                 <a
                   href={STUDIO_DATA.whatsappLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-[12px] font-medium text-emerald-700 hover:text-emerald-800 transition-colors"
+                  className="inline-flex min-h-11 items-center gap-1.5 px-2 text-[12px] font-medium text-emerald-700 hover:text-emerald-800 transition-colors whitespace-nowrap"
                 >
                   <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
                   <span>WhatsApp {STUDIO_DATA.whatsappNumber}</span>
                 </a>
 
-                <span className="text-[11px] text-[#5e5e62] font-medium flex items-center gap-1">
-                  <MapPin className="w-3 h-3 text-[#006875]" />
+                <span className="inline-flex min-h-11 items-center gap-1 px-2 text-[11px] text-[#5e5e62] font-medium">
+                  <MapPin className="w-3 h-3 text-[#006875] shrink-0" />
                   {STUDIO_DATA.address}, {STUDIO_DATA.city}
                 </span>
               </div>
@@ -169,12 +156,12 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
 
           {/* Colonna Destra: Biografia Dettagliata & Metodo Clinico */}
           <div className="lg:col-span-7">
-            <span className="text-[12px] font-medium tracking-wide uppercase text-[#006875] bg-[#006875]/10 px-3 py-1 rounded-full">
+            <span className="text-[12px] font-medium uppercase text-[#006875] bg-[#006875]/10 px-3 py-1 rounded-full">
               {t.about.badge}
             </span>
             <h2 
               id="about-heading"
-              className="text-[32px] sm:text-[38px] font-semibold text-[#1d1d1f] tracking-tight mt-3 mb-4 leading-[1.15]"
+              className="text-[32px] sm:text-[38px] font-semibold text-[#1d1d1f] mt-3 mb-4 leading-[1.15]"
             >
               {t.about.title}
             </h2>
@@ -200,7 +187,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
                 <ul className="space-y-2 text-[13.5px] text-[#555]">
                   <li className="flex items-start gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#006875] mt-2 shrink-0" />
-                    <span><strong>Terapia Manuale</strong> per il ripristino della corretta funzionalità articolare e muscolare.</span>
+                    <span><strong>Terapia Manuale</strong> per lavorare sulla mobilità e sulla funzionalità articolare e muscolare.</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#006875] mt-2 shrink-0" />
@@ -208,7 +195,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#006875] mt-2 shrink-0" />
-                    <span><strong>Educazione e Prevenzione</strong> per offrire al paziente gli strumenti ideali a mantenere i risultati ottenuti nel lungo periodo.</span>
+                    <span><strong>Educazione e prevenzione</strong> per fornire indicazioni utili nella gestione delle attività quotidiane.</span>
                   </li>
                 </ul>
               </div>
@@ -226,62 +213,62 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
 
             </div>
 
-            {/* Punti di Forza Clinici (Senza Tecnologia Avanzata) */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {DOCTOR_DATA.clinicalHighlights.map((highlight, index) => (
-                <div 
-                  key={index}
-                  className="bg-white rounded-[20px] p-5 border border-black/[0.06] shadow-2xs hover:border-black/[0.10] transition-colors"
-                >
-                  <div className="w-9 h-9 rounded-xl bg-[#006875]/10 flex items-center justify-center text-[#006875] mb-3">
-                    <CheckCircle2 className="w-4 h-4 text-[#006875]" />
-                  </div>
-                  <h3 className="text-[15px] font-semibold text-[#1d1d1f] mb-1.5 tracking-tight">
-                    {highlight.title}
-                  </h3>
-                  <p className="text-[13px] text-[#6e6e73] leading-relaxed">
-                    {highlight.desc}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            {/* CTA Azione */}
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              {onBookClick && (
-                <button
-                  type="button"
-                  onClick={onBookClick}
-                  className="bg-[#1d1d1f] text-white px-6 py-3 rounded-full text-[13.5px] font-medium hover:bg-black transition-colors flex items-center gap-2 cursor-pointer shadow-xs"
-                >
-                  {isBookingEnabled ? (
-                    <>
-                      <Calendar className="w-4 h-4 text-white/80" />
-                      <span>Prenota una Valutazione</span>
-                    </>
-                  ) : (
-                    <>
-                      <Phone className="w-4 h-4 text-white/80" />
-                      <span>Contatta il Dott. Lucano</span>
-                    </>
-                  )}
-                </button>
-              )}
-
-              {onExploreServices && (
-                <button
-                  type="button"
-                  onClick={onExploreServices}
-                  className="bg-white border border-black/[0.10] text-[#1d1d1f] px-5 py-3 rounded-full text-[13.5px] font-medium hover:bg-[#f5f5f7] transition-colors flex items-center gap-1.5 cursor-pointer"
-                >
-                  <span>Scopri le Terapie</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-[#6e6e73]" />
-                </button>
-              )}
-            </div>
-
           </div>
 
+        </div>
+
+        {/* Punti di Forza Clinici (Senza Tecnologia Avanzata) */}
+        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 auto-rows-fr gap-4">
+          {DOCTOR_DATA.clinicalHighlights.map((highlight, index) => (
+            <div
+              key={index}
+              className="h-full bg-white rounded-[20px] p-5 border border-black/[0.06] shadow-2xs hover:border-black/[0.10] transition-colors"
+            >
+              <div className="w-9 h-9 rounded-xl bg-[#006875]/10 flex items-center justify-center text-[#006875] mb-3">
+                <CheckCircle2 className="w-4 h-4 text-[#006875]" />
+              </div>
+              <h3 className="text-[15px] font-semibold text-[#1d1d1f] mb-1.5">
+                {highlight.title}
+              </h3>
+              <p className="text-[13px] text-[#6e6e73] leading-relaxed">
+                {highlight.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        {/* CTA Azione */}
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+          {onBookClick && (
+            <button
+              type="button"
+              onClick={onBookClick}
+              className="inline-flex h-12 items-center justify-center gap-2 bg-[#006875] text-white px-6 rounded-full text-[13.5px] font-medium hover:bg-[#005560] transition-colors cursor-pointer shadow-xs"
+            >
+              {isBookingEnabled ? (
+                <>
+                  <Calendar className="w-4 h-4 text-white/80" />
+                  <span>Prenota una Valutazione</span>
+                </>
+              ) : (
+                <>
+                  <Phone className="w-4 h-4 text-white/80" />
+                  <span>Contatta il Dott. Lucano</span>
+                </>
+              )}
+            </button>
+          )}
+
+          {onExploreServices && (
+            <button
+              type="button"
+              onClick={onExploreServices}
+              className="inline-flex h-12 items-center justify-center gap-1.5 bg-white border border-black/[0.10] text-[#1d1d1f] px-5 rounded-full text-[13.5px] font-medium hover:bg-[#f5f5f7] transition-colors cursor-pointer"
+            >
+              <span>Scopri le Terapie</span>
+              <ArrowRight className="w-3.5 h-3.5 text-[#6e6e73]" />
+            </button>
+          )}
         </div>
       </div>
     </section>

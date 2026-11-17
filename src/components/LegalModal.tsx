@@ -56,13 +56,13 @@ export const LegalModal: React.FC<LegalModalProps> = ({
         {/* Header */}
         <div className="flex items-center justify-between pb-4 border-b border-gray-100 shrink-0">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-[#00daf3]/15 flex items-center justify-center text-[#006875] shrink-0">
+            <div className="w-10 h-10 rounded-2xl bg-[#006875]/10 flex items-center justify-center text-[#006875] shrink-0">
               {activeTab === 'privacy' && <ShieldCheck className="w-5 h-5" />}
               {activeTab === 'cookies' && <Cookie className="w-5 h-5" />}
               {activeTab === 'terms' && <FileText className="w-5 h-5" />}
             </div>
             <div>
-              <h2 id="legal-modal-title" className="text-[18px] sm:text-[21px] font-bold text-[#121212] tracking-tight">
+              <h2 id="legal-modal-title" className="text-[18px] sm:text-[21px] font-bold text-[#121212]">
                 {activeTab === 'privacy' && 'Informativa Privacy (Regolamento UE 2016/679 - GDPR)'}
                 {activeTab === 'cookies' && 'Informativa Cookie Estesa (Linee Guida Garante 2021)'}
                 {activeTab === 'terms' && 'Termini e Condizioni delle Prestazioni Fisioterapiche'}
@@ -129,16 +129,16 @@ export const LegalModal: React.FC<LegalModalProps> = ({
           {/* TAB 1: PRIVACY */}
           {activeTab === 'privacy' && (
             <div className="space-y-6">
-              <div className="p-4 bg-[#00E5FF]/10 rounded-2xl border border-[#00daf3]/30 flex items-start gap-3">
+              <div className="p-4 bg-[#006875]/5 rounded-2xl border border-[#006875]/15 flex items-start gap-3">
                 <CheckCircle2 className="w-5 h-5 text-[#006875] shrink-0 mt-0.5" />
                 <div className="text-[12.5px] text-[#004f58] leading-relaxed">
-                  <strong>Trattamento Sanitario Protetto:</strong> I dati personali e le informazioni cliniche sullo stato di salute sono trattati nel rispetto del segreto professionale e del Regolamento UE 2016/679 (GDPR). Le prestazioni sanitarie sono esenti IVA ai sensi dell&apos;art. 10 D.P.R. 633/72 e detraibili al 19%.
+                  <strong>Informazioni sul trattamento dei dati:</strong> consulta le sezioni seguenti per finalità, basi giuridiche, destinatari, tempi di conservazione e diritti dell&apos;interessato.
                 </div>
               </div>
 
               {PRIVACY_POLICY_SECTIONS.map((section, idx) => (
                 <div key={idx} className="space-y-2">
-                  <h3 className="text-[15px] font-bold text-[#121212] tracking-tight">
+                  <h3 className="text-[15px] font-bold text-[#121212]">
                     {section.title}
                   </h3>
                   <p className="whitespace-pre-line text-[#4f4f4f] leading-relaxed">
@@ -178,7 +178,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({
 
               {COOKIE_POLICY_SECTIONS.map((section, idx) => (
                 <div key={idx} className="space-y-2">
-                  <h3 className="text-[15px] font-bold text-[#121212] tracking-tight">
+                  <h3 className="text-[15px] font-bold text-[#121212]">
                     {section.title}
                   </h3>
                   <p className="whitespace-pre-line text-[#4f4f4f] leading-relaxed">
@@ -190,13 +190,13 @@ export const LegalModal: React.FC<LegalModalProps> = ({
               {/* Table of Cookies (Audit Table) */}
               <div className="space-y-3 pt-2">
                 <h3 className="text-[15px] font-bold text-[#121212]">
-                  Tabella dei Cookie Utilizzati (Audit Completo)
+                  Archiviazione locale e servizi esterni
                 </h3>
                 <div className="overflow-x-auto border border-gray-200 rounded-2xl">
                   <table className="w-full text-left text-[12.5px] border-collapse">
                     <thead>
                       <tr className="bg-gray-100/80 text-[#333] border-b border-gray-200 font-bold">
-                        <th className="py-2.5 px-3">Nome Cookie</th>
+                        <th className="py-2.5 px-3">Chiave / strumento</th>
                         <th className="py-2.5 px-3">Categoria</th>
                         <th className="py-2.5 px-3">Fornitore</th>
                         <th className="py-2.5 px-3">Finalità</th>
@@ -237,13 +237,13 @@ export const LegalModal: React.FC<LegalModalProps> = ({
               <div className="p-4 bg-emerald-50 rounded-2xl border border-emerald-200 flex items-start gap-3">
                 <AlertCircle className="w-5 h-5 text-emerald-700 shrink-0 mt-0.5" />
                 <div className="text-[12.5px] text-emerald-900 leading-relaxed">
-                  <strong>Detraibilità 19% e Tracciabilità:</strong> Tutte le prestazioni fisioterapiche sono detraibili al 19% come spesa medica nella dichiarazione dei redditi tramite pagamento tracciabile (Bancomat, Carta o Bonifico).
+                  <strong>Informazioni fiscali:</strong> il trattamento fiscale e l&apos;eventuale detraibilità dipendono dalla prestazione, dai requisiti applicabili e dalla normativa vigente. Per il tuo caso, verifica con un consulente fiscale.
                 </div>
               </div>
 
               {TERMS_SECTIONS.map((section, idx) => (
                 <div key={idx} className="space-y-2">
-                  <h3 className="text-[15px] font-bold text-[#121212] tracking-tight">
+                  <h3 className="text-[15px] font-bold text-[#121212]">
                     {section.title}
                   </h3>
                   <p className="whitespace-pre-line text-[#4f4f4f] leading-relaxed">

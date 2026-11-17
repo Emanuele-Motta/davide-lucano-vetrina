@@ -42,11 +42,11 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
           <X className="w-5 h-5" />
         </button>
 
-        <span className="text-[12px] font-bold uppercase tracking-wider text-[#006875] bg-[#00E5FF]/15 px-3 py-1 rounded-full">
+        <span className="text-[12px] font-bold uppercase text-[#006875] bg-[#006875]/10 px-3 py-1 rounded-full">
           {service.category}
         </span>
 
-        <h3 className="text-[26px] font-bold text-[#121212] tracking-tight mt-3 mb-2">
+        <h3 className="text-[26px] font-bold text-[#121212] mt-3 mb-2">
           {service.title}
         </h3>
 
@@ -64,7 +64,7 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
         </p>
 
         <div className="mb-6">
-          <h4 className="text-[14px] font-bold text-[#121212] uppercase tracking-wider mb-3 flex items-center gap-2">
+          <h4 className="text-[14px] font-bold text-[#121212] uppercase mb-3 flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-[#006875]" />
             {t.modals.serviceDetail.objectivesTitle}
           </h4>
@@ -84,7 +84,7 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
               onBookThisService(service.id);
               onClose();
             }}
-            className="flex-1 bg-[#00E5FF] text-[#121212] py-3 px-6 rounded-full text-[14px] font-bold hover:bg-[#00d0e6] transition-colors interactive flex items-center justify-center gap-2 shadow-sm"
+            className="flex-1 bg-[#006875] text-white py-3 px-6 rounded-full text-[14px] font-semibold hover:bg-[#005560] transition-colors interactive flex items-center justify-center gap-2 shadow-sm"
           >
             {isBookingEnabled ? (
               <>

@@ -56,9 +56,6 @@ export interface Testimonial {
 export interface MioDottoreConfig {
   profileUrl: string;
   doctorSlug: string;
-  overallRating: number;
-  totalReviewsCount: string;
-  recommendationPercentage: string;
   verifiedStatus: string;
   autoFetchApiUrl?: string;
 }

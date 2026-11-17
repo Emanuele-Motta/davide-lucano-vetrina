@@ -10,46 +10,39 @@ export interface CookieAuditItem {
 
 export const COOKIE_AUDIT_TABLE: CookieAuditItem[] = [
   {
-    name: 'davide_lucano_cookie_consent_v2',
+    name: 'localStorage: davide_lucano_cookie_consent_v2',
     provider: `${siteConfig.doctor.name} (Prima parte)`,
     category: 'Tecnico',
-    purpose: 'Memorizza lo stato e la data del consenso espresso dall’utente per le singole categorie di cookie, nel rispetto delle Linee Guida del Garante Privacy.',
+    purpose: 'Memorizza localmente la scelta espressa per le categorie opzionali; non è un cookie HTTP.',
     duration: '6 mesi'
   },
   {
-    name: 'fisioterapia_feature_booking_enabled',
+    name: 'localStorage: fisioterapia_feature_booking_enabled',
     provider: `${siteConfig.doctor.name} (Prima parte)`,
     category: 'Tecnico',
-    purpose: 'Memorizza lo stato di attivazione della modalità di prenotazione o contatto rapido per garantire la corretta visualizzazione dell’interfaccia.',
-    duration: 'Persistente (Locale)'
+    purpose: 'Memorizza sul dispositivo la preferenza di visualizzazione della modalità prenotazione/contatto; non è un cookie HTTP.',
+    duration: 'Fino alla cancellazione dei dati del sito'
   },
   {
-    name: 'studio_milano_user_bookings',
+    name: 'localStorage: studio_milano_user_bookings',
     provider: `${siteConfig.doctor.name} (Prima parte)`,
     category: 'Tecnico',
-    purpose: 'Consente all’utente di visualizzare in locale l’elenco dei propri appuntamenti confermati senza necessità di registrazione account complessa.',
-    duration: 'Persistente (Locale)'
+    purpose: 'Chiave locale utilizzata dalla vecchia gestione appuntamenti; le prenotazioni correnti avvengono su Cal.com e non vengono lette da questa chiave.',
+    duration: 'Fino alla cancellazione dei dati del sito'
   },
   {
-    name: 'fisioterapia_lang_preference',
-    provider: `${siteConfig.doctor.name} (Prima parte)`,
-    category: 'Preferenze',
-    purpose: 'Salva la lingua preferita di navigazione scelta dal paziente.',
-    duration: '12 mesi'
-  },
-  {
-    name: '_ga, _ga_* (Se acconsentito)',
-    provider: 'Google Analytics (Terza parte con IP anonimizzato)',
+    name: '_ga e cookie correlati (se Analytics è configurato e autorizzato)',
+    provider: 'Google Analytics',
     category: 'Analitico',
-    purpose: 'Raccoglie in forma anonima e aggregata dati statistici sull’utilizzo del sito web (pagine viste, tempo di permanenza) per ottimizzare l’esperienza utente.',
-    duration: 'Da sessione a 14 mesi'
+    purpose: 'Misurazione dell’utilizzo del sito. Google può trattare dati tecnici secondo la propria documentazione; non si dichiara anonimizzazione completa.',
+    duration: 'Secondo configurazione e documentazione del fornitore'
   },
   {
-    name: 'maps_session (Se acconsentito)',
-    provider: 'Google Maps / Alphabet Inc. (Terza parte)',
+    name: 'Google Maps embed (solo dopo consenso)',
+    provider: 'Google Maps',
     category: 'Marketing',
-    purpose: `Permette la visualizzazione interattiva della mappa dello studio in ${siteConfig.studio.address}, ${siteConfig.studio.city} e il calcolo del percorso stradale.`,
-    duration: 'Sessione / Persistente'
+    purpose: `Carica la mappa dello studio in ${siteConfig.studio.address}, ${siteConfig.studio.city}; il caricamento può trasmettere dati tecnici al fornitore.`,
+    duration: 'Secondo configurazione e documentazione del fornitore'
   }
 ];
 
@@ -58,7 +51,7 @@ export const PRIVACY_POLICY_SECTIONS = [
     title: '1. Titolare del Trattamento dei Dati',
     content: `Il Titolare del Trattamento è il ${siteConfig.doctor.name}, ${siteConfig.doctor.title}, regolarmente iscritto all'Albo dell'${siteConfig.doctor.alboNumber}.
 Sede dello Studio: ${siteConfig.studio.fullAddress}
-Codice Fiscale / Partita IVA: ${siteConfig.studio.piva}
+Codice Fiscale / Partita IVA: ${siteConfig.studio.piva || 'da configurare prima della pubblicazione'}
 Email per l'esercizio dei diritti privacy: ${siteConfig.studio.email} - PEC: ${siteConfig.studio.pec}
 Telefono studio: ${siteConfig.studio.phone}`
   },
@@ -67,34 +60,28 @@ Telefono studio: ${siteConfig.studio.phone}`
     content: `Il Titolare tratta dati personali comuni e dati appartenenti a particolari categorie (dati relativi alla salute):
 a) Dati Anagrafici e di Contatto: nome, cognome, numero di telefono cellulare, indirizzo e-mail, codice fiscale e indirizzo di residenza per finalità di fatturazione.
 b) Dati Particolari sullo Stato di Salute (Art. 9, par. 2, lett. h GDPR): anamnesi clinica, sintomatologia muscolo-scheletrica, pregresse patologie o interventi chirurgici, diagnosi e prescrizioni mediche specialistiche, referti di diagnostica per immagini (es. RM, RX, ecografie) e diario dei trattamenti fisioterapici e riabilitativi.
-c) Dati di navigazione tecnica: indirizzi IP anonimizzati, log di sistema necessari al regolare funzionamento dell'infrastruttura web.`
+c) Dati di navigazione tecnica: indirizzi IP e log di sistema, secondo le modalità effettivamente adottate dall'infrastruttura web.`
   },
   {
     title: '3. Finalità del Trattamento e Basi Giuridiche (Art. 6 e Art. 9 GDPR)',
     content: `I dati personali sono raccolti e trattati per le seguenti finalità:
 1. Erogazione delle cure sanitarie e riabilitative: Valutazione fisioterapica iniziale, pianificazione terapeutica personalizzata, svolgimento di sedute di terapia manuale, riabilitazione post-traumatica e funzionale (Base giuridica: Art. 9, par. 2, lett. h GDPR - finalità di assistenza sanitaria o terapia medica svolta da un professionista soggetto a segreto professionale).
 2. Gestione degli appuntamenti: Convocazione, conferma oraria, modifiche o promemoria delle sedute prenotate (Base giuridica: Art. 6, par. 1, lett. b GDPR - esecuzione di misure contrattuali o precontrattuali).
-3. Adempimenti fiscali e di legge: Emissione di ricevute e fatture sanitarie esenti IVA ai sensi dell'art. 10 D.P.R. 633/72 e contestuale trasmissione dei dati al Sistema Tessera Sanitaria (STS) per consentire al paziente la detrazione IRPEF del 19%, salvo sua esplicita opposizione (Base giuridica: Art. 6, par. 1, lett. c GDPR - obbligo legale).
+3. Adempimenti amministrativi e fiscali: gestione della documentazione relativa alle prestazioni secondo gli obblighi applicabili. Le modalità effettive, inclusi gli eventuali adempimenti verso il Sistema Tessera Sanitaria, devono essere verificate dal Titolare prima della pubblicazione.
 4. Tutela dei diritti in sede giudiziaria: Difesa dei diritti e rispetto delle norme deontologiche sanitarie FNOFI (Base giuridica: legittimo interesse e tutela legale).`
   },
   {
     title: '4. Modalità del Trattamento e Segreto Professionale',
-    content: `Il trattamento dei dati viene effettuato con strumenti cartacei e informatici idonei a garantire la massima sicurezza, riservatezza e integrità, in conformità agli artt. 24, 25 e 32 del GDPR. 
-Tutti i dati sanitari sono vincolati dal più rigoroso Segreto Professionale ed Etico (art. 622 del Codice Penale e Codice Deontologico del Fisioterapista). L'accesso alle cartelle clinico-riabilitative è riservato esclusivamente al Dott. Davide Lucano.`
+    content: `Il Titolare adotta misure tecniche e organizzative adeguate al trattamento e ai rischi, secondo gli artt. 24, 25 e 32 del GDPR. Le misure effettive e i soggetti autorizzati devono corrispondere alle procedure realmente adottate dallo studio.
+  Le informazioni sanitarie sono trattate da soggetti autorizzati e vincolati agli obblighi di riservatezza e al segreto professionale applicabile.`
   },
   {
     title: '5. Destinatari e Comunicazione dei Dati',
-    content: `I dati non sono mai diffusi né ceduti a terzi per finalità commerciali o promozionali. I dati possono essere comunicati esclusivamente a:
-- Dottore Commercialista e consulenti fiscali incaricati per la tenuta della contabilità sanitaria (nominati Responsabili del Trattamento ex art. 28 GDPR);
-- Agenzia delle Entrate e Ministero dell'Economia e delle Finanze tramite il Sistema Tessera Sanitaria (STS);
-- Enti assicurativi o fondi sanitari integrativi, esclusivamente su richiesta e autorizzazione scritta del paziente.`
+    content: `In base alle funzionalità utilizzate, i dati possono essere trattati da fornitori e soggetti terzi coinvolti nell'erogazione dei servizi, tra cui il servizio di prenotazione Cal.com e, se configurati e autorizzati, Google Analytics e Google Maps. Il Titolare deve verificare e indicare i destinatari effettivi, i relativi ruoli e gli eventuali trasferimenti di dati prima della pubblicazione.`
   },
   {
     title: '6. Tempi di Conservazione dei Dati',
-    content: `Nel rispetto del principio di limitazione della conservazione (Art. 5, par. 1, lett. e GDPR):
-- Dati contabili e fiscali (fatture, ricevute): 10 anni, conformemente all'art. 2220 del Codice Civile.
-- Scheda clinica fisioterapica e anamnesi: conservata per un periodo minimo di 10 anni dall'ultima prestazione, al fine di garantire la continuità terapeutica e la tutela documentale medico-legale.
-- Dati pervenuti tramite moduli di contatto generico: conservati per il tempo strettamente necessario alla gestione della richiesta (massimo 12 mesi).`
+    content: `I dati sono conservati per il tempo necessario alle finalità indicate e per gli eventuali obblighi di legge applicabili. Il Titolare deve definire e riportare i periodi o i criteri di conservazione effettivamente adottati per ciascuna categoria di dati prima della pubblicazione.`
   },
   {
     title: '7. Diritti dell’Interessato (Artt. 15-22 GDPR)',
@@ -120,25 +107,17 @@ export const COOKIE_POLICY_SECTIONS = [
   },
   {
     title: '2. Riferimenti Normativi e Linee Guida del Garante Privacy',
-    content: `La presente informativa è redatta in piena conformità alle "Linee guida cookie e altri strumenti di tracciamento" emanate dal Garante per la Protezione dei Dati Personali il 10 giugno 2021 (pubblicate in G.U. n. 163 del 9 luglio 2021) e all'art. 122 del Codice della Privacy (D.Lgs. 196/2003 e s.m.i.).
-In conformità a tali prescrizioni:
-- L'utente ha la facoltà di rifiutare tutti i cookie non necessari chiudendo il banner tramite l'apposito pulsante contrassegnato con la 'X' in alto a destra o tramite il pulsante 'Solo essenziali';
-- Nessun cookie di profilazione o statistico non anonimizzato viene installato senza il consenso espresso e preventivo dell'interessato (principio di privacy by default);
-- Il consenso espresso è tracciato con timestamp e revocabile in qualsiasi momento con un solo clic tramite il comando permanente "Preferenze Cookie".`
+    content: `Il banner consente di scegliere separatamente le categorie opzionali disponibili. La scelta viene conservata nel localStorage del browser per un massimo di sei mesi. È possibile rivederla o revocarla tramite il comando "Preferenze Cookie"; la revoca disabilita le integrazioni opzionali supportate dal sito. Questa descrizione non sostituisce una valutazione legale del trattamento e dei fornitori effettivamente configurati.`
   },
   {
     title: '3. Tipologie di Cookie Utilizzati da Questo Sito',
-    content: `a) Cookie Tecnici Essenziali (Prima Parte):
-Indispensabili per consentire la navigazione e fruire delle funzionalità di base (es. invio e conferma della prenotazione, protezione da attacchi informatici, visualizzazione responsive). Ai sensi della legge vigente, per questi cookie non è richiesto il preventivo consenso dell'utente.
+    content: `a) Archiviazione locale: il sito usa localStorage per memorizzare la scelta del consenso e alcune preferenze tecniche. Questi elementi non sono cookie HTTP.
 
-b) Cookie di Preferenza e Funzionali:
-Consentono al sito di ricordare le scelte dell'utente (es. lingua selezionata, personalizzazione visuale dell'agenda appuntamenti) per offrire un'esperienza fluida. Vengono attivati solo con il consenso dell'utente.
+b) Google Analytics: lo script viene richiesto solo se è configurato un ID Analytics e la categoria "Statistiche" è stata autorizzata. Il fornitore può usare cookie o tecnologie analoghe; nomi e durata dipendono dalla configurazione effettiva.
 
-c) Cookie Analitici e di Misurazione Statistica:
-Se utilizzati con mascheramento dell'indirizzo IP e senza incrocio con altri dati terzi, sono assimilabili ai tecnici. In ogni altro caso, richiedono il consenso preventivo dell'interessato.
+c) Google Maps: la mappa incorporata viene caricata solo dopo l'autorizzazione della categoria "Servizi di terze parti". Il collegamento esterno per aprire la mappa è invece attivato dall'utente.
 
-d) Cookie di Terze Parti (es. Google Maps):
-Possono essere utilizzati qualora l'utente decida di visualizzare la mappa interattiva o avviare percorsi stradali verso lo studio.`
+d) Cal.com: il calendario incorporato viene caricato solo dopo l'autorizzazione della categoria "Servizi di terze parti". La prenotazione e i dati inseriti nel widget sono gestiti da Cal.com secondo la propria informativa privacy; il sito non controlla le tecnologie utilizzate dal fornitore.`
   },
   {
     title: '4. Come Disabilitare i Cookie dal Tuo Browser',
@@ -162,19 +141,15 @@ export const TERMS_SECTIONS = [
   },
   {
     title: '3. Politica di Disdetta e Rispetto dell’Orario',
-    content: `Per garantire la massima puntualità ed efficienza delle cure a tutti i pazienti, comprese eventuali urgenze riabilitative acute:
-- Si raccomanda di presentarsi con 5 minuti di anticipo rispetto all'orario concordato;
-- Eventuali cancellazioni o spostamenti di appuntamento devono essere comunicati con almeno 24 ore di anticipo contattando il recapito telefonico o WhatsApp dello studio (${siteConfig.studio.phone}).`
+    content: `Per modificare o annullare un appuntamento, segui le istruzioni riportate nella conferma di prenotazione o contatta lo studio (${siteConfig.studio.phone}). Le eventuali condizioni e i termini di disdetta devono essere indicati in modo coerente con le regole effettivamente applicate.`
   },
   {
-    title: '4. Regime Fiscale ed Esenzione IVA (Art. 10 D.P.R. 633/72)',
-    content: `Le prestazioni fisioterapiche erogate dal Dott. Davide Lucano sono prestazioni sanitarie diagnostiche e riabilitative esenti IVA ai sensi dell'art. 10, comma 1, n. 18 del D.P.R. 633/1972.
-Per importi superiori a € 77,47 viene applicata l'imposta di bollo di € 2,00 a carico del paziente conformemente alla legge.`
+    title: '4. Informazioni sul trattamento fiscale',
+    content: `Il trattamento fiscale e l'eventuale applicazione dell'IVA o dell'imposta di bollo dipendono dalla prestazione e dalla normativa vigente. Per indicazioni riferite al proprio caso, il paziente può rivolgersi al proprio consulente fiscale.`
   },
   {
-    title: '5. Detraibilità Fiscale delle Spese Mediche (19%)',
-    content: `Ai sensi dell'art. 15, comma 1, lett. c) del TUIR, le spese per prestazioni fisioterapiche sostenute presso professionisti iscritti all'albo FNOFI sono interamente detraibili al 19% nella dichiarazione dei redditi (Modello 730 / Redditi PF).
-Per poter beneficiare della detrazione fiscale, il pagamento deve avvenire con modalità tracciabile (POS bancomat/carta di credito, bonifico bancario).`
+    title: '5. Eventuale detraibilità delle spese sanitarie',
+    content: `L'eventuale detraibilità delle spese sanitarie dipende dalla natura della prestazione, dai requisiti previsti e dalle regole fiscali in vigore. Per verificare la propria situazione e le modalità di pagamento richieste, rivolgersi a un consulente fiscale.`
   },
   {
     title: '6. Consenso Informato Sanitario',

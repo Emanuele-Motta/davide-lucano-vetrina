@@ -54,7 +54,7 @@ export const Button = React.forwardRef<HTMLButtonElement & HTMLAnchorElement, Bu
   ...props
 }, ref) => {
   const baseClasses = `
-    inline-flex items-center justify-center font-medium tracking-tight whitespace-nowrap select-none cursor-pointer
+    inline-flex items-center justify-center font-medium whitespace-nowrap select-none cursor-pointer
     focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-offset-2
     disabled:opacity-50 disabled:pointer-events-none disabled:cursor-not-allowed
     ${variantStyles[variant]}

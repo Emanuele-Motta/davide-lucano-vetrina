@@ -43,7 +43,7 @@ export const BookingsListModal: React.FC<BookingsListModalProps> = ({
         </button>
 
         <div className="flex items-center gap-3 mb-6 shrink-0">
-          <div className="w-10 h-10 rounded-full bg-[#00E5FF]/20 flex items-center justify-center text-[#006875]">
+          <div className="w-10 h-10 rounded-full bg-[#006875]/10 flex items-center justify-center text-[#006875]">
             <CalendarCheck2 className="w-5 h-5" />
           </div>
           <div>
@@ -68,7 +68,7 @@ export const BookingsListModal: React.FC<BookingsListModalProps> = ({
                   onClose();
                   onNewBookingClick();
                 }}
-                className="bg-[#00E5FF] text-[#121212] px-6 py-2.5 rounded-full text-[14px] font-semibold hover:bg-[#00d0e6] transition-colors"
+                className="bg-[#006875] text-white px-6 py-2.5 rounded-full text-[14px] font-semibold hover:bg-[#005560] transition-colors"
               >
                 {t.modals.bookingsList.bookNow}
               </button>

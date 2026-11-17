@@ -33,7 +33,7 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onBookClick }) => {
           </div>
           <h2 
             id="faq-heading"
-            className="text-[32px] sm:text-[38px] font-semibold text-[#1d1d1f] tracking-tight mb-3 leading-[1.15]"
+            className="text-[32px] sm:text-[38px] font-semibold text-[#1d1d1f] mb-3 leading-[1.15]"
           >
             {t.faq.title}
           </h2>
@@ -92,7 +92,7 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onBookClick }) => {
         <div className="mt-10 p-6 rounded-[22px] bg-white border border-black/[0.06] text-center flex flex-col sm:flex-row items-center justify-between gap-4 shadow-2xs">
           <div className="text-left">
             <h3 className="text-[15px] font-semibold text-[#1d1d1f]">Hai altre domande specifiche?</h3>
-            <p className="text-[13px] text-[#6e6e73] mt-0.5">Il Dott. Davide Lucano risponde direttamente su WhatsApp</p>
+            <p className="text-[13px] text-[#6e6e73] mt-0.5">Contatta lo studio per informazioni o appuntamenti.</p>
           </div>
           <div className="flex items-center gap-2.5 shrink-0">
             <a
@@ -107,7 +107,7 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onBookClick }) => {
             <button
               type="button"
               onClick={onBookClick}
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#1d1d1f] text-white text-[13px] font-medium hover:bg-black transition-colors cursor-pointer shadow-2xs"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#006875] text-white text-[13px] font-medium hover:bg-[#005560] transition-colors cursor-pointer shadow-2xs"
             >
               <Calendar className="w-3.5 h-3.5 text-white/80" />
               <span>Prenota</span>

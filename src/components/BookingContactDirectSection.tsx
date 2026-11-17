@@ -48,12 +48,12 @@ export const BookingContactDirectSection: React.FC<BookingContactDirectSectionPr
 
         {/* Section Heading */}
         <div className="text-center mb-8 sm:mb-10 max-w-2xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#00E5FF]/15 text-[#006875] text-[13px] font-semibold mb-3 border border-[#00E5FF]/25">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#006875]/10 text-[#006875] text-[13px] font-semibold mb-3 border border-[#006875]/20">
             <Phone className="w-3.5 h-3.5 text-[#006875]" />
             <span>Prenotazioni & Contatto Diretto</span>
           </div>
 
-          <h2 className="text-[28px] sm:text-[34px] md:text-[38px] font-bold text-[#121212] tracking-tight mb-3">
+          <h2 className="text-[28px] sm:text-[34px] md:text-[38px] font-bold text-[#121212] mb-3">
             Fissa una Seduta con il Dott. Davide Lucano
           </h2>
 
@@ -75,7 +75,7 @@ export const BookingContactDirectSection: React.FC<BookingContactDirectSectionPr
                 Contatto Telefonico
               </h3>
               <p className="text-[13.5px] text-[#5f5e5e] leading-relaxed mb-4">
-                Parla direttamente con il Dott. Lucano per fissare giorno e orario della prima seduta o per urgenze.
+                Contatta lo studio per informazioni e per concordare giorno e orario dell'appuntamento.
               </p>
             </div>
             <div>
@@ -99,7 +99,7 @@ export const BookingContactDirectSection: React.FC<BookingContactDirectSectionPr
                 Messaggio WhatsApp
               </h3>
               <p className="text-[13.5px] text-[#5f5e5e] leading-relaxed mb-4">
-                Invia una richiesta rapida con gli orari in cui sei disponibile o invia una foto di eventuali referti.
+                Scrivi allo studio per informazioni o per concordare un appuntamento. Evita di inviare dati clinici tramite messaggistica.
               </p>
             </div>
             <div>
@@ -148,23 +148,23 @@ export const BookingContactDirectSection: React.FC<BookingContactDirectSectionPr
             <div className="space-y-3.5">
               <div className="flex items-center gap-2 text-[#006875] font-semibold text-[14px]">
                 <ShieldCheck className="w-4 h-4" />
-                <span>Presa in Carico Professionale 1-a-1</span>
+                <span>Informazioni sullo studio</span>
               </div>
               <h3 className="text-[20px] font-bold text-[#121212]">
                 Sede delle Visite & Orari di Ricevimento
               </h3>
               <p className="text-[14px] text-[#5f5e5e] leading-relaxed">
-                Le sedute si tengono presso lo studio in <strong>{siteConfig.studio.fullAddress}</strong> (Milano Ovest / San Siro), comodamente raggiungibile sia con i mezzi pubblici che in auto con facilità di parcheggio.
+                Le sedute si tengono presso lo studio in <strong>{siteConfig.studio.fullAddress}</strong>. Per indicazioni su accessibilità e trasporti, contatta lo studio prima dell&apos;appuntamento.
               </p>
               
               <ul className="space-y-2 text-[13px] text-[#333]">
                 <li className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                  <span>Nessuna lista d&apos;attesa: prima valutazione fissata entro 24-48 ore</span>
+                  <span>Gli appuntamenti sono concordati in base alle disponibilità.</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                  <span>Prestazioni sanitarie detraibili fiscalmente al 19% (senza obbligo di prescrizione)</span>
+                  <span>Per informazioni fiscali o sui documenti utili, contatta lo studio.</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
